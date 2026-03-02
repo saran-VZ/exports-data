@@ -1,7 +1,6 @@
 const ExcelJS = require("exceljs");
 const path = require("path");
 const fs = require("fs");
-const { tryCatch } = require("bullmq");
 
 class ExcelService {
   constructor() {
@@ -13,7 +12,7 @@ class ExcelService {
 
     this.generatedFiles = []; 
 
-    this.finalDir = path.join(process.env.HOME, "Documents/exports/excels");
+    this.finalDir = path.join(__dirname, "exports/excels"); 
 
     if (!fs.existsSync(this.finalDir)) {
       fs.mkdirSync(this.finalDir, { recursive: true });
@@ -21,8 +20,7 @@ class ExcelService {
   }
 
   async createNewFile() {
-    try {
-    this.tempPath = `/tmp/export_${this.fileCounter}.xlsx`;
+    this.tempPath = path.join(this.finalDir, `export_${this.fileCounter}.xlsx`);
 
     this.workbook = new ExcelJS.stream.xlsx.WorkbookWriter({
       filename: this.tempPath,
@@ -34,20 +32,13 @@ class ExcelService {
     this.currentRowCount = 0;
 
     this.fileCounter++;
-  }catch(err){
-    throw err;
-  }}
+  }
 
   async moveToFinalLocation() {
-    const finalPath = path.join(this.finalDir, path.basename(this.tempPath));
-    fs.renameSync(this.tempPath, finalPath);
-
-    
-    this.generatedFiles.push(finalPath);
+    this.generatedFiles.push(this.tempPath);
   }
 
   async writeBatch(batch) {
-    try {
     if (!this.workbook) {
       await this.createNewFile();
     }
@@ -57,28 +48,20 @@ class ExcelService {
       this.currentRowCount++;
 
       if (this.currentRowCount >= this.rowLimit) {
-        console.time("FILE COMMIT");
         await this.workbook.commit();
-        console.timeEnd("FILE COMMIT");
-
+        console.log(`File ${this.tempPath} created `);
         await this.moveToFinalLocation();
         await this.createNewFile();
       }
     }
-  }catch(err){
-    throw err;
-  }
   }
 
   async finalize() {
-    try {
     if (this.workbook) {
       await this.workbook.commit();
       await this.moveToFinalLocation();
     }
-  }catch(err){
-    throw err;
-  }}
+  }
 
   getGeneratedFiles() {
     return this.generatedFiles;
