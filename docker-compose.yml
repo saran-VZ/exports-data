@@ -1,0 +1,22 @@
+services:
+  nodeapp:
+    build: .
+    container_name: my_node_app
+    environment:
+      mongoDB_url: mongodb://admin:Admin%40123@mongo:27017/?authSource=admin
+      #random_secrete_key: eacec06b7ec4d87316e25fcb509cfe86de43e8454c7c87e8fe9fb9e5f2c347f28a84c5dea089b66953ca79991f65354bf5c7f7c30866dbce0b10bdd2ca27f02a
+      #mongoDB_sessions_url: mongodb://admin:Admin%40123@mongo:27017/session_auth?authSource=admin
+      #REDIS_URL: redis://redis:6379
+      PORT: 5000
+    command: npm run dev
+    ports:
+      - "3000:3000"
+      - "9229:9229"
+    volumes:
+      - .:/app              
+    networks:
+      - myapp-network
+
+networks:
+  myapp-network:
+    external: true

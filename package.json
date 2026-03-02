@@ -1,0 +1,28 @@
+{
+  "dependencies": {
+    "7zip-bin": "^5.2.0",
+    "archiver": "^7.0.1",
+    "bullmq": "^5.70.1",
+    "crypto": "^1.0.1",
+    "dotenv": "^17.3.1",
+    "exceljs": "^4.4.0",
+    "express": "^5.2.1",
+    "ioredis": "^5.10.0",
+    "mongoose": "^9.2.3",
+    "node-7z": "^3.0.0",
+    "nodemailer": "^8.0.1",
+    "nodemon": "^3.1.14",
+    "redis": "^5.11.0"
+  },
+  "name": "exports",
+  "version": "1.0.0",
+  "main": "app.js",
+  "scripts": {
+    "dev": "nodemon --inspect=0.0.0.0:9229 app.js",
+    "start": "node app.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
