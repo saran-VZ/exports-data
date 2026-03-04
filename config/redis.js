@@ -3,15 +3,16 @@ const IORedis = require("ioredis");
 const redis = new IORedis({
   host: process.env.REDIS_HOST,
   port: process.env.REDIS_PORT,
-  maxRetriesPerRequest: null
+  maxRetriesPerRequest: null, 
 });
 
-redis.on("connect", () => {
-  console.log("Redis Connected");
+redis.on("ready", (err) => {
+  console.error("redis is connected");
 });
 
 redis.on("error", (err) => {
-  console.error("Redis Error:", err);
+  console.error(" Redis connection error:", err);
 });
+
 
 module.exports = redis;

@@ -5,17 +5,21 @@ services:
     environment:
       PORT: 5000
       mongodb_url: mongodb://admin:Admin%40123@127.0.0.1:27017/export_data?authSource=admin
-      REDIS_HOST: redis
+      REDIS_HOST: 127.0.0.1
       REDIS_PORT: 6379
       EXPORT_SCHEDULING_MODE: immediate
       EXPORT_SCHEDULE_HOUR: 10
       EXPORT_SCHEDULE_MINUTE: 0
+      SMTP_HOST: smtp.gmail.com
+      SMTP_PORT: 587
+      SMTP_USER: saran.st@viewzenlabs.com
+      SMTP_PASS: ourh calo gwli uhvz
+      BASE_DOWNLOAD_URL: http://192.168.1.26:5000/download
     command: npm run dev
     ports:
-      - "3000:3000"
+      - "5000:5000"
       - "9229:9229"
     volumes:
-      - ./exports:/app/exports
       - .:/app
     network_mode: host
 

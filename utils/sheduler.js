@@ -23,6 +23,12 @@ function calculateDelay() {
     return scheduled.getTime() - now.getTime();
   }
 
+
+  if (mode === "sampleWait"){
+    const sampleTime = 60*1000*1;
+    return sampleTime;
+  }
+
   return 0;
 }
 

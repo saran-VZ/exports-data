@@ -12,6 +12,12 @@ const ExportSchema = new mongoose.Schema(
       required: true,
     },
 
+    email: {
+      type: String,
+      default: null,
+      required: true,
+    },
+
     filters: {
       type: mongoose.Schema.Types.Mixed,
       default: {},
@@ -32,18 +38,18 @@ const ExportSchema = new mongoose.Schema(
       index: true,
     },
 
-    scheduledFor: {
+    scheduled_for: {
       type: Date,
       default: null,
       index: true,
     },
 
-    fileFormat: {
+    file_format: {
       type: String,
       default: "xlsx",
     },
 
-    filePath: {
+    file_path: {
       type: String,
       default: null,
     },
@@ -58,7 +64,7 @@ const ExportSchema = new mongoose.Schema(
       max: 100,
     },
 
-    errorMessage: {
+    error_message: {
       type: String,
       default: null,
     },
@@ -68,26 +74,26 @@ const ExportSchema = new mongoose.Schema(
       default: 0,
     },
 
-    startedAt: {
+    started_at: {
       type: Date,
       default: null,
     },
 
-    completedAt: {
+    completed_at: {
       type: Date,
       default: null,
     },
 
-    expiresAt: {
+    expires_at: {
       type: Date,
       default: null,
       index: true,
     },
-  },
-  {
-    timestamps: true, 
-    createdAt: "created_at",
-    updatedAt: "updated_at"
+  },{
+    timestamps: true,         
+    createdAt: "created_at",   
+    updatedAt: "updated_at",  
+    version: false           
   }
 );
 
