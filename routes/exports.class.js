@@ -1,16 +1,18 @@
 const exportStatus = require("./../schemas/export-status");
 const exportQueue = require("./../jobs/queue");
 const { calculateDelay } = require("./../utils/sheduler");
-const fs = require("fs");
+const { validateAndSanitizeFilters } = require("./../utils/filter-validator");
 
 class ExportService {
   async createExport(data) {
     try{
+    const safeFilters = validateAndSanitizeFilters(data.filters);
+
     const exportDoc = await exportStatus.create({
       user_name: data.user_name,
       email: data.email,
       collections: data.collections,
-      filters: data.filters || {},
+      filters: safeFilters,
       file_format: data.fileFormat || "xlsx",
       status: "queued",
       progress: 0,
@@ -62,8 +64,6 @@ class ExportService {
       throw new Error("EXPIRED");
     if (exportDoc.status !== "completed") 
       throw new Error("NOT_READY");
-    if (!fs.existsSync(exportDoc.file_path))
-      throw new Error("FILE_MISSING");
 
     return exportDoc;
   }

@@ -32,7 +32,6 @@ const ExportSchema = new mongoose.Schema(
         "completed",
         "failed",
         "expired",
-        "cancelled",
       ],
       default: "pending",
       index: true,
@@ -90,11 +89,12 @@ const ExportSchema = new mongoose.Schema(
       index: true,
     },
   },{
-    timestamps: true,         
-    createdAt: "created_at",   
-    updatedAt: "updated_at",  
-    version: false           
-  }
+  timestamps: {
+    createdAt: "created_at",
+    updatedAt: "updated_at",
+  },
+  versionKey: false
+}
 );
 
 //ExportSchema.index({ expiresAt: 1 }, { expireAfterSeconds: 0 });

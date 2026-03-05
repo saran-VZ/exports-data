@@ -1,4 +1,9 @@
 node_modules/
-.env 
 export.data/
+mongo_data/
+
+.env 
+
+docker-compose-mongo.yml
+docker-compose-redis.yml
 docker-compose.yml

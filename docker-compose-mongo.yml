@@ -1,0 +1,21 @@
+services:
+  mongo:
+    image: mongo:7
+    container_name: my_mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: Admin@123
+      MONGO_INITDB_DATABASE: export_data
+    volumes:
+      - ./mongo_data:/data/db
+    networks:
+      - myapp-network
+    ports:
+      - "27017:27017"
+
+volumes:
+  mongo_data:
+
+networks:
+  myapp-network:
+    external: true

@@ -5,7 +5,7 @@ const fs = require("fs");
 class ExcelService {
   constructor(outputDir, exportDoc, identifier) {
     this.partCounter = 1;         
-    this.rowLimit = 25000;
+    this.rowLimit = 20000;
     this.currentRowCount = 0;
     this.workbook = null;
     this.worksheet = null;
@@ -73,6 +73,7 @@ class ExcelService {
     try {
       if (this.workbook) {
         await this.workbook.commit();
+        console.log(`${path.basename(this.tempPath)} created`);
         await this.moveToFinalLocation();
         this.workbook = null;
       }

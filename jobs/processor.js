@@ -12,9 +12,28 @@ const batteryData = mongoose.connection.collection("battery_data");
 
 archiver.registerFormat("zip-encrypted", zipEncrypted);
 
+function buildDownloadPageLink(exportId) {
+  const pageBaseUrl = (process.env.BASE_DOWNLOAD_PAGE_URL || "").trim();
+  if (pageBaseUrl) {
+    return `${pageBaseUrl.replace(/\/+$/, "")}/${exportId}`;
+  }
+
+  const downloadBaseUrl = (process.env.BASE_DOWNLOAD_URL || "").trim();
+  if (!downloadBaseUrl) {
+    throw new Error("BASE_DOWNLOAD_URL or BASE_DOWNLOAD_PAGE_URL is required");
+  }
+
+  const normalized = downloadBaseUrl.replace(/\/+$/, "");
+  const pageBase = normalized.endsWith("/download")
+    ? normalized.replace(/\/download$/, "/download-page")
+    : `${normalized}/download-page`;
+
+  return `${pageBase}/${exportId}`;
+}
+
 async function runExport(exportDoc) {
   const ROOT_DIR = path.join(process.cwd(), "export.data");
-  const userFolder = `${exportDoc.user_name}_${exportDoc._id.toString()}`;
+  const userFolder = `${exportDoc.user_name}_${exportDoc._id.toString()}`;      // Unique folder per export
   const USER_ROOT = path.join(ROOT_DIR, userFolder);
 
   fs.mkdirSync(USER_ROOT, { recursive: true });
@@ -22,11 +41,11 @@ async function runExport(exportDoc) {
   const batchSize = 5000;
   const identifierGroups = {};
 
-  const cursor = batteryData.find({}).batchSize(batchSize);
+  const cursor = batteryData.find(exportDoc.filters).batchSize(batchSize);
 
   for await (const doc of cursor) {
     const idKey = doc.Identifier || "UNKNOWN";
-    if (!identifierGroups[idKey]) identifierGroups[idKey] = [];
+    if (!identifierGroups[idKey]) identifierGroups[idKey] = [];       // Grouping by Identifier
     identifierGroups[idKey].push(doc);
   }
 
@@ -49,7 +68,6 @@ async function runExport(exportDoc) {
     if (batch.length > 0) {
       await excelService.writeBatch(batch, `Identifier_${identifier}`);
     }
-
     await excelService.finalize();
   }
 
@@ -58,9 +76,11 @@ async function runExport(exportDoc) {
 
   const zipResult = await createPasswordProtectedZip(zipDir, USER_ROOT);
 
-  const downloadLink = `${process.env.BASE_DOWNLOAD_URL}/${exportDoc._id}`;
+
+  const downloadLink = buildDownloadPageLink(exportDoc._id);
   await sendDownloadLinkMail(exportDoc.email, downloadLink);
   await sendPasswordMail(exportDoc.email, zipResult.password);
+
 
   return {
     zipPath: zipResult.zipPath,
