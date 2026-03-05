@@ -8,21 +8,16 @@ const zipEncrypted = require("archiver-zip-encrypted");
 const ExcelService = require("./excel");
 const { sendDownloadLinkMail, sendPasswordMail } = require("./../utils/mailer");
 
-const batteryData = mongoose.connection.collection("battery_data");
-
 archiver.registerFormat("zip-encrypted", zipEncrypted);
 
 function buildDownloadPageLink(exportId) {
-  const pageBaseUrl = (process.env.BASE_DOWNLOAD_PAGE_URL || "").trim();
+  const pageBaseUrl = (process.env.BASE_DOWNLOAD_PAGE_URL || "");
   if (pageBaseUrl) {
     return `${pageBaseUrl.replace(/\/+$/, "")}/${exportId}`;
   }
 
-  const downloadBaseUrl = (process.env.BASE_DOWNLOAD_URL || "").trim();
-  if (!downloadBaseUrl) {
-    throw new Error("BASE_DOWNLOAD_URL or BASE_DOWNLOAD_PAGE_URL is required");
-  }
-
+  const downloadBaseUrl = (process.env.BASE_DOWNLOAD_URL || "");
+  
   const normalized = downloadBaseUrl.replace(/\/+$/, "");
   const pageBase = normalized.endsWith("/download")
     ? normalized.replace(/\/download$/, "/download-page")
@@ -40,14 +35,36 @@ async function runExport(exportDoc) {
 
   const batchSize = 5000;
   const identifierGroups = {};
+  let totalMatched = 0;
 
-  const cursor = batteryData.find(exportDoc.filters).batchSize(batchSize);
+  const selectedCollections = Array.isArray(exportDoc.collections)
+    ? exportDoc.collections
+        .filter((name) => typeof name === "string" && name !== "")
+        .map((name) => name.trim())
+    : [];
 
-  for await (const doc of cursor) {
-    const idKey = doc.Identifier || "UNKNOWN";
-    if (!identifierGroups[idKey]) identifierGroups[idKey] = [];       // Grouping by Identifier
-    identifierGroups[idKey].push(doc);
+  if (selectedCollections.length === 0) {
+    throw new Error("No collections selected for export");
   }
+
+  for (const collectionName of selectedCollections) {
+    const collection = mongoose.connection.collection(collectionName);
+    const cursor = collection.find(exportDoc.filters).batchSize(batchSize);
+    let collectionMatched = 0;
+
+    for await (const doc of cursor) {
+      totalMatched += 1;
+      const idKey = doc.Identifier || "UNKNOWN";
+      if (!identifierGroups[idKey]) identifierGroups[idKey] = [];       // Grouping by Identifier
+      identifierGroups[idKey].push(doc);
+    }
+  }
+
+  if (totalMatched === 0) {
+    throw new Error("No records found for the selected filters/collections");
+  }
+
+  console.log(`[EXPORT ${exportDoc._id}] Total matched docs: ${totalMatched}`);
 
   for (const [identifier, records] of Object.entries(identifierGroups)) {
     const identifierFolder = path.join(USER_ROOT, identifier);

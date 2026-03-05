@@ -11,6 +11,7 @@ const worker = new Worker(
   "exportQueue",
   async (job) => {
     const { exportId } = job.data;
+    console.log(`[JOB ${job.id}] Started export job for exportId=${exportId}`);
 
     const exportDoc = await exportStatus.findById(exportId);
     if (!exportDoc) return;
@@ -51,6 +52,7 @@ const worker = new Worker(
       exportDoc.status = "failed";
       exportDoc.error_message = err.message;
       await exportDoc.save();
+      console.error(`[JOB ${job.id}] Export failed for exportId=${exportId}:`, err);
       throw err;
     }
   },
@@ -59,5 +61,16 @@ const worker = new Worker(
     concurrency: 1,
   }
 );
+
+worker.on("failed", (job, err) => {
+  console.error(
+    `[JOB ${job?.id ?? "unknown"}] Worker failed event:`,
+    err?.message || err
+  );
+});
+
+worker.on("completed", (job) => {
+  console.log(`[JOB ${job.id}] Worker completed event`);
+});
 
 console.log("Export Worker Started...!!");

@@ -175,9 +175,9 @@ exports.downloadExport = async (req, res) => {
     }
 
     // Help browsers/webviews handle the response as a real download.
-    res.setHeader("Content-Type", "application/zip");
-    res.setHeader("Content-Disposition", `attachment; filename="${downloadName}"`);
-    res.setHeader("X-Content-Type-Options", "nosniff");
+    //res.setHeader("Content-Type", "application/zip");
+    //res.setHeader("Content-Disposition", `attachment; filename="${downloadName}"`);
+    //res.setHeader("X-Content-Type-Options", "nosniff");
 
     res.download(
       filePath,
