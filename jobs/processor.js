@@ -11,16 +11,13 @@ const { sendDownloadLinkMail, sendPasswordMail } = require("./../utils/mailer");
 archiver.registerFormat("zip-encrypted", zipEncrypted);
 
 function buildDownloadPageLink(exportId) {
-  const pageBaseUrl = (process.env.BASE_DOWNLOAD_PAGE_URL || "");
-  if (pageBaseUrl) {
-    return `${pageBaseUrl.replace(/\/+$/, "")}/${exportId}`;
-  }
-
   const downloadBaseUrl = (process.env.BASE_DOWNLOAD_URL || "");
-  
-  const normalized = downloadBaseUrl.replace(/\/+$/, "");
+
+  const normalized = downloadBaseUrl.endsWith("/")
+    ? downloadBaseUrl.slice(0, -1)
+    : downloadBaseUrl;
   const pageBase = normalized.endsWith("/download")
-    ? normalized.replace(/\/download$/, "/download-page")
+    ? `${normalized.slice(0, -"/download".length)}/download-page`
     : `${normalized}/download-page`;
 
   return `${pageBase}/${exportId}`;
@@ -40,7 +37,6 @@ async function runExport(exportDoc) {
   const selectedCollections = Array.isArray(exportDoc.collections)
     ? exportDoc.collections
         .filter((name) => typeof name === "string" && name !== "")
-        .map((name) => name.trim())
     : [];
 
   if (selectedCollections.length === 0) {
@@ -110,10 +106,8 @@ function createPasswordProtectedZip(zipDir, userRoot) {
   return new Promise((resolve, reject) => {
     try {
       const password = crypto
-        .randomBytes(12)
-        .toString("base64")
-        .slice(0, 12)
-        .replace(/[+/=]/g, "A");
+        .randomBytes(6)
+        .toString("hex");
 
       const zipFileName = `export-${Date.now()}.zip`;
       const zipPath = path.join(zipDir, zipFileName);

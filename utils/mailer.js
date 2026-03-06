@@ -11,7 +11,7 @@ const transporter = nodemailer.createTransport({
 });
 
 async function sendDownloadLinkMail(to, downloadLink) {
-  const safeLink = String(downloadLink || "").trim();
+  const safeLink = String(downloadLink || "")
 
   await transporter.sendMail({
     from: `"Export Service" <${process.env.SMTP_USER}>`,

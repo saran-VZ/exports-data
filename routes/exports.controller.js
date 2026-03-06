@@ -96,7 +96,7 @@ exports.downloadLandingPage = async (req, res) => {
     const filePath = exportDoc.file_path;
 
     if (!fs.existsSync(filePath)) {
-      throw new Error("FILE_MISSING");
+      throw new Error("NOT_FOUND");
     }
 
     const directDownloadUrl = `/download/${exportDoc._id}`;
@@ -116,17 +116,7 @@ exports.downloadLandingPage = async (req, res) => {
       return res.status(404).type("html").send(
         renderDownloadPage({
           title: "Export Not Found",
-          message: "This export does not exist or the link is invalid.",
-          buttonHref: null,
-        })
-      );
-    }
-
-    if (err.message === "NOT_READY") {
-      return res.status(400).type("html").send(
-        renderDownloadPage({
-          title: "Export Still Processing",
-          message: "The file is not ready yet. Please retry after a few minutes.",
+          message: "This export does not exist or the file is missing.",
           buttonHref: null,
         })
       );
@@ -142,15 +132,6 @@ exports.downloadLandingPage = async (req, res) => {
       );
     }
 
-    if (err.message === "FILE_MISSING") {
-      return res.status(404).type("html").send(
-        renderDownloadPage({
-          title: "File Not Found",
-          message: "The export record exists, but the file is missing on the server.",
-          buttonHref: null,
-        })
-      );
-    }
 
     return res.status(500).type("html").send(
       renderDownloadPage({
@@ -173,11 +154,6 @@ exports.downloadExport = async (req, res) => {
     if (!fs.existsSync(filePath)) {
       throw new Error("FILE_MISSING");
     }
-
-    // Help browsers/webviews handle the response as a real download.
-    //res.setHeader("Content-Type", "application/zip");
-    //res.setHeader("Content-Disposition", `attachment; filename="${downloadName}"`);
-    //res.setHeader("X-Content-Type-Options", "nosniff");
 
     res.download(
       filePath,
@@ -207,14 +183,8 @@ exports.downloadExport = async (req, res) => {
     if (err.message === "NOT_FOUND")
       return res.status(404).send("Export not found");
 
-    if (err.message === "NOT_READY")
-      return res.status(400).send("File not ready");
-
     if (err.message === "EXPIRED")
       return res.status(410).send("File expired");
-
-    if (err.message === "FILE_MISSING")
-      return res.status(404).send("File not found on server");
 
     return res.status(500).send("Download failed");
   }

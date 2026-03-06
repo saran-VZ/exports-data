@@ -62,8 +62,6 @@ class ExportService {
       throw new Error("NOT_FOUND");
     if (!exportDoc.expires_at || new Date() > exportDoc.expires_at)
       throw new Error("EXPIRED");
-    if (exportDoc.status !== "completed") 
-      throw new Error("NOT_READY");
 
     return exportDoc;
   }
