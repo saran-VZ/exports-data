@@ -87,8 +87,8 @@ function validateByType(value, expectedType, fieldName) {                       
 
 function validateOperatorValue(operator, value, expectedType, fieldName) {                    // Operator validation
   if (operator === "$in" || operator === "$nin") {
-    if (!Array.isArray(value) || value.length === 0 || value.length > 100) {
-      throw new Error(`Field ${fieldName} must use a non-empty array (max 100) for ${operator}`);
+    if (!Array.isArray(value) || value.length === 0 || value.length > 10) {
+      throw new Error(`Field ${fieldName} must use a non-empty array (max 10) for ${operator}`);
     }
 
     return value.map((item) => validateByType(item, expectedType, fieldName));
@@ -97,7 +97,7 @@ function validateOperatorValue(operator, value, expectedType, fieldName) {      
   return validateByType(value, expectedType, fieldName);
 }
 
-function sanitizeFieldFilter(fieldName, rawFilter) {
+function checkFieldFilter(fieldName, rawFilter) {
   const expectedType = ALLOWED_FIELDS[fieldName];
   if (!expectedType) {
     throw new Error(`Field not allowed: ${fieldName}`);
@@ -124,7 +124,7 @@ function sanitizeFieldFilter(fieldName, rawFilter) {
   return cleanOperators;
 }
 
-function validateAndSanitizeFilters(rawFilters) {
+function validateFilters(rawFilters) {
   if (rawFilters == null) return {};
 
   if (!isPlainObject(rawFilters)) {
@@ -133,10 +133,10 @@ function validateAndSanitizeFilters(rawFilters) {
 
   const cleanFilters = {};
   for (const [fieldName, rawFilter] of Object.entries(rawFilters)) {
-    cleanFilters[fieldName] = sanitizeFieldFilter(fieldName, rawFilter);
+    cleanFilters[fieldName] = checkFieldFilter(fieldName, rawFilter);
   }
 
   return cleanFilters;
 }
 
-module.exports = { validateAndSanitizeFilters };
+module.exports = { validateFilters };

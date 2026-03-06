@@ -132,7 +132,6 @@ exports.downloadLandingPage = async (req, res) => {
       );
     }
 
-
     return res.status(500).type("html").send(
       renderDownloadPage({
         title: "Download Unavailable",

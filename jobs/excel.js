@@ -13,7 +13,7 @@ class ExcelService {
     this.exportId = exportDoc?._id?.toString() || "unknown";
     this.finalDir = outputDir;
 
-    this.identifier = identifier.replace(/[^a-zA-Z0-9_-]/g, "_");
+    this.identifier = String(identifier).replace(/[^a-zA-Z0-9_-]/g, "_");
 
     if (!fs.existsSync(this.finalDir)) {
       fs.mkdirSync(this.finalDir, { recursive: true });
@@ -87,4 +87,45 @@ class ExcelService {
   }
 }
 
-module.exports = ExcelService;
+class ExcelGroupService {
+  constructor(rootDir, exportDoc) {
+    this.rootDir = rootDir;
+    this.exportDoc = exportDoc;
+    this.services = new Map();
+  }
+
+  getService(identifier) {
+    const idKey = String(identifier || "UNKNOWN");
+
+    if (!this.services.has(idKey)) {
+      const identifierFolder = path.join(this.rootDir, idKey);
+      fs.mkdirSync(identifierFolder, { recursive: true });
+      this.services.set(idKey, new ExcelService(identifierFolder, this.exportDoc, idKey));
+    }
+
+    return this.services.get(idKey);
+  }
+
+  async writeGroupedBatch(batch) {
+    const groups = new Map();
+
+    for (const doc of batch) {
+      const idKey = String(doc.Identifier || "UNKNOWN");
+      if (!groups.has(idKey)) groups.set(idKey, []);
+      groups.get(idKey).push(doc);
+    }
+
+    for (const [identifier, records] of groups) {
+      const service = this.getService(identifier);
+      await service.writeBatch(records);
+    }
+  }
+
+  async finalizeAll() {
+    for (const service of this.services.values()) {
+      await service.finalize();
+    }
+  }
+}
+
+module.exports = { ExcelService, ExcelGroupService };

@@ -1,12 +1,12 @@
 const exportStatus = require("./../schemas/export-status");
 const exportQueue = require("./../jobs/queue");
 const { calculateDelay } = require("./../utils/sheduler");
-const { validateAndSanitizeFilters } = require("./../utils/filter-validator");
+const { validateFilters } = require("./../utils/filter.validator");
 
 class ExportService {
   async createExport(data) {
     try{
-    const safeFilters = validateAndSanitizeFilters(data.filters);
+    const safeFilters = validateFilters(data.filters);
 
     const exportDoc = await exportStatus.create({
       user_name: data.user_name,

@@ -5,23 +5,11 @@ const crypto = require("crypto");
 const archiver = require("archiver");
 const zipEncrypted = require("archiver-zip-encrypted");
 
-const ExcelService = require("./excel");
+const { ExcelGroupService } = require("./excel");
 const { sendDownloadLinkMail, sendPasswordMail } = require("./../utils/mailer");
 
 archiver.registerFormat("zip-encrypted", zipEncrypted);
 
-function buildDownloadPageLink(exportId) {
-  const downloadBaseUrl = (process.env.BASE_DOWNLOAD_URL || "");
-
-  const normalized = downloadBaseUrl.endsWith("/")
-    ? downloadBaseUrl.slice(0, -1)
-    : downloadBaseUrl;
-  const pageBase = normalized.endsWith("/download")
-    ? `${normalized.slice(0, -"/download".length)}/download-page`
-    : `${normalized}/download-page`;
-
-  return `${pageBase}/${exportId}`;
-}
 
 async function runExport(exportDoc) {
   const ROOT_DIR = path.join(process.cwd(), "export.data");
@@ -31,8 +19,9 @@ async function runExport(exportDoc) {
   fs.mkdirSync(USER_ROOT, { recursive: true });
 
   const batchSize = 5000;
-  const identifierGroups = {};
+  const excelGroupService = new ExcelGroupService(USER_ROOT, exportDoc);
   let totalMatched = 0;
+  let docsBatch = [];
 
   const selectedCollections = Array.isArray(exportDoc.collections)
     ? exportDoc.collections
@@ -44,16 +33,24 @@ async function runExport(exportDoc) {
   }
 
   for (const collectionName of selectedCollections) {
+    
     const collection = mongoose.connection.collection(collectionName);
     const cursor = collection.find(exportDoc.filters).batchSize(batchSize);
-    let collectionMatched = 0;
 
     for await (const doc of cursor) {
       totalMatched += 1;
-      const idKey = doc.Identifier || "UNKNOWN";
-      if (!identifierGroups[idKey]) identifierGroups[idKey] = [];       // Grouping by Identifier
-      identifierGroups[idKey].push(doc);
+      docsBatch.push(doc);
+
+      if (docsBatch.length === batchSize) {
+        await excelGroupService.writeGroupedBatch(docsBatch);
+        docsBatch = [];
+      }
     }
+  }
+
+  if (docsBatch.length > 0) {
+    await excelGroupService.writeGroupedBatch(docsBatch);
+    docsBatch = [];
   }
 
   if (totalMatched === 0) {
@@ -61,28 +58,7 @@ async function runExport(exportDoc) {
   }
 
   console.log(`[EXPORT ${exportDoc._id}] Total matched docs: ${totalMatched}`);
-
-  for (const [identifier, records] of Object.entries(identifierGroups)) {
-    const identifierFolder = path.join(USER_ROOT, identifier);
-    fs.mkdirSync(identifierFolder, { recursive: true });
-
-    const excelService = new ExcelService(identifierFolder, exportDoc, identifier);
-
-    let batch = [];
-
-    for (const doc of records) {
-      batch.push(doc);
-      if (batch.length === batchSize) {
-        await excelService.writeBatch(batch, `Identifier_${identifier}`);
-        batch = [];
-      }
-    }
-
-    if (batch.length > 0) {
-      await excelService.writeBatch(batch, `Identifier_${identifier}`);
-    }
-    await excelService.finalize();
-  }
+  await excelGroupService.finalizeAll();
 
   const zipDir = path.join(USER_ROOT, "zips");
   fs.mkdirSync(zipDir, { recursive: true });
@@ -100,6 +76,19 @@ async function runExport(exportDoc) {
     password: zipResult.password,
     userRoot: USER_ROOT,
   };
+}
+
+function buildDownloadPageLink(exportId) {
+  const downloadBaseUrl = (process.env.BASE_DOWNLOAD_URL || "");
+
+  const normalized = downloadBaseUrl.endsWith("/")
+    ? downloadBaseUrl.slice(0, -1)
+    : downloadBaseUrl;
+  const pageBase = normalized.endsWith("/download")
+    ? `${normalized.slice(0, -"/download".length)}/download-page`
+    : `${normalized}/download-page`;
+
+  return `${pageBase}/${exportId}`;
 }
 
 function createPasswordProtectedZip(zipDir, userRoot) {
