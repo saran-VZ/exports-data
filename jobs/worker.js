@@ -1,5 +1,4 @@
 const { Worker } = require("bullmq");
-const path = require("path");
 const connection = require("./../config/redis");
 const exportStatus = require("./../schemas/export-status");
 const cleanupQueue = require("./cleanup.queue");

@@ -14,7 +14,7 @@ const cleanupWorker = new Worker(
 
       const now = new Date();
       if (!exportDoc.expires_at || now < exportDoc.expires_at) {
-        console.log("Not expired yet.");
+        console.log("Not expired yet");
         return;
       }
 

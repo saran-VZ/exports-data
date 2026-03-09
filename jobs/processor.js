@@ -57,8 +57,9 @@ async function runExport(exportDoc) {
     throw new Error("No records found for the selected filters/collections");
   }
 
-  console.log(`[EXPORT ${exportDoc._id}] Total matched docs: ${totalMatched}`);
   await excelGroupService.finalizeAll();
+  
+  console.log(`[EXPORT ${exportDoc._id}] Total matched docs: ${totalMatched}`);
 
   const zipDir = path.join(USER_ROOT, "zips");
   fs.mkdirSync(zipDir, { recursive: true });

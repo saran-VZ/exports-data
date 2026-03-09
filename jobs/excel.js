@@ -10,10 +10,10 @@ class ExcelService {
     this.workbook = null;
     this.worksheet = null;
     this.generatedFiles = [];
-    this.exportId = exportDoc?._id?.toString() || "unknown";
+    this.exportId = exportDoc._id?.toString() || "unknown";
     this.finalDir = outputDir;
 
-    this.identifier = String(identifier).replace(/[^a-zA-Z0-9_-]/g, "_");
+    this.identifier = String(identifier);
 
     if (!fs.existsSync(this.finalDir)) {
       fs.mkdirSync(this.finalDir, { recursive: true });
@@ -23,8 +23,7 @@ class ExcelService {
   async createNewFile() {
     try {
       const fileName = `${this.identifier}_part${this.partCounter}.xlsx`;
-      const sheetName = `${this.identifier}_part${this.partCounter}`
-        .substring(0, 31); 
+      const sheetName = `${this.identifier}_part${this.partCounter}`; 
 
       this.tempPath = path.join(this.finalDir, fileName);
 
@@ -43,10 +42,6 @@ class ExcelService {
     }
   }
 
-  async moveToFinalLocation() {
-    this.generatedFiles.push(this.tempPath);
-  }
-
   async writeBatch(batch) {
     try {
       if (!this.workbook) {
@@ -60,7 +55,6 @@ class ExcelService {
         if (this.currentRowCount >= this.rowLimit) {
           await this.workbook.commit();
           console.log(`${path.basename(this.tempPath)} created`);
-          await this.moveToFinalLocation();
           await this.createNewFile();
         }
       }
@@ -74,7 +68,6 @@ class ExcelService {
       if (this.workbook) {
         await this.workbook.commit();
         console.log(`${path.basename(this.tempPath)} created`);
-        await this.moveToFinalLocation();
         this.workbook = null;
       }
     } catch (err) {
@@ -128,4 +121,4 @@ class ExcelGroupService {
   }
 }
 
-module.exports = { ExcelService, ExcelGroupService };
+module.exports = {  ExcelGroupService };

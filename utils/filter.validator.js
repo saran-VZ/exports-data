@@ -3,7 +3,7 @@ const ALLOWED_FIELDS = {
   Model_Name: "string",
   Scale_In_Barcode: "string",
   Scale_In_Result: "string",
-  Time: "string",
+  Time: "time",
   I_OCV1_Max: "number",
   I_OCV1_Min: "number",
   Scale_In_Empty_Weight: "number",
@@ -78,11 +78,24 @@ function validateByType(value, expectedType, fieldName) {                       
     return value;
   }
 
+   if (expectedType === "time") {
+    return validateTime(value, fieldName);
+  }
+
   if (expectedType === "date") {
     return parseDate(value, fieldName);
   }
 
   throw new Error(`Unsupported field type for ${fieldName}`);
+}
+
+function validateTime(value, fieldName) {
+  const timeRegex = /^([01]\d|2[0-3]):([0-5]\d)$/;
+
+  if (typeof value !== "string" || !timeRegex.test(value)) {
+    throw new Error(`Field ${fieldName} must be a valid time (HH:MM)`);
+  }
+  return value;
 }
 
 function validateOperatorValue(operator, value, expectedType, fieldName) {                    // Operator validation
