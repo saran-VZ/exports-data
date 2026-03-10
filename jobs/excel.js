@@ -74,23 +74,19 @@ class ExcelService {
       throw err;
     }
   }
-
-  getGeneratedFiles() {
-    return this.generatedFiles;
-  }
 }
 
 class ExcelGroupService {
   constructor(rootDir, exportDoc) {
     this.rootDir = rootDir;
     this.exportDoc = exportDoc;
-    this.services = new Map();
+    this.services = new Map();                                //map of identifier to group records and excel service instance
   }
 
   getService(identifier) {
     const idKey = String(identifier || "UNKNOWN");
 
-    if (!this.services.has(idKey)) {
+    if (!this.services.has(idKey)) {                                                   //add new identifier group and excel service instance 
       const identifierFolder = path.join(this.rootDir, idKey);
       fs.mkdirSync(identifierFolder, { recursive: true });
       this.services.set(idKey, new ExcelService(identifierFolder, this.exportDoc, idKey));
@@ -104,11 +100,11 @@ class ExcelGroupService {
 
     for (const doc of batch) {
       const idKey = String(doc.Identifier || "UNKNOWN");
-      if (!groups.has(idKey)) groups.set(idKey, []);
-      groups.get(idKey).push(doc);
+      if (!groups.has(idKey)) groups.set(idKey, []);                                   
+      groups.get(idKey).push(doc);                                     //group records by identifier
     }
 
-    for (const [identifier, records] of groups) {
+    for (const [identifier, records] of groups) {                      // read and write each identifier group 
       const service = this.getService(identifier);
       await service.writeBatch(records);
     }

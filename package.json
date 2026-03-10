@@ -14,7 +14,9 @@
     "node-7z": "^3.0.0",
     "nodemailer": "^8.0.1",
     "nodemon": "^3.1.14",
-    "redis": "^5.11.0"
+    "redis": "^5.11.0",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1"
   },
   "name": "exports",
   "version": "1.0.0",
@@ -22,7 +24,7 @@
   "scripts": {
     "dev": "nodemon --inspect=0.0.0.0:9229 app.js",
     "start": "node app.js",
-    "test" : "jest"
+    "test": "jest"
   },
   "keywords": [],
   "author": "",

@@ -13,7 +13,7 @@ class ExportService {
       email: data.email,
       collections: data.collections,
       filters: safeFilters,
-      file_format: data.fileFormat || "xlsx",
+      file_format:  "xlsx",
       status: "queued",
       progress: 0,
     });

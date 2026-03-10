@@ -110,19 +110,19 @@ function validateOperatorValue(operator, value, expectedType, fieldName) {      
   return validateByType(value, expectedType, fieldName);
 }
 
-function checkFieldFilter(fieldName, rawFilter) {
+function checkFieldFilter(fieldName, filterParams) {
   const expectedType = ALLOWED_FIELDS[fieldName];
   if (!expectedType) {
     throw new Error(`Field not allowed: ${fieldName}`);
   }
 
-  if (!isPlainObject(rawFilter)) {
-    return validateByType(rawFilter, expectedType, fieldName);
+  if (!isPlainObject(filterParams)) {
+    return validateByType(filterParams, expectedType, fieldName);
   }
 
   const cleanOperators = {};
 
-  for (const [operator, value] of Object.entries(rawFilter)) {
+  for (const [operator, value] of Object.entries(filterParams)) {
     if (!ALLOWED_OPERATORS.has(operator)) {
       throw new Error(`Unsupported operator: ${operator}`);
     }
@@ -145,8 +145,8 @@ function validateFilters(rawFilters) {
   }
 
   const cleanFilters = {};
-  for (const [fieldName, rawFilter] of Object.entries(rawFilters)) {
-    cleanFilters[fieldName] = checkFieldFilter(fieldName, rawFilter);
+  for (const [fieldName, filterParams] of Object.entries(rawFilters)) {
+    cleanFilters[fieldName] = checkFieldFilter(fieldName, filterParams);
   }
 
   return cleanFilters;

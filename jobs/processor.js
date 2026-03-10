@@ -12,6 +12,7 @@ archiver.registerFormat("zip-encrypted", zipEncrypted);
 
 
 async function runExport(exportDoc) {
+
   const ROOT_DIR = path.join(process.cwd(), "export.data");
   const userFolder = `${exportDoc.user_name}_${exportDoc._id.toString()}`;      // Unique folder per export
   const USER_ROOT = path.join(ROOT_DIR, userFolder);
@@ -64,7 +65,7 @@ async function runExport(exportDoc) {
   const zipDir = path.join(USER_ROOT, "zips");
   fs.mkdirSync(zipDir, { recursive: true });
 
-  const zipResult = await createPasswordProtectedZip(zipDir, USER_ROOT);
+  const zipResult = await createPasswordProtectedZip(zipDir, USER_ROOT);     //return zipPath and password
 
 
   const downloadLink = buildDownloadPageLink(exportDoc._id);
@@ -110,7 +111,7 @@ function createPasswordProtectedZip(zipDir, userRoot) {
         password: password,
       });
 
-      output.on("close", () => {
+      output.on("close", () => {                             //listen for close event and returns zipPath and password
         resolve({ zipPath, password });
       });
 

@@ -2,8 +2,11 @@ require('dotenv').config();
 const express = require("express")
 const app = express()
 const mongoose = require("mongoose");
+const swaggerUi = require("swagger-ui-express");
 
 const exportsRouter= require("./routes/index")
+const swaggerSpec = require("./config/swagger");
+
 
 require("./jobs/worker");
 require("./jobs/cleanup.worker");
@@ -20,6 +23,8 @@ async function connectToDB() {
 }
 
 connectToDB();
+
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 app.use('/',exportsRouter)
 
