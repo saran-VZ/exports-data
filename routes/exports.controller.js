@@ -47,7 +47,8 @@ exports.createExport = async (req, res) => {
         : null,
     });
   } catch (error) {
-    return res.status(500).json({
+    statusCode = error.status || 500;
+    return res.status(statusCode).json({
       success: false,
       message: "Failed to create export job",
       error: error.message,
@@ -60,13 +61,6 @@ exports.getExportStatus = async (req, res) => {
     const exportService = new ExportService();
 
     const exportDoc = await exportService.getExportStatus(req.params.id);
-
-    if (!exportDoc) {
-      return res.status(404).json({
-        success: false,
-        message: "Export job not found",
-      });
-    }
 
     return res.status(200).json({
       success: true,
@@ -81,6 +75,12 @@ exports.getExportStatus = async (req, res) => {
         : null,
     });
   } catch (error) {
+    if (err.message === "Export job not found") {
+      return res.status(404).json({
+        success: false,
+        message: "Export job not found",
+      });
+    }
     return res.status(500).json({
       success: false,
       message: "Failed to fetch export status",
@@ -179,12 +179,34 @@ exports.downloadExport = async (req, res) => {
       }
     );
   } catch (err) {
-    if (err.message === "NOT_FOUND")
-      return res.status(404).send("Export not found");
+    if (err.message === "NOT_FOUND") {
+      return res.status(404).type("html").send(
+        renderDownloadPage({
+          title: "Export Not Found",
+          message: "This export does not exist or the file is missing.",
+          buttonHref: null,
+        })
+      );
+    }
 
-    if (err.message === "EXPIRED")
-      return res.status(410).send("File expired");
+    if (err.message === "EXPIRED") {
+      return res.status(410).type("html").send(
+        renderDownloadPage({
+          title: "Link Expired",
+          message: "This download link has expired. Please create a new export request.",
+          buttonHref: null,
+        })
+      );
+    }
 
-    return res.status(500).send("Download failed");
+    return res.status(500).type("html").send(
+      renderDownloadPage({
+        title: "Download Unavailable",
+        message: "Something went wrong while loading this page. Please try again.",
+        buttonHref: null,
+      })
+    );
   }
 };
+
+

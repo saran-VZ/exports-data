@@ -48,7 +48,12 @@ class ExportService {
 
   async getExportStatus(id) {                           
     try{
-      return await exportStatus.findById(id);
+      const exportDoc = await exportStatus.findById(id);
+      if (!exportDoc) {
+         throw new Error("Export job not found");
+      }
+      return exportDoc;
+      
     }catch(err){
       throw err;
     }  

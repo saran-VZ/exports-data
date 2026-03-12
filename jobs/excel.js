@@ -16,7 +16,7 @@ class ExcelService {
     this.identifier = String(identifier);
 
     if (!fs.existsSync(this.finalDir)) {
-      fs.mkdirSync(this.finalDir, { recursive: true });
+       fs.mkdirSync(this.finalDir, { recursive: true });
     }
   }
 
@@ -79,14 +79,14 @@ class ExcelService {
 class ExcelGroupService {
   constructor(rootDir, exportDoc) {
     this.rootDir = rootDir;
-    this.exportDoc = exportDoc;
-    this.services = new Map();                                //map of identifier to group records and excel service instance
+    this.exportDoc = exportDoc; 
+    this.services = new Map();                                          //map of identifiers to group records and excel service instance
   }
 
   getService(identifier) {
     const idKey = String(identifier || "UNKNOWN");
 
-    if (!this.services.has(idKey)) {                                                   //add new identifier group and excel service instance 
+    if (!this.services.has(idKey)) {                                     //add new identifier group and excel service instance 
       const identifierFolder = path.join(this.rootDir, idKey);
       fs.mkdirSync(identifierFolder, { recursive: true });
       this.services.set(idKey, new ExcelService(identifierFolder, this.exportDoc, idKey));

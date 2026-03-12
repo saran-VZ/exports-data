@@ -88,7 +88,7 @@ async function sendPasswordMail(to, password) {
           </div>
 
           <p style="color:#FFD700; font-size:14px; margin-top:30px;">
-            ⚠ This file will expire in 1 hour.
+             This file will expire in 1 hour.
           </p>
 
           <p style="color:#FFD700; font-size:12px; margin-top:15px; opacity:0.8;">

@@ -7,7 +7,7 @@ const redis = new IORedis({
 });
 
 redis.on("ready", (err) => {
-  console.error("redis is connected");
+  console.error("Redis connected");
 });
 
 redis.on("error", (err) => {
