@@ -3,14 +3,15 @@ const connection = require("./../config/redis");
 const exportStatus = require("./../schemas/export-status");
 const cleanupQueue = require("./cleanup.queue");
 const { runExport } = require("./processor");
+const logger = require("./../utils/logger");
 
-const EXPIRY_TIME = 5 * 60 * 1000;                     // 5 minutes
+const EXPIRY_TIME = 5 * 60 * 1000;                      // 5 minutes
 
 const worker = new Worker(
   "exportQueue",
   async (job) => {
     const { exportId } = job.data;
-    console.log(`[JOB ${job.id}] Started export job for exportId=${exportId}`);
+    logger.info(`[JOB ${job.id}] Started export job for exportId=${exportId}`);
 
     const exportDoc = await exportStatus.findById(exportId);
     if (!exportDoc) return;
@@ -22,7 +23,7 @@ const worker = new Worker(
       exportDoc.progress = 0;
       await exportDoc.save();
 
-      const result = await runExport(exportDoc);
+      const result = await runExport(exportDoc);               //callback to processor 
 
       exportDoc.status = "completed";
       exportDoc.completed_at = new Date();
@@ -32,10 +33,10 @@ const worker = new Worker(
       exportDoc.expires_at = new Date(Date.now() + EXPIRY_TIME);
       await exportDoc.save();
 
-      console.log("Export and zip completed for:", exportDoc._id);
-      console.log("Notification emails sent to:", exportDoc.email);
+      logger.info("Export and zip completed for: %s", exportDoc._id);
+      logger.info("Notification emails sent to: %s", exportDoc.email);
 
-      await cleanupQueue.add(
+      await cleanupQueue.add(                                               //added to celanupqueue after the job is completed
         "deleteExportFiles",
         {
           userRoot: result.userRoot,
@@ -51,25 +52,25 @@ const worker = new Worker(
       exportDoc.status = "failed";
       exportDoc.error_message = err.message;
       await exportDoc.save();
-      console.error(`[JOB ${job.id}] Export failed for exportId=${exportId}:`, err);
+      logger.error(`[JOB ${job.id}] Export failed for exportId=${exportId}: %s`, err);
       throw err;
     }
   },
   {
     connection,
-    concurrency: 2,
+    concurrency: 2,                                                         //can process upto 2 jobs concurrently
   }
 );
 
 worker.on("failed", (job, err) => {
-  console.error(
-    `[JOB ${job?.id ?? "unknown"}] Worker failed event:`,
+  logger.error(
+    `[JOB ${job?.id ?? "unknown"}] Worker failed event: %s`,
     err?.message || err
   );
 });
 
 worker.on("completed", (job) => {
-  console.log(`[JOB ${job.id}] Worker completed event`);
+  logger.info(`[JOB ${job.id}] Worker completed event`);
 });
 
-console.log("Export Worker Started...!!");
+logger.info("Export Worker Started...!!");

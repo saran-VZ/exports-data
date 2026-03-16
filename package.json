@@ -6,17 +6,18 @@
     "bullmq": "^5.70.1",
     "concurrency": "^0.1.4",
     "crypto": "^1.0.1",
-    "dotenv": "^17.3.1", 
+    "dotenv": "^17.3.1",
     "exceljs": "^4.4.0",
     "express": "^5.2.1",
     "ioredis": "^5.10.0",
     "mongoose": "^9.2.3",
     "node-7z": "^3.0.0",
-    "nodemailer": "^8.0.1",
     "nodemon": "^3.1.14",
     "redis": "^5.11.0",
+    "resend": "^6.9.3",
     "swagger-jsdoc": "^6.2.8",
-    "swagger-ui-express": "^5.0.1"
+    "swagger-ui-express": "^5.0.1",
+    "winston": "^3.19.0"
   },
   "name": "exports",
   "version": "1.0.0",
@@ -24,7 +25,9 @@
   "scripts": {
     "dev": "nodemon --inspect=0.0.0.0:9229 app.js",
     "start": "node app.js",
-    "test": "jest"
+    "test": "jest",
+    "test:start": "jest && node app.js",
+    "test:dev": "jest && nodemon --inspect=0.0.0.0:9229 app.js"
   },
   "keywords": [],
   "author": "",

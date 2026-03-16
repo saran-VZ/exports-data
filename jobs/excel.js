@@ -1,6 +1,7 @@
 const ExcelJS = require("exceljs");
 const path = require("path");
 const fs = require("fs");
+const logger = require("./../utils/logger");
 
 class ExcelService {
   constructor(outputDir, exportDoc, identifier) {
@@ -54,7 +55,7 @@ class ExcelService {
 
         if (this.currentRowCount >= this.rowLimit) {
           await this.workbook.commit();
-          console.log(`${path.basename(this.tempPath)} created`);
+          logger.info(`${path.basename(this.tempPath)} created`);
           await this.createNewFile();
         }
       }
@@ -67,7 +68,7 @@ class ExcelService {
     try {
       if (this.workbook) {
         await this.workbook.commit();
-        console.log(`${path.basename(this.tempPath)} created`);
+        logger.info(`${path.basename(this.tempPath)} created`);
         this.workbook = null;
       }
     } catch (err) {
@@ -80,37 +81,40 @@ class ExcelGroupService {
   constructor(rootDir, exportDoc) {
     this.rootDir = rootDir;
     this.exportDoc = exportDoc; 
-    this.services = new Map();                                          //map of identifiers to group records and excel service instance
+    this.services = new Map();                                          //map of identifier groups and  excel service instance
   }
 
-  getService(identifier) {
+  getService(collectionName, identifier) {
+    const collectionKey = String(collectionName || "UNKNOWN_COLLECTION");
     const idKey = String(identifier || "UNKNOWN");
+    const serviceKey = `${collectionKey}::${idKey}`;
 
-    if (!this.services.has(idKey)) {                                     //add new identifier group and excel service instance 
-      const identifierFolder = path.join(this.rootDir, idKey);
+    if (!this.services.has(serviceKey)) {                                //add new identifier group and excel service instance 
+      const collectionFolder = path.join(this.rootDir, collectionKey);
+      const identifierFolder = path.join(collectionFolder, idKey);
       fs.mkdirSync(identifierFolder, { recursive: true });
-      this.services.set(idKey, new ExcelService(identifierFolder, this.exportDoc, idKey));
+      this.services.set(serviceKey, new ExcelService(identifierFolder, this.exportDoc, idKey));
     }
 
-    return this.services.get(idKey);
+    return this.services.get(serviceKey);
   }
 
-  async writeGroupedBatch(batch) {
+  async writeGroupedBatch(collectionName, batch) {
     const groups = new Map();
 
     for (const doc of batch) {
       const idKey = String(doc.Identifier || "UNKNOWN");
       if (!groups.has(idKey)) groups.set(idKey, []);                                   
-      groups.get(idKey).push(doc);                                     //group records by identifier
+      groups.get(idKey).push(doc);                                     // group records by identifier
     }
 
     for (const [identifier, records] of groups) {                      // read and write each identifier group 
-      const service = this.getService(identifier);
+      const service = this.getService(collectionName, identifier);
       await service.writeBatch(records);
     }
   }
 
-  async finalizeAll() {
+  async finalizeAll() {                                                // finalize all uncommited excel files
     for (const service of this.services.values()) {
       await service.finalize();
     }

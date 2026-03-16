@@ -1,23 +1,15 @@
-const nodemailer = require("nodemailer");
+const { Resend } = require("resend");
 
-const transporter = nodemailer.createTransport({
-  host: process.env.SMTP_HOST,        
-  port: Number(process.env.SMTP_PORT),
-  secure: false,                      
-  auth: {
-    user: process.env.SMTP_USER,
-    pass: process.env.SMTP_PASS,
-  },
-});
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 async function sendDownloadLinkMail(to, downloadLink) {
-  const safeLink = String(downloadLink || "")
+  const safeLink = String(downloadLink || "");
 
-  await transporter.sendMail({
-    from: `"Export Service" <${process.env.SMTP_USER}>`,
+  await resend.emails.send({
+    from: "Export Service <onboarding@resend.dev>",
     to,
     subject: "Your Export File Is Ready",
-   html: `
+    html: `
       <div style="background-color:#0b1f3a; padding:40px 0; font-family:Arial, sans-serif;">
         <div style="max-width:600px; margin:0 auto; background:#102b52; padding:30px; border-radius:12px; text-align:center; box-shadow:0 8px 20px rgba(0,0,0,0.3);">
           
@@ -58,8 +50,8 @@ async function sendDownloadLinkMail(to, downloadLink) {
 }
 
 async function sendPasswordMail(to, password) {
-  await transporter.sendMail({
-    from: `"Export Service" <${process.env.SMTP_USER}>`,
+  await resend.emails.send({
+    from: "Export Service <onboarding@resend.dev>",
     to,
     subject: "Password For Your Export File",
     html: `
@@ -97,8 +89,8 @@ async function sendPasswordMail(to, password) {
 
         </div>
       </div>
-    `
+    `,
   });
- }
+}
 
- module.exports = { sendDownloadLinkMail,sendPasswordMail, };
+module.exports = { sendDownloadLinkMail, sendPasswordMail };

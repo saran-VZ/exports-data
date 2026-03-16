@@ -2,6 +2,7 @@ const { Worker } = require("bullmq");
 const fs = require("fs");
 const connection = require("./../config/redis");
 const exportStatus = require("./../schemas/export-status");
+const logger = require("./../utils/logger");
 
 const cleanupWorker = new Worker(
   "cleanupQueue",
@@ -14,26 +15,25 @@ const cleanupWorker = new Worker(
 
       const now = new Date();
       if (!exportDoc.expires_at || now < exportDoc.expires_at) {
-        console.log("Not expired yet");
+        logger.info("Not expired yet");
         return;
       }
 
       if (userRoot && fs.existsSync(userRoot)) {
         fs.rmSync(userRoot, { recursive: true, force: true });
-        console.log("Deleted:", userRoot);
+        logger.info("Deleted: %s", userRoot);
       }
 
       exportDoc.status = "expired";
       await exportDoc.save();
 
-      console.log("Cleanup completed for:", exportId);
+      logger.info("Cleanup completed for: %s", exportId);
 
     } catch (err) {
-      console.error("Cleanup failed:", err);
+      logger.error("Cleanup failed: %s", err);
     }
   },
   { connection }
 );
 
-console.log("Cleanup Worker Running...");
-module.exports = cleanupWorker;
+logger.info("Cleanup Worker Running...");

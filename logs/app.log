@@ -1,0 +1,560 @@
+2026-03-13T05:43:12.053Z info: Export Worker Started...!!
+2026-03-13T05:43:12.055Z info: Cleanup Worker Running...
+2026-03-13T05:43:12.074Z info: server is running at 5000
+2026-03-13T05:43:12.075Z info: Swagger docs is available at http://localhost:5000/api-docs
+2026-03-13T05:43:12.104Z error: Redis connected
+2026-03-13T05:43:12.131Z info: Mongo Connected
+2026-03-13T05:44:10.254Z info: Export Worker Started...!!
+2026-03-13T05:44:10.255Z info: Cleanup Worker Running...
+2026-03-13T05:44:10.273Z info: server is running at 5000
+2026-03-13T05:44:10.273Z info: Swagger docs is available at http://localhost:5000/api-docs
+2026-03-13T05:44:10.296Z info: Redis connected
+2026-03-13T05:44:10.319Z info: Mongo Connected
+13-03-2026 05-46 info: Export Worker Started...!!
+13-03-2026 05-46 info: Cleanup Worker Running...
+13-03-2026 05-46 info: server is running at 5000
+13-03-2026 05-46 info: Swagger docs is available at http://localhost:5000/api-docs
+13-03-2026 05-46 info: Redis connected
+13-03-2026 05-46 info: Mongo Connected
+13-03-2026 11-18 info: Export Worker Started...!!
+13-03-2026 11-18 info: Cleanup Worker Running...
+13-03-2026 11-18 info: server is running at 5000
+13-03-2026 11-18 info: Swagger docs is available at http://localhost:5000/api-docs
+13-03-2026 11-18 info: Redis connected
+13-03-2026 11-18 info: Mongo Connected
+13-03-2026 11-20 info: Export Worker Started...!!
+13-03-2026 11-20 info: Cleanup Worker Running...
+13-03-2026 11-20 info: server is running at 5000
+13-03-2026 11-20 info: Swagger docs is available at http://localhost:5000/api-docs
+13-03-2026 11-20 info: Redis connected
+13-03-2026 11-20 info: Mongo Connected
+13-03-2026 11-20 info: [JOB 15] Started export job for exportId=69b3a5b7a383e61d4ee7d3d5
+13-03-2026 11-20 info: [JOB 16] Started export job for exportId=69b3a5b8a383e61d4ee7d3da
+13-03-2026 11-20 info: [JOB 17] Started export job for exportId=69b3a5b9a383e61d4ee7d3df
+13-03-2026 11-20 info: [JOB 18] Started export job for exportId=69b3a5baa383e61d4ee7d3e4
+13-03-2026 11-20 info: TEC2411_part1.xlsx created
+13-03-2026 11-20 info: [JOB 19] Started export job for exportId=69b3a5bca383e61d4ee7d3e9
+13-03-2026 11-20 info: TEC2411_part1.xlsx created
+13-03-2026 11-20 info: TEC2411_part1.xlsx created
+13-03-2026 11-20 info: TEC2411_part1.xlsx created
+13-03-2026 11-20 info: TEC2411_part2.xlsx created
+13-03-2026 11-20 info: TEC2411_part1.xlsx created
+13-03-2026 11-20 info: TEC2411_part2.xlsx created
+13-03-2026 11-20 info: TEC2411_part2.xlsx created
+13-03-2026 11-21 info: TEC2411_part2.xlsx created
+13-03-2026 11-21 info: TEC2411_part3.xlsx created
+13-03-2026 11-21 info: TEC2411_part3.xlsx created
+13-03-2026 11-21 info: TEC2411_part2.xlsx created
+13-03-2026 11-21 info: TEC2411_part3.xlsx created
+13-03-2026 11-21 info: TEC2411_part3.xlsx created
+13-03-2026 11-21 info: TEC2411_part4.xlsx created
+13-03-2026 11-21 info: TEC2411_part3.xlsx created
+13-03-2026 11-21 info: TEC2411_part4.xlsx created
+13-03-2026 11-21 info: TEC2411_part4.xlsx created
+13-03-2026 11-21 info: TEC2411_part4.xlsx created
+13-03-2026 11-21 info: TEC2411_part5.xlsx created
+13-03-2026 11-21 info: TEC2411_part5.xlsx created
+13-03-2026 11-21 info: TEC2411_part4.xlsx created
+13-03-2026 11-21 info: TEC2411_part5.xlsx created
+13-03-2026 11-21 info: TEC2411_part5.xlsx created
+13-03-2026 11-21 info: TEC2411_part6.xlsx created
+13-03-2026 11-21 info: TEC2411_part6.xlsx created
+13-03-2026 11-21 info: TEC2411_part5.xlsx created
+13-03-2026 11-21 info: TEC2411_part6.xlsx created
+13-03-2026 11-21 info: TEC2411_part6.xlsx created
+13-03-2026 11-21 info: TEC2211_part1.xlsx created
+13-03-2026 11-21 info: TEC2211_part1.xlsx created
+13-03-2026 11-21 info: TEC2411_part6.xlsx created
+13-03-2026 11-21 info: TEC2211_part1.xlsx created
+13-03-2026 11-21 info: TEC2211_part1.xlsx created
+13-03-2026 11-21 info: TEC2211_part2.xlsx created
+13-03-2026 11-21 info: TEC2211_part2.xlsx created
+13-03-2026 11-21 info: TEC2211_part1.xlsx created
+13-03-2026 11-21 info: TEC2211_part2.xlsx created
+13-03-2026 11-21 info: TEC2211_part2.xlsx created
+13-03-2026 11-21 info: TEC2211_part3.xlsx created
+13-03-2026 11-21 info: TEC2211_part3.xlsx created
+13-03-2026 11-21 info: TEC2211_part2.xlsx created
+13-03-2026 11-21 info: TEC2411_part7.xlsx created
+13-03-2026 11-21 info: TEC2211_part3.xlsx created
+13-03-2026 11-21 info: TEC2211_part3.xlsx created
+13-03-2026 11-21 info: TEC2411_part7.xlsx created
+13-03-2026 11-21 info: TEC2411_part7.xlsx created
+13-03-2026 11-21 info: TEC2411_part7.xlsx created
+13-03-2026 11-21 info: TEC2211_part3.xlsx created
+13-03-2026 11-21 info: TEC2411_part8.xlsx created
+13-03-2026 11-21 info: TEC2411_part8.xlsx created
+13-03-2026 11-21 info: TEC2411_part7.xlsx created
+13-03-2026 11-21 info: TEC2411_part8.xlsx created
+13-03-2026 11-21 info: TEC2411_part8.xlsx created
+13-03-2026 11-21 info: TEC2411_part9.xlsx created
+13-03-2026 11-21 info: TEC2411_part9.xlsx created
+13-03-2026 11-21 info: TEC2411_part8.xlsx created
+13-03-2026 11-21 info: TEC2411_part9.xlsx created
+13-03-2026 11-21 info: TEC2411_part9.xlsx created
+13-03-2026 11-21 info: TEC2411_part10.xlsx created
+13-03-2026 11-21 info: TEC2411_part10.xlsx created
+13-03-2026 11-21 info: TEC2411_part10.xlsx created
+13-03-2026 11-21 info: TEC2411_part9.xlsx created
+13-03-2026 11-21 info: TEC2411_part10.xlsx created
+13-03-2026 11-21 info: TEC2411_part11.xlsx created
+13-03-2026 11-21 info: TEC2411_part11.xlsx created
+13-03-2026 11-21 info: TEC2411_part11.xlsx created
+13-03-2026 11-21 info: TEC2411_part10.xlsx created
+13-03-2026 11-21 info: TEC2411_part11.xlsx created
+13-03-2026 11-22 info: TEC2411_part12.xlsx created
+13-03-2026 11-22 info: TEC2411_part12.xlsx created
+13-03-2026 11-22 info: TEC2411_part12.xlsx created
+13-03-2026 11-22 info: TEC2411_part11.xlsx created
+13-03-2026 11-22 info: TEC2411_part12.xlsx created
+13-03-2026 11-22 info: TEC2411_part13.xlsx created
+13-03-2026 11-22 info: TEC2411_part13.xlsx created
+13-03-2026 11-22 info: TEC2411_part13.xlsx created
+13-03-2026 11-22 info: TEC2411_part12.xlsx created
+13-03-2026 11-22 info: TEC2411_part13.xlsx created
+13-03-2026 11-22 info: TEC2411_part14.xlsx created
+13-03-2026 11-22 info: TEC2211_part4.xlsx created
+13-03-2026 11-22 info: [EXPORT 69b3a5b7a383e61d4ee7d3d5] Total matched docs: 349350
+13-03-2026 11-22 info: TEC2411_part14.xlsx created
+13-03-2026 11-22 info: TEC2211_part4.xlsx created
+13-03-2026 11-22 info: [EXPORT 69b3a5b8a383e61d4ee7d3da] Total matched docs: 349350
+13-03-2026 11-22 info: TEC2411_part14.xlsx created
+13-03-2026 11-22 info: TEC2211_part4.xlsx created
+13-03-2026 11-22 info: [EXPORT 69b3a5b9a383e61d4ee7d3df] Total matched docs: 349350
+13-03-2026 11-22 info: TEC2411_part14.xlsx created
+13-03-2026 11-22 info: TEC2211_part4.xlsx created
+13-03-2026 11-22 info: [EXPORT 69b3a5baa383e61d4ee7d3e4] Total matched docs: 349350
+13-03-2026 11-22 info: TEC2411_part13.xlsx created
+13-03-2026 11-22 info: TEC2411_part14.xlsx created
+13-03-2026 11-22 info: TEC2211_part4.xlsx created
+13-03-2026 11-22 info: [EXPORT 69b3a5bca383e61d4ee7d3e9] Total matched docs: 349350
+13-03-2026 11-22 info: Export and zip completed for: {"buffer":{"type":"Buffer","data":[105,179,165,184,163,131,230,29,78,231,211,218]}}
+13-03-2026 11-22 info: Notification emails sent to: {"0":"s","1":"w","2":"a","3":"m","4":"i","5":"n","6":"a","7":"t","8":"h","9":"a","10":"n","11":".","12":"s","13":"@","14":"v","15":"i","16":"e","17":"w","18":"z","19":"e","20":"n","21":"l","22":"a","23":"b","24":"s","25":".","26":"c","27":"o","28":"m"}
+13-03-2026 11-22 info: [JOB 16] Worker completed event
+13-03-2026 11-22 info: Export and zip completed for: {"buffer":{"type":"Buffer","data":[105,179,165,185,163,131,230,29,78,231,211,223]}}
+13-03-2026 11-22 info: Notification emails sent to: {"0":"s","1":"w","2":"a","3":"m","4":"i","5":"n","6":"a","7":"t","8":"h","9":"a","10":"n","11":".","12":"s","13":"@","14":"v","15":"i","16":"e","17":"w","18":"z","19":"e","20":"n","21":"l","22":"a","23":"b","24":"s","25":".","26":"c","27":"o","28":"m"}
+13-03-2026 11-22 info: [JOB 17] Worker completed event
+13-03-2026 11-22 info: Export and zip completed for: {"buffer":{"type":"Buffer","data":[105,179,165,183,163,131,230,29,78,231,211,213]}}
+13-03-2026 11-22 info: Notification emails sent to: {"0":"s","1":"w","2":"a","3":"m","4":"i","5":"n","6":"a","7":"t","8":"h","9":"a","10":"n","11":".","12":"s","13":"@","14":"v","15":"i","16":"e","17":"w","18":"z","19":"e","20":"n","21":"l","22":"a","23":"b","24":"s","25":".","26":"c","27":"o","28":"m"}
+13-03-2026 11-22 info: [JOB 15] Worker completed event
+13-03-2026 11-22 info: Export and zip completed for: {"buffer":{"type":"Buffer","data":[105,179,165,186,163,131,230,29,78,231,211,228]}}
+13-03-2026 11-22 info: Notification emails sent to: {"0":"s","1":"w","2":"a","3":"m","4":"i","5":"n","6":"a","7":"t","8":"h","9":"a","10":"n","11":".","12":"s","13":"@","14":"v","15":"i","16":"e","17":"w","18":"z","19":"e","20":"n","21":"l","22":"a","23":"b","24":"s","25":".","26":"c","27":"o","28":"m"}
+13-03-2026 11-22 info: [JOB 18] Worker completed event
+13-03-2026 11-22 info: Export and zip completed for: {"buffer":{"type":"Buffer","data":[105,179,165,188,163,131,230,29,78,231,211,233]}}
+13-03-2026 11-22 info: Notification emails sent to: {"0":"s","1":"w","2":"a","3":"m","4":"i","5":"n","6":"a","7":"t","8":"h","9":"a","10":"n","11":".","12":"s","13":"@","14":"v","15":"i","16":"e","17":"w","18":"z","19":"e","20":"n","21":"l","22":"a","23":"b","24":"s","25":".","26":"c","27":"o","28":"m"}
+13-03-2026 11-22 info: [JOB 19] Worker completed event
+13-03-2026 11-23 info: Export Worker Started...!!
+13-03-2026 11-23 info: Cleanup Worker Running...
+13-03-2026 11-23 info: server is running at 5000
+13-03-2026 11-23 info: Swagger docs is available at http://localhost:5000/api-docs
+13-03-2026 11-23 info: Redis connected
+13-03-2026 11-23 info: Mongo Connected
+13-03-2026 11-23 info: [JOB 20] Started export job for exportId=69b3a668beea68b70515a793
+13-03-2026 11-23 info: [JOB 21] Started export job for exportId=69b3a669beea68b70515a798
+13-03-2026 11-23 info: TEC2411_part1.xlsx created
+13-03-2026 11-23 info: TEC2411_part1.xlsx created
+13-03-2026 11-23 info: TEC2411_part2.xlsx created
+13-03-2026 11-23 info: TEC2411_part2.xlsx created
+13-03-2026 11-23 info: TEC2411_part3.xlsx created
+13-03-2026 11-23 info: TEC2411_part3.xlsx created
+13-03-2026 11-23 info: TEC2411_part4.xlsx created
+13-03-2026 11-23 info: TEC2411_part4.xlsx created
+13-03-2026 11-23 info: TEC2411_part5.xlsx created
+13-03-2026 11-23 info: TEC2411_part5.xlsx created
+13-03-2026 11-24 info: TEC2411_part6.xlsx created
+13-03-2026 11-24 info: TEC2411_part6.xlsx created
+13-03-2026 11-24 info: TEC2211_part1.xlsx created
+13-03-2026 11-24 info: TEC2211_part1.xlsx created
+13-03-2026 11-24 info: TEC2211_part2.xlsx created
+13-03-2026 11-24 info: TEC2211_part2.xlsx created
+13-03-2026 11-24 info: TEC2211_part3.xlsx created
+13-03-2026 11-24 info: TEC2211_part3.xlsx created
+13-03-2026 11-24 info: TEC2411_part7.xlsx created
+13-03-2026 11-24 info: TEC2411_part7.xlsx created
+13-03-2026 11-24 info: TEC2411_part8.xlsx created
+13-03-2026 11-24 info: TEC2411_part8.xlsx created
+13-03-2026 11-24 info: TEC2411_part9.xlsx created
+13-03-2026 11-24 info: TEC2411_part9.xlsx created
+13-03-2026 11-24 info: TEC2411_part10.xlsx created
+13-03-2026 11-24 info: TEC2411_part10.xlsx created
+13-03-2026 11-24 info: TEC2411_part11.xlsx created
+13-03-2026 11-24 info: TEC2411_part11.xlsx created
+13-03-2026 11-24 info: TEC2411_part12.xlsx created
+13-03-2026 11-24 info: TEC2411_part12.xlsx created
+13-03-2026 11-24 info: TEC2411_part13.xlsx created
+13-03-2026 11-24 info: TEC2411_part13.xlsx created
+13-03-2026 11-24 info: TEC2411_part14.xlsx created
+13-03-2026 11-24 info: TEC2411_part14.xlsx created
+13-03-2026 11-24 info: TEC2211_part4.xlsx created
+13-03-2026 11-24 info: [EXPORT 69b3a668beea68b70515a793] Total matched docs: 349350
+13-03-2026 11-24 info: TEC2211_part4.xlsx created
+13-03-2026 11-24 info: [EXPORT 69b3a669beea68b70515a798] Total matched docs: 349350
+13-03-2026 11-24 info: Export and zip completed for: {"buffer":{"type":"Buffer","data":[105,179,166,105,190,234,104,183,5,21,167,152]}}
+13-03-2026 11-24 info: Notification emails sent to: {"0":"s","1":"w","2":"a","3":"m","4":"i","5":"n","6":"a","7":"t","8":"h","9":"a","10":"n","11":".","12":"s","13":"@","14":"v","15":"i","16":"e","17":"w","18":"z","19":"e","20":"n","21":"l","22":"a","23":"b","24":"s","25":".","26":"c","27":"o","28":"m"}
+13-03-2026 11-24 info: [JOB 21] Worker completed event
+13-03-2026 11-24 info: Export and zip completed for: {"buffer":{"type":"Buffer","data":[105,179,166,104,190,234,104,183,5,21,167,147]}}
+13-03-2026 11-24 info: Notification emails sent to: {"0":"s","1":"w","2":"a","3":"m","4":"i","5":"n","6":"a","7":"t","8":"h","9":"a","10":"n","11":".","12":"s","13":"@","14":"v","15":"i","16":"e","17":"w","18":"z","19":"e","20":"n","21":"l","22":"a","23":"b","24":"s","25":".","26":"c","27":"o","28":"m"}
+13-03-2026 11-24 info: [JOB 20] Worker completed event
+13-03-2026 11-27 info: Deleted: {"0":"/","1":"a","2":"p","3":"p","4":"/","5":"e","6":"x","7":"p","8":"o","9":"r","10":"t","11":".","12":"d","13":"a","14":"t","15":"a","16":"/","17":"s","18":"w","19":"a","20":"m","21":"i","22":"_","23":"6","24":"9","25":"b","26":"3","27":"a","28":"5","29":"b","30":"8","31":"a","32":"3","33":"8","34":"3","35":"e","36":"6","37":"1","38":"d","39":"4","40":"e","41":"e","42":"7","43":"d","44":"3","45":"d","46":"a"}
+13-03-2026 11-27 info: Cleanup completed for: {"0":"6","1":"9","2":"b","3":"3","4":"a","5":"5","6":"b","7":"8","8":"a","9":"3","10":"8","11":"3","12":"e","13":"6","14":"1","15":"d","16":"4","17":"e","18":"e","19":"7","20":"d","21":"3","22":"d","23":"a"}
+13-03-2026 11-27 info: Deleted: {"0":"/","1":"a","2":"p","3":"p","4":"/","5":"e","6":"x","7":"p","8":"o","9":"r","10":"t","11":".","12":"d","13":"a","14":"t","15":"a","16":"/","17":"s","18":"w","19":"a","20":"m","21":"i","22":"_","23":"6","24":"9","25":"b","26":"3","27":"a","28":"5","29":"b","30":"9","31":"a","32":"3","33":"8","34":"3","35":"e","36":"6","37":"1","38":"d","39":"4","40":"e","41":"e","42":"7","43":"d","44":"3","45":"d","46":"f"}
+13-03-2026 11-27 info: Cleanup completed for: {"0":"6","1":"9","2":"b","3":"3","4":"a","5":"5","6":"b","7":"9","8":"a","9":"3","10":"8","11":"3","12":"e","13":"6","14":"1","15":"d","16":"4","17":"e","18":"e","19":"7","20":"d","21":"3","22":"d","23":"f"}
+13-03-2026 11-27 info: Deleted: {"0":"/","1":"a","2":"p","3":"p","4":"/","5":"e","6":"x","7":"p","8":"o","9":"r","10":"t","11":".","12":"d","13":"a","14":"t","15":"a","16":"/","17":"s","18":"w","19":"a","20":"m","21":"i","22":"_","23":"6","24":"9","25":"b","26":"3","27":"a","28":"5","29":"b","30":"7","31":"a","32":"3","33":"8","34":"3","35":"e","36":"6","37":"1","38":"d","39":"4","40":"e","41":"e","42":"7","43":"d","44":"3","45":"d","46":"5"}
+13-03-2026 11-27 info: Cleanup completed for: {"0":"6","1":"9","2":"b","3":"3","4":"a","5":"5","6":"b","7":"7","8":"a","9":"3","10":"8","11":"3","12":"e","13":"6","14":"1","15":"d","16":"4","17":"e","18":"e","19":"7","20":"d","21":"3","22":"d","23":"5"}
+13-03-2026 11-27 info: Deleted: {"0":"/","1":"a","2":"p","3":"p","4":"/","5":"e","6":"x","7":"p","8":"o","9":"r","10":"t","11":".","12":"d","13":"a","14":"t","15":"a","16":"/","17":"s","18":"w","19":"a","20":"m","21":"i","22":"_","23":"6","24":"9","25":"b","26":"3","27":"a","28":"5","29":"b","30":"a","31":"a","32":"3","33":"8","34":"3","35":"e","36":"6","37":"1","38":"d","39":"4","40":"e","41":"e","42":"7","43":"d","44":"3","45":"e","46":"4"}
+13-03-2026 11-27 info: Cleanup completed for: {"0":"6","1":"9","2":"b","3":"3","4":"a","5":"5","6":"b","7":"a","8":"a","9":"3","10":"8","11":"3","12":"e","13":"6","14":"1","15":"d","16":"4","17":"e","18":"e","19":"7","20":"d","21":"3","22":"e","23":"4"}
+13-03-2026 11-27 info: Deleted: {"0":"/","1":"a","2":"p","3":"p","4":"/","5":"e","6":"x","7":"p","8":"o","9":"r","10":"t","11":".","12":"d","13":"a","14":"t","15":"a","16":"/","17":"s","18":"w","19":"a","20":"m","21":"i","22":"_","23":"6","24":"9","25":"b","26":"3","27":"a","28":"5","29":"b","30":"c","31":"a","32":"3","33":"8","34":"3","35":"e","36":"6","37":"1","38":"d","39":"4","40":"e","41":"e","42":"7","43":"d","44":"3","45":"e","46":"9"}
+13-03-2026 11-27 info: Cleanup completed for: {"0":"6","1":"9","2":"b","3":"3","4":"a","5":"5","6":"b","7":"c","8":"a","9":"3","10":"8","11":"3","12":"e","13":"6","14":"1","15":"d","16":"4","17":"e","18":"e","19":"7","20":"d","21":"3","22":"e","23":"9"}
+13-03-2026 11-29 info: Deleted: {"0":"/","1":"a","2":"p","3":"p","4":"/","5":"e","6":"x","7":"p","8":"o","9":"r","10":"t","11":".","12":"d","13":"a","14":"t","15":"a","16":"/","17":"s","18":"w","19":"a","20":"m","21":"i","22":"_","23":"6","24":"9","25":"b","26":"3","27":"a","28":"6","29":"6","30":"9","31":"b","32":"e","33":"e","34":"a","35":"6","36":"8","37":"b","38":"7","39":"0","40":"5","41":"1","42":"5","43":"a","44":"7","45":"9","46":"8"}
+13-03-2026 11-29 info: Cleanup completed for: {"0":"6","1":"9","2":"b","3":"3","4":"a","5":"6","6":"6","7":"9","8":"b","9":"e","10":"e","11":"a","12":"6","13":"8","14":"b","15":"7","16":"0","17":"5","18":"1","19":"5","20":"a","21":"7","22":"9","23":"8"}
+13-03-2026 11-29 info: Deleted: {"0":"/","1":"a","2":"p","3":"p","4":"/","5":"e","6":"x","7":"p","8":"o","9":"r","10":"t","11":".","12":"d","13":"a","14":"t","15":"a","16":"/","17":"s","18":"w","19":"a","20":"m","21":"i","22":"_","23":"6","24":"9","25":"b","26":"3","27":"a","28":"6","29":"6","30":"8","31":"b","32":"e","33":"e","34":"a","35":"6","36":"8","37":"b","38":"7","39":"0","40":"5","41":"1","42":"5","43":"a","44":"7","45":"9","46":"3"}
+13-03-2026 11-29 info: Cleanup completed for: {"0":"6","1":"9","2":"b","3":"3","4":"a","5":"6","6":"6","7":"8","8":"b","9":"e","10":"e","11":"a","12":"6","13":"8","14":"b","15":"7","16":"0","17":"5","18":"1","19":"5","20":"a","21":"7","22":"9","23":"3"}
+13-03-2026 13-00 info: Export Worker Started...!!
+13-03-2026 13-00 info: Cleanup Worker Running...
+13-03-2026 13-00 info: server is running at 5000
+13-03-2026 13-00 info: Swagger docs is available at http://localhost:5000/api-docs
+13-03-2026 13-00 info: Redis connected
+13-03-2026 13-00 info: Mongo Connected
+13-03-2026 13-06 info: Export Worker Started...!!
+13-03-2026 13-06 info: Cleanup Worker Running...
+13-03-2026 13-06 info: server is running at 5000
+13-03-2026 13-06 info: Swagger docs is available at http://localhost:5000/api-docs
+13-03-2026 13-06 info: Redis connected
+13-03-2026 13-06 info: Mongo Connected
+13-03-2026 13-12 info: Export Worker Started...!!
+13-03-2026 13-12 info: Cleanup Worker Running...
+13-03-2026 13-12 info: server is running at 5000
+13-03-2026 13-12 info: Swagger docs is available at http://localhost:5000/api-docs
+13-03-2026 13-12 info: Redis connected
+13-03-2026 13-12 info: Mongo Connected
+13-03-2026 13-12 info: Export Worker Started...!!
+13-03-2026 13-12 info: Cleanup Worker Running...
+13-03-2026 13-12 info: server is running at 5000
+13-03-2026 13-12 info: Swagger docs is available at http://localhost:5000/api-docs
+13-03-2026 13-12 info: Redis connected
+13-03-2026 13-12 info: Mongo Connected
+13-03-2026 13-12 info: Export Worker Started...!!
+13-03-2026 13-12 info: Cleanup Worker Running...
+13-03-2026 13-12 info: server is running at 5000
+13-03-2026 13-12 info: Swagger docs is available at http://localhost:5000/api-docs
+13-03-2026 13-12 info: Redis connected
+13-03-2026 13-12 info: Mongo Connected
+13-03-2026 13-12 info: Export Worker Started...!!
+13-03-2026 13-12 info: Cleanup Worker Running...
+13-03-2026 13-12 info: server is running at 5000
+13-03-2026 13-12 info: Swagger docs is available at http://localhost:5000/api-docs
+13-03-2026 13-12 info: Redis connected
+13-03-2026 13-12 info: Mongo Connected
+13-03-2026 13-12 info: Export Worker Started...!!
+13-03-2026 13-12 info: Cleanup Worker Running...
+13-03-2026 13-12 info: server is running at 5000
+13-03-2026 13-12 info: Swagger docs is available at http://localhost:5000/api-docs
+13-03-2026 13-12 info: Redis connected
+13-03-2026 13-12 info: Mongo Connected
+13-03-2026 13-12 info: Export Worker Started...!!
+13-03-2026 13-12 info: Cleanup Worker Running...
+13-03-2026 13-12 info: server is running at 5000
+13-03-2026 13-12 info: Swagger docs is available at http://localhost:5000/api-docs
+13-03-2026 13-12 info: Redis connected
+13-03-2026 13-12 info: Mongo Connected
+13-03-2026 13-13 info: Export Worker Started...!!
+13-03-2026 13-13 info: Cleanup Worker Running...
+13-03-2026 13-13 info: server is running at 5000
+13-03-2026 13-13 info: Swagger docs is available at http://localhost:5000/api-docs
+13-03-2026 13-13 info: Redis connected
+13-03-2026 13-13 info: Mongo Connected
+13-03-2026 13-13 info: Export Worker Started...!!
+13-03-2026 13-13 info: Cleanup Worker Running...
+13-03-2026 13-13 info: server is running at 5000
+13-03-2026 13-13 info: Swagger docs is available at http://localhost:5000/api-docs
+13-03-2026 13-13 info: Redis connected
+13-03-2026 13-13 info: Mongo Connected
+13-03-2026 14-58 info: Export Worker Started...!!
+13-03-2026 14-58 info: Cleanup Worker Running...
+13-03-2026 14-58 info: server is running at 5000
+13-03-2026 14-58 info: Swagger docs is available at http://localhost:5000/api-docs
+13-03-2026 14-58 info: Redis connected
+13-03-2026 14-58 info: Mongo Connected
+13-03-2026 14-59 info: Export Worker Started...!!
+13-03-2026 14-59 info: Cleanup Worker Running...
+13-03-2026 14-59 info: server is running at 5000
+13-03-2026 14-59 info: Swagger docs is available at http://localhost:5000/api-docs
+13-03-2026 14-59 info: Mongo Connected
+13-03-2026 14-59 info: Redis connected
+13-03-2026 15-01 info: [JOB 22] Started export job for exportId=69b3d92258355efd64c4a4cf
+13-03-2026 15-01 info: TEC2211_part1.xlsx created
+13-03-2026 15-01 info: TEC2211_part2.xlsx created
+13-03-2026 15-01 info: TEC2211_part3.xlsx created
+13-03-2026 15-01 info: TEC2211_part4.xlsx created
+13-03-2026 15-01 info: [EXPORT 69b3d92258355efd64c4a4cf] Total matched docs: 75000
+13-03-2026 15-01 info: Export and zip completed for: {"buffer":{"type":"Buffer","data":[105,179,217,34,88,53,94,253,100,196,164,207]}}
+13-03-2026 15-01 info: Notification emails sent to: {"0":"s","1":"w","2":"a","3":"m","4":"i","5":"n","6":"a","7":"t","8":"h","9":"a","10":"n","11":".","12":"s","13":"@","14":"v","15":"i","16":"e","17":"w","18":"z","19":"e","20":"n","21":"l","22":"a","23":"b","24":"s","25":".","26":"c","27":"o","28":"m"}
+13-03-2026 15-01 info: [JOB 22] Worker completed event
+13-03-2026 15-02 info: Export Worker Started...!!
+13-03-2026 15-02 info: Cleanup Worker Running...
+13-03-2026 15-02 info: server is running at 5000
+13-03-2026 15-02 info: Swagger docs is available at http://localhost:5000/api-docs
+13-03-2026 15-02 info: Redis connected
+13-03-2026 15-02 info: Mongo Connected
+13-03-2026 15-03 info: [JOB 23] Started export job for exportId=69b3d9cbd595fedbc9843d4a
+13-03-2026 15-04 info: TEC2211_part1.xlsx created
+13-03-2026 15-04 info: TEC2211_part2.xlsx created
+13-03-2026 15-04 info: TEC2211_part3.xlsx created
+13-03-2026 15-04 info: TEC2211_part4.xlsx created
+13-03-2026 15-04 info: [EXPORT 69b3d9cbd595fedbc9843d4a] Total matched docs: 75000
+13-03-2026 15-04 info: Export and zip completed for: {"buffer":{"type":"Buffer","data":[105,179,217,203,213,149,254,219,201,132,61,74]}}
+13-03-2026 15-04 info: Notification emails sent to: swaminathan.s@viewzenlabs.com
+13-03-2026 15-04 info: [JOB 23] Worker completed event
+13-03-2026 15-05 info: Export Worker Started...!!
+13-03-2026 15-05 info: Cleanup Worker Running...
+13-03-2026 15-05 info: server is running at 5000
+13-03-2026 15-05 info: Swagger docs is available at http://localhost:5000/api-docs
+13-03-2026 15-05 info: Redis connected
+13-03-2026 15-05 info: Mongo Connected
+13-03-2026 15-06 info: Export Worker Started...!!
+13-03-2026 15-06 info: Cleanup Worker Running...
+13-03-2026 15-06 info: server is running at 5000
+13-03-2026 15-06 info: Swagger docs is available at http://localhost:5000/api-docs
+13-03-2026 15-06 info: Redis connected
+13-03-2026 15-06 info: Mongo Connected
+13-03-2026 15-06 info: Deleted: /app/export.data/swami_69b3d92258355efd64c4a4cf
+13-03-2026 15-06 info: Cleanup completed for: 69b3d92258355efd64c4a4cf
+13-03-2026 15-07 info: [JOB 24] Started export job for exportId=69b3da9b194371bd271dc2dd
+13-03-2026 15-07 info: TEC2211_part1.xlsx created
+13-03-2026 15-07 info: TEC2211_part2.xlsx created
+13-03-2026 15-07 info: TEC2211_part3.xlsx created
+13-03-2026 15-07 info: TEC2211_part4.xlsx created
+13-03-2026 15-07 info: [EXPORT 69b3da9b194371bd271dc2dd] Total matched docs: 75000
+13-03-2026 15-07 info: Export and zip completed for: 69b3da9b194371bd271dc2dd
+13-03-2026 15-07 info: Notification emails sent to: swaminathan.s@viewzenlabs.com
+13-03-2026 15-07 info: [JOB 24] Worker completed event
+13-03-2026 15-09 info: Deleted: /app/export.data/swami_69b3d9cbd595fedbc9843d4a
+13-03-2026 15-09 info: Cleanup completed for: 69b3d9cbd595fedbc9843d4a
+13-03-2026 15-12 info: Deleted: /app/export.data/swami_69b3da9b194371bd271dc2dd
+13-03-2026 15-12 info: Cleanup completed for: 69b3da9b194371bd271dc2dd
+13-03-2026 15-16 info: Export Worker Started...!!
+13-03-2026 15-16 info: Cleanup Worker Running...
+13-03-2026 15-16 info: server is running at 5000
+13-03-2026 15-16 info: Swagger docs is available at http://localhost:5000/api-docs
+13-03-2026 15-16 info: Redis connected
+13-03-2026 15-16 info: Mongo Connected
+13-03-2026 15-16 info: Export Worker Started...!!
+13-03-2026 15-16 info: Cleanup Worker Running...
+13-03-2026 15-16 info: server is running at 5000
+13-03-2026 15-16 info: Swagger docs is available at http://localhost:5000/api-docs
+13-03-2026 15-16 info: Redis connected
+13-03-2026 15-16 info: Mongo Connected
+13-03-2026 15-25 info: Export Worker Started...!!
+13-03-2026 15-25 info: Cleanup Worker Running...
+13-03-2026 15-25 info: server is running at 5000
+13-03-2026 15-25 info: Swagger docs is available at http://localhost:5000/api-docs
+13-03-2026 15-25 info: Redis connected
+13-03-2026 15-25 info: Mongo Connected
+13-03-2026 17-28 info: [JOB 25] Started export job for exportId=69b3fbc042b01cf5b997cb70
+13-03-2026 17-28 info: TEC2211_part1.xlsx created
+13-03-2026 17-28 info: TEC2211_part2.xlsx created
+13-03-2026 17-28 info: TEC2211_part3.xlsx created
+13-03-2026 17-28 info: TEC2211_part4.xlsx created
+13-03-2026 17-28 info: [EXPORT 69b3fbc042b01cf5b997cb70] Total matched docs: 75000
+13-03-2026 17-29 info: Export and zip completed for: 69b3fbc042b01cf5b997cb70
+13-03-2026 17-29 info: Notification emails sent to: saran.st@viewzenlabs.com
+13-03-2026 17-29 info: [JOB 25] Worker completed event
+13-03-2026 17-29 info: [JOB 26] Started export job for exportId=69b3fbd442b01cf5b997cb73
+13-03-2026 17-29 info: TEC2211_part1.xlsx created
+13-03-2026 17-29 info: TEC2211_part2.xlsx created
+13-03-2026 17-29 info: TEC2211_part3.xlsx created
+13-03-2026 17-29 info: TEC2211_part4.xlsx created
+13-03-2026 17-29 info: [EXPORT 69b3fbd442b01cf5b997cb73] Total matched docs: 75000
+13-03-2026 17-29 info: Export and zip completed for: 69b3fbd442b01cf5b997cb73
+13-03-2026 17-29 info: Notification emails sent to: saran.st@viewzenlabs.com
+13-03-2026 17-29 info: [JOB 26] Worker completed event
+13-03-2026 17-32 info: [JOB 27] Started export job for exportId=69b3fc8942b01cf5b997cb80
+13-03-2026 17-32 info: TEC2211_part1.xlsx created
+13-03-2026 17-32 info: TEC2211_part2.xlsx created
+13-03-2026 17-32 info: TEC2211_part3.xlsx created
+13-03-2026 17-32 info: TEC2211_part4.xlsx created
+13-03-2026 17-32 info: [EXPORT 69b3fc8942b01cf5b997cb80] Total matched docs: 75000
+13-03-2026 17-32 info: Export and zip completed for: 69b3fc8942b01cf5b997cb80
+13-03-2026 17-32 info: Notification emails sent to: saran.st@viewzenlabs.com
+13-03-2026 17-32 info: [JOB 27] Worker completed event
+13-03-2026 17-34 info: Deleted: /app/export.data/swami_69b3fbc042b01cf5b997cb70
+13-03-2026 17-34 info: Cleanup completed for: 69b3fbc042b01cf5b997cb70
+13-03-2026 17-34 info: Deleted: /app/export.data/swami_69b3fbd442b01cf5b997cb73
+13-03-2026 17-34 info: Cleanup completed for: 69b3fbd442b01cf5b997cb73
+13-03-2026 17-34 info: [JOB 28] Started export job for exportId=69b3fd2442b01cf5b997cb88
+13-03-2026 17-34 info: TEC2211_part1.xlsx created
+13-03-2026 17-34 info: TEC2211_part2.xlsx created
+13-03-2026 17-34 info: TEC2211_part3.xlsx created
+13-03-2026 17-34 info: TEC2211_part4.xlsx created
+13-03-2026 17-34 info: [EXPORT 69b3fd2442b01cf5b997cb88] Total matched docs: 75000
+13-03-2026 17-35 info: Export and zip completed for: 69b3fd2442b01cf5b997cb88
+13-03-2026 17-35 info: Notification emails sent to: saran.st@viewzenlabs.com
+13-03-2026 17-35 info: [JOB 28] Worker completed event
+13-03-2026 17-37 info: Deleted: /app/export.data/swami_69b3fc8942b01cf5b997cb80
+13-03-2026 17-37 info: Cleanup completed for: 69b3fc8942b01cf5b997cb80
+13-03-2026 17-40 info: Deleted: /app/export.data/swami_69b3fd2442b01cf5b997cb88
+13-03-2026 17-40 info: Cleanup completed for: 69b3fd2442b01cf5b997cb88
+13-03-2026 17-40 info: [JOB 29] Started export job for exportId=69b3fe6742b01cf5b997cb98
+13-03-2026 17-40 info: TEC2411_part1.xlsx created
+13-03-2026 17-40 info: TEC2411_part2.xlsx created
+13-03-2026 17-40 info: TEC2411_part3.xlsx created
+13-03-2026 17-40 info: TEC2411_part4.xlsx created
+13-03-2026 17-40 info: TEC2411_part5.xlsx created
+13-03-2026 17-40 info: TEC2411_part6.xlsx created
+13-03-2026 17-40 info: TEC2211_part1.xlsx created
+13-03-2026 17-40 info: TEC2211_part2.xlsx created
+13-03-2026 17-40 info: TEC2211_part3.xlsx created
+13-03-2026 17-40 info: TEC9988_part1.xlsx created
+13-03-2026 17-40 info: TEC9988_part2.xlsx created
+13-03-2026 17-40 info: TEC9988_part3.xlsx created
+13-03-2026 17-40 info: TEC2411_part7.xlsx created
+13-03-2026 17-40 info: TEC2411_part8.xlsx created
+13-03-2026 17-40 info: TEC2411_part9.xlsx created
+13-03-2026 17-40 info: TEC2411_part10.xlsx created
+13-03-2026 17-40 info: TEC2411_part11.xlsx created
+13-03-2026 17-40 info: TEC2411_part12.xlsx created
+13-03-2026 17-40 info: TEC2411_part13.xlsx created
+13-03-2026 17-40 info: TEC2422_part1.xlsx created
+13-03-2026 17-40 info: TEC2411_part1.xlsx created
+13-03-2026 17-40 info: TEC2411_part2.xlsx created
+13-03-2026 17-40 info: TEC2411_part3.xlsx created
+13-03-2026 17-40 info: TEC2411_part4.xlsx created
+13-03-2026 17-40 info: TEC2411_part5.xlsx created
+13-03-2026 17-40 info: TEC2411_part6.xlsx created
+13-03-2026 17-40 info: TEC2411_part14.xlsx created
+13-03-2026 17-40 info: TEC2422_part2.xlsx created
+13-03-2026 17-40 info: TEC2211_part4.xlsx created
+13-03-2026 17-40 info: TEC9988_part4.xlsx created
+13-03-2026 17-41 info: TEC2411_part7.xlsx created
+13-03-2026 17-41 info: TEC2422_part1.xlsx created
+13-03-2026 17-41 info: [EXPORT 69b3fe6742b01cf5b997cb98] Total matched docs: 610641
+13-03-2026 17-41 info: Export and zip completed for: 69b3fe6742b01cf5b997cb98
+13-03-2026 17-41 info: Notification emails sent to: saran.st@viewzenlabs.com
+13-03-2026 17-41 info: [JOB 29] Worker completed event
+13-03-2026 17-46 info: Deleted: /app/export.data/swami_69b3fe6742b01cf5b997cb98
+13-03-2026 17-46 info: Cleanup completed for: 69b3fe6742b01cf5b997cb98
+13-03-2026 17-53 info: Export Worker Started...!!
+13-03-2026 17-53 info: Cleanup Worker Running...
+13-03-2026 17-53 info: server is running at 5000
+13-03-2026 17-53 info: Swagger docs is available at http://localhost:5000/api-docs
+13-03-2026 17-53 info: Redis connected
+13-03-2026 17-53 info: Mongo Connected
+16-03-2026 10-51 info: Export Worker Started...!!
+16-03-2026 10-51 info: Cleanup Worker Running...
+16-03-2026 10-51 info: server is running at 5000
+16-03-2026 10-51 info: Swagger docs is available at http://localhost:5000/api-docs
+16-03-2026 10-51 info: Redis connected
+16-03-2026 10-51 info: Mongo Connected
+16-03-2026 10-53 info: Export Worker Started...!!
+16-03-2026 10-53 info: Cleanup Worker Running...
+16-03-2026 10-53 info: server is running at 5000
+16-03-2026 10-53 info: Swagger docs is available at http://localhost:5000/api-docs
+16-03-2026 10-53 info: Redis connected
+16-03-2026 10-53 info: Mongo Connected
+16-03-2026 10-54 info: Export Worker Started...!!
+16-03-2026 10-54 info: Cleanup Worker Running...
+16-03-2026 10-54 info: server is running at 5000
+16-03-2026 10-54 info: Swagger docs is available at http://localhost:5000/api-docs
+16-03-2026 10-54 info: Redis connected
+16-03-2026 10-54 info: Mongo Connected
+16-03-2026 10-54 info: Export Worker Started...!!
+16-03-2026 10-54 info: Cleanup Worker Running...
+16-03-2026 10-54 info: server is running at 5000
+16-03-2026 10-54 info: Swagger docs is available at http://localhost:5000/api-docs
+16-03-2026 10-54 info: Redis connected
+16-03-2026 10-54 info: Mongo Connected
+16-03-2026 10-54 info: Export Worker Started...!!
+16-03-2026 10-54 info: Cleanup Worker Running...
+16-03-2026 10-54 info: server is running at 5000
+16-03-2026 10-54 info: Swagger docs is available at http://localhost:5000/api-docs
+16-03-2026 10-54 info: Redis connected
+16-03-2026 10-54 info: Mongo Connected
+16-03-2026 10-54 info: Export Worker Started...!!
+16-03-2026 10-54 info: Cleanup Worker Running...
+16-03-2026 10-54 info: server is running at 5000
+16-03-2026 10-54 info: Swagger docs is available at http://localhost:5000/api-docs
+16-03-2026 10-54 info: Redis connected
+16-03-2026 10-54 info: Mongo Connected
+16-03-2026 10-54 info: Export Worker Started...!!
+16-03-2026 10-54 info: Cleanup Worker Running...
+16-03-2026 10-54 info: server is running at 5000
+16-03-2026 10-54 info: Swagger docs is available at http://localhost:5000/api-docs
+16-03-2026 10-54 info: Redis connected
+16-03-2026 10-54 info: Mongo Connected
+16-03-2026 10-55 info: Export Worker Started...!!
+16-03-2026 10-55 info: Cleanup Worker Running...
+16-03-2026 10-55 info: server is running at 5000
+16-03-2026 10-55 info: Swagger docs is available at http://localhost:5000/api-docs
+16-03-2026 10-55 info: Redis connected
+16-03-2026 10-55 info: Mongo Connected
+16-03-2026 10-55 info: Export Worker Started...!!
+16-03-2026 10-55 info: Cleanup Worker Running...
+16-03-2026 10-55 info: server is running at 5000
+16-03-2026 10-55 info: Swagger docs is available at http://localhost:5000/api-docs
+16-03-2026 10-55 info: Redis connected
+16-03-2026 10-55 info: Mongo Connected
+16-03-2026 10-57 info: Export Worker Started...!!
+16-03-2026 10-57 info: Cleanup Worker Running...
+16-03-2026 10-57 info: server is running at 5000
+16-03-2026 10-57 info: Swagger docs is available at http://localhost:5000/api-docs
+16-03-2026 10-57 info: Redis connected
+16-03-2026 10-57 info: Mongo Connected
+16-03-2026 11-11 info: Export Worker Started...!!
+16-03-2026 11-11 info: Cleanup Worker Running...
+16-03-2026 11-11 info: server is running at 5000
+16-03-2026 11-11 info: Swagger docs is available at http://localhost:5000/api-docs
+16-03-2026 11-11 info: Redis connected
+16-03-2026 11-11 info: Mongo Connected
+16-03-2026 11-11 info: [JOB 1] Started export job for exportId=69b7981be5991c4874ed2c62
+16-03-2026 11-11 info: TEC2411_part1.xlsx created
+16-03-2026 11-11 info: TEC2411_part2.xlsx created
+16-03-2026 11-11 info: TEC2411_part3.xlsx created
+16-03-2026 11-11 info: TEC2411_part4.xlsx created
+16-03-2026 11-11 info: TEC2411_part5.xlsx created
+16-03-2026 11-11 info: TEC2411_part6.xlsx created
+16-03-2026 11-11 info: TEC2411_part7.xlsx created
+16-03-2026 11-11 info: TEC2422_part1.xlsx created
+16-03-2026 11-11 info: [EXPORT 69b7981be5991c4874ed2c62] Total matched docs: 153547
+16-03-2026 11-11 info: Export and zip completed for: 69b7981be5991c4874ed2c62
+16-03-2026 11-11 info: Notification emails sent to: saran.st@viewzenlabs.com
+16-03-2026 11-11 info: [JOB 1] Worker completed event
+16-03-2026 11-16 info: Deleted: /app/export.data/swami_69b7981be5991c4874ed2c62
+16-03-2026 11-16 info: Cleanup completed for: 69b7981be5991c4874ed2c62
+16-03-2026 11-21 info: Export Worker Started...!!
+16-03-2026 11-21 info: Cleanup Worker Running...
+16-03-2026 11-21 info: server is running at 5000
+16-03-2026 11-21 info: Swagger docs is available at http://localhost:5000/api-docs
+16-03-2026 11-21 info: Mongo Connected
+16-03-2026 11-21 info: Redis connected
+16-03-2026 11-22 info: [JOB 2] Started export job for exportId=69b79a9c414fad50d1c42026
+16-03-2026 11-22 error: [JOB 2] Export failed for exportId=69b79a9c414fad50d1c42026: Error: No records found for the selected filters/collections
+    at runExport (/app/jobs/processor.js:59:11)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Worker.connection.connection [as processFn] (/app/jobs/worker.js:26:22)
+    at async /app/node_modules/bullmq/dist/cjs/classes/worker.js:571:32
+16-03-2026 11-22 error: [JOB 2] Worker failed event: No records found for the selected filters/collections
+16-03-2026 11-22 info: [JOB 2] Started export job for exportId=69b79a9c414fad50d1c42026
+16-03-2026 11-22 error: [JOB 2] Export failed for exportId=69b79a9c414fad50d1c42026: Error: No records found for the selected filters/collections
+    at runExport (/app/jobs/processor.js:59:11)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Worker.connection.connection [as processFn] (/app/jobs/worker.js:26:22)
+    at async /app/node_modules/bullmq/dist/cjs/classes/worker.js:571:32
+16-03-2026 11-22 error: [JOB 2] Worker failed event: No records found for the selected filters/collections
+16-03-2026 11-22 info: [JOB 2] Started export job for exportId=69b79a9c414fad50d1c42026
+16-03-2026 11-22 error: [JOB 2] Export failed for exportId=69b79a9c414fad50d1c42026: Error: No records found for the selected filters/collections
+    at runExport (/app/jobs/processor.js:59:11)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Worker.connection.connection [as processFn] (/app/jobs/worker.js:26:22)
+    at async /app/node_modules/bullmq/dist/cjs/classes/worker.js:571:32
+16-03-2026 11-22 error: [JOB 2] Worker failed event: No records found for the selected filters/collections
+16-03-2026 11-22 info: [JOB 3] Started export job for exportId=69b79ab1414fad50d1c42034
+16-03-2026 11-22 info: TEC2211_part1.xlsx created
+16-03-2026 11-22 info: TEC2211_part2.xlsx created
+16-03-2026 11-22 info: TEC2211_part3.xlsx created
+16-03-2026 11-22 info: TEC2211_part4.xlsx created
+16-03-2026 11-22 info: [EXPORT 69b79ab1414fad50d1c42034] Total matched docs: 75000
+16-03-2026 11-22 info: Export and zip completed for: 69b79ab1414fad50d1c42034
+16-03-2026 11-22 info: Notification emails sent to: saran.st@viewzenlabs.com
+16-03-2026 11-22 info: [JOB 3] Worker completed event
+16-03-2026 11-27 info: Deleted: /app/export.data/swami_69b79ab1414fad50d1c42034
+16-03-2026 11-27 info: Cleanup completed for: 69b79ab1414fad50d1c42034

@@ -1,5 +1,6 @@
 const ExportService = require("./exports.class");
 const fs = require("fs");
+const logger = require("../utils/logger");
 
 function renderDownloadPage({ title, message, buttonHref, buttonLabel = "Download File" }) {
   const buttonHtml = buttonHref
@@ -165,13 +166,13 @@ exports.downloadExport = async (req, res) => {
             err.message === "Request aborted";
 
           if (isClientAbort) {
-            console.warn(
+            logger.warn(
               `Download aborted by client for export ${exportDoc._id}: ${err.code || err.message}`
             );
             return;
           }
 
-          console.error("Download error:", err);
+          logger.error("Download error: %s", err);
           if (!res.headersSent) {
             res.status(500).send("Download failed");
           }
@@ -208,5 +209,3 @@ exports.downloadExport = async (req, res) => {
     );
   }
 };
-
-

@@ -4,6 +4,7 @@ const fs = require("fs");
 const crypto = require("crypto");
 const archiver = require("archiver");
 const zipEncrypted = require("archiver-zip-encrypted");
+const logger = require("./../utils/logger");
 
 const { ExcelGroupService } = require("./excel");
 const { sendDownloadLinkMail, sendPasswordMail } = require("./../utils/mailer");
@@ -14,7 +15,7 @@ archiver.registerFormat("zip-encrypted", zipEncrypted);
 async function runExport(exportDoc) {
 
   const ROOT_DIR = path.join(process.cwd(), "export.data");
-  const userFolder = `${exportDoc.user_name}_${exportDoc._id.toString()}`;      // Unique folder per export
+  const userFolder = `${exportDoc.user_name}_${exportDoc._id.toString()}`;       // Unique folder per export
   const USER_ROOT = path.join(ROOT_DIR, userFolder);
 
   fs.mkdirSync(USER_ROOT, { recursive: true });
@@ -34,24 +35,24 @@ async function runExport(exportDoc) {
   }
 
   for (const collectionName of selectedCollections) {
-    
-    const collection = mongoose.connection.collection(collectionName);
+    docsBatch = [];
+    const collection = mongoose.connection.collection(collectionName);                     
     const cursor = collection.find(exportDoc.filters).batchSize(batchSize);
 
-    for await (const doc of cursor) {
+    for await (const doc of cursor) {                                             //pushing docs to batch and write when batch size is reached
       totalMatched += 1;
       docsBatch.push(doc);
 
       if (docsBatch.length === batchSize) {
-        await excelGroupService.writeGroupedBatch(docsBatch);
+        await excelGroupService.writeGroupedBatch(collectionName, docsBatch);
         docsBatch = [];
       }
     }
-  }
 
-  if (docsBatch.length > 0) {
-    await excelGroupService.writeGroupedBatch(docsBatch);
-    docsBatch = [];
+    if (docsBatch.length > 0) {
+      await excelGroupService.writeGroupedBatch(collectionName, docsBatch);
+      docsBatch = [];
+    }
   }
 
   if (totalMatched === 0) {
@@ -60,17 +61,17 @@ async function runExport(exportDoc) {
 
   await excelGroupService.finalizeAll();
   
-  console.log(`[EXPORT ${exportDoc._id}] Total matched docs: ${totalMatched}`);
+  logger.info(`[EXPORT ${exportDoc._id}] Total matched docs: ${totalMatched}`);
 
   const zipDir = path.join(USER_ROOT, "zips");
   fs.mkdirSync(zipDir, { recursive: true });
 
-  const zipResult = await createPasswordProtectedZip(zipDir, USER_ROOT);     //return zipPath and password
+  const zipResult = await createPasswordProtectedZip(zipDir, USER_ROOT);       //return zipPath and password
 
 
   const downloadLink = buildDownloadPageLink(exportDoc._id);
   await sendDownloadLinkMail(exportDoc.email, downloadLink);
-  await sendPasswordMail(exportDoc.email, zipResult.password);
+  await sendPasswordMail(exportDoc.email, zipResult.password);                 //required mails are sent to user
 
 
   return {
@@ -93,7 +94,7 @@ function buildDownloadPageLink(exportId) {
   return `${pageBase}/${exportId}`;
 }
 
-function createPasswordProtectedZip(zipDir, userRoot) {
+function createPasswordProtectedZip(zipDir, userRoot) {                                 //zipper logic
   return new Promise((resolve, reject) => {
     try {
       const password = crypto

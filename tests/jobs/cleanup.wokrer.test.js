@@ -2,6 +2,14 @@ const fs = require("fs");
 
 jest.mock("fs");
 
+jest.mock("../../utils/logger", () => ({
+  info: jest.fn(),
+  warn: jest.fn(),
+  error: jest.fn(),
+}));
+
+const logger = require("./../../utils/logger");
+
 const mockFindById = jest.fn();
 
 jest.mock("./../../schemas/export-status", () => ({
@@ -9,7 +17,6 @@ jest.mock("./../../schemas/export-status", () => ({
 }));
 
 const mockProcessor = jest.fn();
-let logSpy;
 
 jest.mock("bullmq", () => ({
   Worker: jest.fn().mockImplementation((queue, processor) => {
@@ -18,7 +25,7 @@ jest.mock("bullmq", () => ({
   })
 }));
 
-jest.mock("../../config/redis", () => ({}));
+jest.mock("./../../config/redis", () => ({}));
 
 const cleanupWorker = require("./../../jobs/cleanup.worker");
 const exportStatus = require("./../../schemas/export-status");
@@ -27,7 +34,6 @@ describe("Cleanup Worker", () => {
 
   beforeEach(() => {
     jest.clearAllMocks();
-    logSpy = jest.spyOn(console, "log").mockImplementation(() => {});
 
   });
 
@@ -65,7 +71,7 @@ describe("Cleanup Worker", () => {
 
     await mockProcessor.processor(job);
 
-    expect(logSpy).toHaveBeenCalledWith('Not expired yet');
+    expect(logger.info).toHaveBeenCalledWith("Not expired yet");
     expect(fs.rmSync).not.toHaveBeenCalled();
   });
 
@@ -97,9 +103,9 @@ describe("Cleanup Worker", () => {
       force: true
     });
     
-    expect(logSpy).toHaveBeenCalledWith("Deleted:", "/tmp/export");
+    expect(logger.info).toHaveBeenCalledWith("Deleted: %s", "/tmp/export");
     expect(mockSave).toHaveBeenCalled();
-    expect(logSpy).toHaveBeenCalledWith("Cleanup completed for:", "123");
+    expect(logger.info).toHaveBeenCalledWith("Cleanup completed for: %s", "123");
   });
 
   test("should not delete if folder does not exist", async () => {

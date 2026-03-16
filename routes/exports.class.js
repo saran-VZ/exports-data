@@ -20,21 +20,22 @@ class ExportService {
 
     const delay = calculateDelay();     
 
-    const job = await exportQueue.add(
+    const job = await exportQueue.add(                  //job pushed into exportQueue with delay
       "exportJob",
       { exportId: exportDoc._id },
       {
         delay,
         attempts: 3,
         backoff: {                     
-          type: "exponential",
+          type: "exponential",                         //exponential time delay for retries of unsuccessful jobs [max retry = 3]
           delay: 5000,
         },
         removeOnComplete: true,
         removeOnFail: false,
+        stalledInterval: 30000, 
       }
     );
-
+    
     if (delay > 0) {
       exportDoc.scheduled_for = new Date(Date.now() + delay);
       await exportDoc.save();
