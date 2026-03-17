@@ -558,3 +558,152 @@
 16-03-2026 11-22 info: [JOB 3] Worker completed event
 16-03-2026 11-27 info: Deleted: /app/export.data/swami_69b79ab1414fad50d1c42034
 16-03-2026 11-27 info: Cleanup completed for: 69b79ab1414fad50d1c42034
+16-03-2026 17-30 info: Export Worker Started...!!
+16-03-2026 17-30 info: Cleanup Worker Running...
+16-03-2026 17-30 info: server is running at 5000
+16-03-2026 17-30 info: Swagger docs is available at http://localhost:5000/api-docs
+16-03-2026 17-30 info: Redis connected
+16-03-2026 17-30 info: Mongo Connected
+17-03-2026 14-15 info: Export Worker Started...!!
+17-03-2026 14-15 info: Cleanup Worker Running...
+17-03-2026 14-15 info: server is running at 5000
+17-03-2026 14-15 info: Swagger docs is available at http://localhost:5000/api-docs
+17-03-2026 14-15 info: Redis connected
+17-03-2026 14-15 info: Mongo Connected
+17-03-2026 16-40 info: [JOB 1] Started export job for exportId=69b936aa67d7769e3a938073
+17-03-2026 16-40 info: TEC2211_part1.xlsx created
+17-03-2026 16-40 info: TEC2211_part2.xlsx created
+17-03-2026 16-40 info: TEC2211_part3.xlsx created
+17-03-2026 16-40 info: TEC2211_part4.xlsx created
+17-03-2026 16-40 info: [EXPORT 69b936aa67d7769e3a938073] Total matched docs: 75000
+17-03-2026 16-40 info: Export and zip completed for: 69b936aa67d7769e3a938073
+17-03-2026 16-40 info: Notification emails sent to: saran.st@viewzenlabs.com
+17-03-2026 16-40 info: [JOB 1] Worker completed event
+17-03-2026 16-41 info: Export Worker Started...!!
+17-03-2026 16-41 info: Cleanup Worker Running...
+17-03-2026 16-41 info: server is running at 5000
+17-03-2026 16-41 info: Swagger docs is available at http://localhost:5000/api-docs
+17-03-2026 16-41 info: Redis connected
+17-03-2026 16-41 info: Mongo Connected
+17-03-2026 16-42 info: Export Worker Started...!!
+17-03-2026 16-42 info: Cleanup Worker Running...
+17-03-2026 16-42 info: server is running at 5000
+17-03-2026 16-42 info: Swagger docs is available at http://localhost:5000/api-docs
+17-03-2026 16-42 info: Redis connected
+17-03-2026 16-42 info: Mongo Connected
+17-03-2026 16-42 info: [JOB 2] Started export job for exportId=69b9370a83e03ec26421c6ca
+17-03-2026 16-42 info: Export Worker Started...!!
+17-03-2026 16-42 info: Cleanup Worker Running...
+17-03-2026 16-42 info: server is running at 5000
+17-03-2026 16-42 info: Swagger docs is available at http://localhost:5000/api-docs
+17-03-2026 16-42 info: Redis connected
+17-03-2026 16-42 info: Mongo Connected
+17-03-2026 16-42 info: [JOB 2] Started export job for exportId=69b9370a83e03ec26421c6ca
+17-03-2026 16-42 info: TEC2211_part1.xlsx created
+17-03-2026 16-42 info: TEC2211_part2.xlsx created
+17-03-2026 16-42 info: TEC2211_part3.xlsx created
+17-03-2026 16-42 info: TEC2211_part4.xlsx created
+17-03-2026 16-42 info: [EXPORT 69b9370a83e03ec26421c6ca] Total matched docs: 75000
+17-03-2026 16-42 info: Export and zip completed for: 69b9370a83e03ec26421c6ca
+17-03-2026 16-42 info: Notification emails sent to: saran.st@viewzenlabs.com
+17-03-2026 16-42 info: [JOB 2] Worker completed event
+17-03-2026 16-45 info: Deleted: /app/export.data/swami_69b936aa67d7769e3a938073
+17-03-2026 16-45 info: Cleanup completed for: 69b936aa67d7769e3a938073
+17-03-2026 16-47 info: Deleted: /app/export.data/swami_69b9370a83e03ec26421c6ca
+17-03-2026 16-47 info: Cleanup completed for: 69b9370a83e03ec26421c6ca
+17-03-2026 17-17 info: Export Worker Started...!!
+17-03-2026 17-17 info: Cleanup Worker Running...
+17-03-2026 17-17 info: server is running at 5000
+17-03-2026 17-17 info: Swagger docs is available at http://localhost:5000/api-docs
+17-03-2026 17-17 info: Redis connected
+17-03-2026 17-17 info: Mongo Connected
+17-03-2026 17-50 info: [JOB 3] Started export job for exportId=69b94702b7c60fa0c8083fab
+17-03-2026 17-50 info: TEC2211_part1.xlsx created
+17-03-2026 17-50 info: TEC2211_part2.xlsx created
+17-03-2026 17-50 info: TEC2211_part3.xlsx created
+17-03-2026 17-50 info: TEC2211_part4.xlsx created
+17-03-2026 17-50 info: [EXPORT 69b94702b7c60fa0c8083fab] Total matched docs: 75000
+17-03-2026 17-50 info: Export Worker Started...!!
+17-03-2026 17-50 info: Cleanup Worker Running...
+17-03-2026 17-50 info: server is running at 5000
+17-03-2026 17-50 info: Swagger docs is available at http://localhost:5000/api-docs
+17-03-2026 17-50 info: Mongo Connected
+17-03-2026 17-50 info: Redis connected
+17-03-2026 17-51 info: [JOB 3] Started export job for exportId=69b94702b7c60fa0c8083fab
+17-03-2026 17-51 info: TEC2211_part1.xlsx created
+17-03-2026 17-51 info: TEC2211_part2.xlsx created
+17-03-2026 17-51 info: TEC2211_part3.xlsx created
+17-03-2026 17-51 info: TEC2211_part4.xlsx created
+17-03-2026 17-51 info: [EXPORT 69b94702b7c60fa0c8083fab] Total matched docs: 75000
+17-03-2026 17-51 info: Export and zip completed for: 69b94702b7c60fa0c8083fab
+17-03-2026 17-51 info: Notification emails sent to: saran.st@viewzenlabs.com
+17-03-2026 17-51 info: [JOB 3] Worker completed event
+17-03-2026 17-52 info: [JOB 4] Started export job for exportId=69b9479600db1570235a6c1c
+17-03-2026 17-52 info: TEC2411_part1.xlsx created
+17-03-2026 17-52 info: TEC2411_part2.xlsx created
+17-03-2026 17-52 info: TEC2411_part3.xlsx created
+17-03-2026 17-52 info: TEC2411_part4.xlsx created
+17-03-2026 17-52 info: TEC2411_part5.xlsx created
+17-03-2026 17-52 info: TEC2411_part6.xlsx created
+17-03-2026 17-52 info: TEC2411_part7.xlsx created
+17-03-2026 17-52 info: TEC2411_part8.xlsx created
+17-03-2026 17-53 info: TEC2411_part9.xlsx created
+17-03-2026 17-53 info: TEC2411_part10.xlsx created
+17-03-2026 17-53 info: TEC2411_part11.xlsx created
+17-03-2026 17-53 info: TEC2411_part12.xlsx created
+17-03-2026 17-53 info: TEC2411_part13.xlsx created
+17-03-2026 17-53 info: TEC2411_part1.xlsx created
+17-03-2026 17-53 info: TEC2411_part2.xlsx created
+17-03-2026 17-53 info: TEC2411_part3.xlsx created
+17-03-2026 17-53 info: TEC2411_part4.xlsx created
+17-03-2026 17-53 info: TEC2411_part5.xlsx created
+17-03-2026 17-53 info: TEC2411_part6.xlsx created
+17-03-2026 17-53 info: TEC2411_part14.xlsx created
+17-03-2026 17-53 info: TEC2411_part7.xlsx created
+17-03-2026 17-53 info: [EXPORT 69b9479600db1570235a6c1c] Total matched docs: 411525
+17-03-2026 17-53 info: Export and zip completed for: 69b9479600db1570235a6c1c
+17-03-2026 17-53 info: Notification emails sent to: saran.st@viewzenlabs.com
+17-03-2026 17-53 info: [JOB 4] Worker completed event
+17-03-2026 17-55 info: [JOB 5] Started export job for exportId=69b9482000db1570235a6c23
+17-03-2026 17-55 info: TEC2411_part1.xlsx created
+17-03-2026 17-55 info: TEC2411_part2.xlsx created
+17-03-2026 17-55 info: TEC2411_part3.xlsx created
+17-03-2026 17-55 info: TEC2411_part4.xlsx created
+17-03-2026 17-55 info: TEC2411_part5.xlsx created
+17-03-2026 17-55 info: TEC2411_part6.xlsx created
+17-03-2026 17-55 info: TEC2211_part1.xlsx created
+17-03-2026 17-55 info: TEC2211_part2.xlsx created
+17-03-2026 17-55 info: TEC2211_part3.xlsx created
+17-03-2026 17-55 info: TEC9988_part1.xlsx created
+17-03-2026 17-55 info: TEC9988_part2.xlsx created
+17-03-2026 17-55 info: TEC9988_part3.xlsx created
+17-03-2026 17-55 info: TEC2411_part7.xlsx created
+17-03-2026 17-55 info: TEC2411_part8.xlsx created
+17-03-2026 17-55 info: TEC2411_part9.xlsx created
+17-03-2026 17-55 info: TEC2411_part10.xlsx created
+17-03-2026 17-55 info: TEC2411_part11.xlsx created
+17-03-2026 17-55 info: TEC2411_part12.xlsx created
+17-03-2026 17-55 info: TEC2411_part13.xlsx created
+17-03-2026 17-55 info: TEC2422_part1.xlsx created
+17-03-2026 17-55 info: TEC2411_part1.xlsx created
+17-03-2026 17-55 info: TEC2411_part2.xlsx created
+17-03-2026 17-55 info: TEC2411_part3.xlsx created
+17-03-2026 17-55 info: TEC2411_part4.xlsx created
+17-03-2026 17-55 info: TEC2411_part5.xlsx created
+17-03-2026 17-55 info: TEC2411_part6.xlsx created
+17-03-2026 17-55 info: TEC2411_part14.xlsx created
+17-03-2026 17-55 info: TEC2422_part2.xlsx created
+17-03-2026 17-55 info: TEC2211_part4.xlsx created
+17-03-2026 17-55 info: TEC9988_part4.xlsx created
+17-03-2026 17-55 info: TEC2411_part7.xlsx created
+17-03-2026 17-55 info: TEC2422_part1.xlsx created
+17-03-2026 17-55 info: [EXPORT 69b9482000db1570235a6c23] Total matched docs: 610641
+17-03-2026 17-56 info: Export and zip completed for: 69b9482000db1570235a6c23
+17-03-2026 17-56 info: Notification emails sent to: saran.st@viewzenlabs.com
+17-03-2026 17-56 info: [JOB 5] Worker completed event
+17-03-2026 17-56 info: Deleted: /app/export.data/swami_69b94702b7c60fa0c8083fab
+17-03-2026 17-56 info: Cleanup completed for: 69b94702b7c60fa0c8083fab
+17-03-2026 17-58 info: Deleted: /app/export.data/swami_69b9479600db1570235a6c1c
+17-03-2026 17-58 info: Cleanup completed for: 69b9479600db1570235a6c1c
+17-03-2026 18-01 info: Deleted: /app/export.data/swami_69b9482000db1570235a6c23
+17-03-2026 18-01 info: Cleanup completed for: 69b9482000db1570235a6c23

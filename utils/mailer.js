@@ -40,7 +40,7 @@ async function sendDownloadLinkMail(to, downloadLink) {
           </p>
 
           <p style="color:#FFD700; font-size:12px; margin-top:20px; opacity:0.8;">
-            This link will expire in 1 hour.
+            This link will expire in 5 minutes.
           </p>
 
         </div>
@@ -80,7 +80,7 @@ async function sendPasswordMail(to, password) {
           </div>
 
           <p style="color:#FFD700; font-size:14px; margin-top:30px;">
-             This file will expire in 1 hour.
+             This file will expire in 5 minutes.
           </p>
 
           <p style="color:#FFD700; font-size:12px; margin-top:15px; opacity:0.8;">

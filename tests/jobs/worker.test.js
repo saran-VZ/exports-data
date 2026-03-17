@@ -29,13 +29,9 @@ jest.mock("./../../utils/logger", () => ({
   error: jest.fn(),
 }));
 
-// ─── require AFTER all mocks ───────────────────────────────────────────────────
-
 require("./../../jobs/worker");
 
 const exportStatus = require("./../../schemas/export-status");
-
-// ─── Helpers ───────────────────────────────────────────────────────────────────
 
 function makeFakeDoc(overrides = {}) {
   return {
@@ -52,8 +48,6 @@ function makeFakeDoc(overrides = {}) {
 function makeFakeJob(exportId = "export123") {
   return { id: "job-001", data: { exportId } };
 }
-
-// ─── Tests ─────────────────────────────────────────────────────────────────────
 
 describe("Export Worker", () => {
 

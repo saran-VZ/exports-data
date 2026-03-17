@@ -24,9 +24,9 @@
   "main": "app.js",
   "scripts": {
     "dev": "nodemon --inspect=0.0.0.0:9229 app.js",
-    "start": "node app.js",
+    "start": "nodemon app.js",
     "test": "jest",
-    "test:start": "jest && node app.js",
+    "test:start": "jest && nodemon app.js",
     "test:dev": "jest && nodemon --inspect=0.0.0.0:9229 app.js"
   },
   "keywords": [],
