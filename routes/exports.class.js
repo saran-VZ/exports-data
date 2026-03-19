@@ -38,8 +38,9 @@ class ExportService {
     
     if (delay > 0) {
       exportDoc.scheduled_for = new Date(Date.now() + delay);
-      await exportDoc.save();
     }
+    exportDoc.bull_job_id = job.id;
+    await exportDoc.save();
 
     return { exportDoc, job, delay };
   }catch(err){

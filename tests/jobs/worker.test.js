@@ -1,4 +1,5 @@
 const mockFindById = jest.fn();
+const mockFindByIdAndUpdate = jest.fn().mockResolvedValue(true); // ← ADDED
 const mockRunExport = jest.fn();
 const mockCleanupAdd = jest.fn();
 const mockProcessor = {};
@@ -14,6 +15,7 @@ jest.mock("./../../config/redis", () => ({}));
 
 jest.mock("./../../schemas/export-status", () => ({
   findById: mockFindById,
+  findByIdAndUpdate: mockFindByIdAndUpdate, // ← ADDED
 }));
 
 jest.mock("./../../jobs/cleanup.queue", () => ({
@@ -123,9 +125,18 @@ describe("Export Worker", () => {
     await expect(mockProcessor.processor(makeFakeJob()))
       .rejects.toThrow("MongoDB cursor timeout");
 
-    expect(doc.status).toBe("failed");
-    expect(doc.error_message).toBe("MongoDB cursor timeout");
-    expect(doc.save).toHaveBeenCalled();
+    expect(mockFindByIdAndUpdate).toHaveBeenCalledWith(
+      "export123",
+      {
+        $set: { status: "failed" },
+        $push: {
+          error_logs: {
+            attempt: 1,
+            message: "MongoDB cursor timeout",
+          }
+        }
+      }
+    );
   });
 
   test("should not queue cleanup job if runExport fails", async () => {

@@ -49,9 +49,15 @@ const worker = new Worker(
       );
 
     } catch (err) {
-      exportDoc.status = "failed";
-      exportDoc.error_message = err.message;
-      await exportDoc.save();
+      await exportStatus.findByIdAndUpdate(exportDoc._id, {
+        $set:  { status: "failed" },
+        $push: {
+          error_logs: {
+            attempt: exportDoc.attempts,
+            message: err.message,
+          }
+        }
+      });
       logger.error(`[JOB ${job.id}] Export failed for exportId=${exportId}: %s`, err);
       throw err;
     }

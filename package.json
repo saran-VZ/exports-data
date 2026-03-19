@@ -17,7 +17,8 @@
     "resend": "^6.9.3",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.1",
-    "winston": "^3.19.0"
+    "winston": "^3.19.0",
+    "winston-daily-rotate-file": "^5.0.0"
   },
   "name": "exports",
   "version": "1.0.0",

@@ -42,6 +42,10 @@ const ExportSchema = new mongoose.Schema(
       default: null,
       index: true,
     },
+    bull_job_id: {
+    type: String,
+    default: null,
+    },
 
     file_format: {
       type: String,
@@ -63,10 +67,15 @@ const ExportSchema = new mongoose.Schema(
       max: 100,
     },
 
-    error_message: {
-      type: String,
-      default: null,
-    },
+    error_logs: {
+  type: [
+    {
+      attempt: { type: Number },
+      message: { type: String },
+    }
+  ],
+  default: [],
+},
 
     attempts: {
       type: Number,

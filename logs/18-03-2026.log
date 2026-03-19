@@ -1,0 +1,403 @@
+18-03-2026 11-01 info: Export Worker Started...!!
+18-03-2026 11-01 info: Cleanup Worker Running...
+18-03-2026 11-01 info: server is running at 5000
+18-03-2026 11-01 info: Swagger docs is available at http://localhost:5000/api-docs
+18-03-2026 11-01 info: Redis connected
+18-03-2026 11-01 info: Mongo Connected
+18-03-2026 11-28 info: Export Worker Started...!!
+18-03-2026 11-28 info: Cleanup Worker Running...
+18-03-2026 11-28 info: server is running at 5000
+18-03-2026 11-28 info: Swagger docs is available at http://localhost:5000/api-docs
+18-03-2026 11-28 info: Redis connected
+18-03-2026 11-28 info: Mongo Connected
+18-03-2026 11-30 info: Export Worker Started...!!
+18-03-2026 11-30 info: Cleanup Worker Running...
+18-03-2026 11-30 info: server is running at 5000
+18-03-2026 11-30 info: Swagger docs is available at http://localhost:5000/api-docs
+18-03-2026 11-30 info: Redis connected
+18-03-2026 11-30 info: Mongo Connected
+18-03-2026 11-30 info: Export Worker Started...!!
+18-03-2026 11-30 info: Cleanup Worker Running...
+18-03-2026 11-30 info: server is running at 5000
+18-03-2026 11-30 info: Swagger docs is available at http://localhost:5000/api-docs
+18-03-2026 11-30 info: Redis connected
+18-03-2026 11-30 info: Mongo Connected
+18-03-2026 11-30 info: Export Worker Started...!!
+18-03-2026 11-30 info: Cleanup Worker Running...
+18-03-2026 11-30 info: server is running at 5000
+18-03-2026 11-30 info: Swagger docs is available at http://localhost:5000/api-docs
+18-03-2026 11-30 info: Redis connected
+18-03-2026 11-30 info: Mongo Connected
+18-03-2026 11-36 info: Export Worker Started...!!
+18-03-2026 11-36 info: Cleanup Worker Running...
+18-03-2026 11-36 info: server is running at 5000
+18-03-2026 11-36 info: Swagger docs is available at http://localhost:5000/api-docs
+18-03-2026 11-36 info: Redis connected
+18-03-2026 11-36 info: Mongo Connected
+18-03-2026 11-36 info: [RESCUE] Checking for stale export jobs...
+18-03-2026 11-36 info: [RESCUE] No stale jobs found.
+18-03-2026 11-37 info: Export Worker Started...!!
+18-03-2026 11-37 info: Cleanup Worker Running...
+18-03-2026 11-37 info: server is running at 5000
+18-03-2026 11-37 info: Swagger docs is available at http://localhost:5000/api-docs
+18-03-2026 11-37 info: Redis connected
+18-03-2026 11-37 info: Mongo Connected
+18-03-2026 11-37 info: [RESCUE] Checking for stale export jobs...
+18-03-2026 11-37 info: [RESCUE] No stale jobs found.
+18-03-2026 11-38 info: Export Worker Started...!!
+18-03-2026 11-38 info: Cleanup Worker Running...
+18-03-2026 11-38 info: server is running at 5000
+18-03-2026 11-38 info: Swagger docs is available at http://localhost:5000/api-docs
+18-03-2026 11-38 info: Redis connected
+18-03-2026 11-38 info: Mongo Connected
+18-03-2026 11-38 info: [RESCUE] Checking for stale export jobs...
+18-03-2026 11-38 info: [RESCUE] No stale jobs found.
+18-03-2026 11-40 info: Export Worker Started...!!
+18-03-2026 11-40 info: Cleanup Worker Running...
+18-03-2026 11-40 info: server is running at 5000
+18-03-2026 11-40 info: Swagger docs is available at http://localhost:5000/api-docs
+18-03-2026 11-40 info: Redis connected
+18-03-2026 11-40 info: Mongo Connected
+18-03-2026 11-40 info: [RESCUE] Checking for stale export jobs...
+18-03-2026 11-40 info: [RESCUE] No stale jobs found.
+18-03-2026 11-40 info: [JOB 1] Started export job for exportId=69ba41adbfea1631fd5601f5
+18-03-2026 11-40 info: TEC2411_part1.xlsx created
+18-03-2026 11-40 info: TEC2411_part2.xlsx created
+18-03-2026 11-40 info: TEC2411_part3.xlsx created
+18-03-2026 11-40 info: TEC2411_part4.xlsx created
+18-03-2026 11-40 info: TEC2411_part5.xlsx created
+18-03-2026 11-40 info: TEC2411_part6.xlsx created
+18-03-2026 11-41 info: TEC2211_part1.xlsx created
+18-03-2026 11-41 info: TEC2211_part2.xlsx created
+18-03-2026 11-41 info: TEC2211_part3.xlsx created
+18-03-2026 11-41 info: TEC9988_part1.xlsx created
+18-03-2026 11-41 info: TEC9988_part2.xlsx created
+18-03-2026 11-41 info: TEC9988_part3.xlsx created
+18-03-2026 11-41 info: TEC2411_part7.xlsx created
+18-03-2026 11-41 info: TEC2411_part8.xlsx created
+18-03-2026 11-41 info: TEC2411_part9.xlsx created
+18-03-2026 11-41 info: TEC2411_part10.xlsx created
+18-03-2026 11-41 info: TEC2411_part11.xlsx created
+18-03-2026 11-41 info: TEC2411_part12.xlsx created
+18-03-2026 11-41 info: TEC2411_part13.xlsx created
+18-03-2026 11-41 info: TEC2422_part1.xlsx created
+18-03-2026 11-41 info: TEC2411_part1.xlsx created
+18-03-2026 11-41 info: TEC2411_part2.xlsx created
+18-03-2026 11-41 info: TEC2411_part3.xlsx created
+18-03-2026 11-41 info: TEC2411_part4.xlsx created
+18-03-2026 11-41 info: TEC2411_part5.xlsx created
+18-03-2026 11-41 info: TEC2411_part6.xlsx created
+18-03-2026 11-41 info: TEC2411_part14.xlsx created
+18-03-2026 11-41 info: TEC2422_part2.xlsx created
+18-03-2026 11-41 info: TEC2211_part4.xlsx created
+18-03-2026 11-41 info: TEC9988_part4.xlsx created
+18-03-2026 11-41 info: TEC2411_part7.xlsx created
+18-03-2026 11-41 info: TEC2422_part1.xlsx created
+18-03-2026 11-41 info: [EXPORT 69ba41adbfea1631fd5601f5] Total matched docs: 610641
+18-03-2026 11-41 info: Export Worker Started...!!
+18-03-2026 11-41 info: Cleanup Worker Running...
+18-03-2026 11-41 info: server is running at 5000
+18-03-2026 11-41 info: Swagger docs is available at http://localhost:5000/api-docs
+18-03-2026 11-41 info: Mongo Connected
+18-03-2026 11-41 info: Redis connected
+18-03-2026 11-43 info: Export Worker Started...!!
+18-03-2026 11-43 info: Cleanup Worker Running...
+18-03-2026 11-43 info: server is running at 5000
+18-03-2026 11-43 info: Swagger docs is available at http://localhost:5000/api-docs
+18-03-2026 11-43 info: Redis connected
+18-03-2026 11-43 info: Mongo Connected
+18-03-2026 11-43 info: [JOB 1] Started export job for exportId=69ba41adbfea1631fd5601f5
+18-03-2026 11-43 info: TEC2411_part1.xlsx created
+18-03-2026 11-43 info: TEC2411_part2.xlsx created
+18-03-2026 11-43 info: TEC2411_part3.xlsx created
+18-03-2026 11-43 info: TEC2411_part4.xlsx created
+18-03-2026 11-43 info: TEC2411_part5.xlsx created
+18-03-2026 11-43 info: TEC2411_part6.xlsx created
+18-03-2026 11-43 info: [JOB 2] Started export job for exportId=69ba423b36eb84e680fe47ce
+18-03-2026 11-43 info: TEC2211_part1.xlsx created
+18-03-2026 11-43 info: TEC2411_part1.xlsx created
+18-03-2026 11-43 info: TEC2211_part2.xlsx created
+18-03-2026 11-43 info: TEC2411_part2.xlsx created
+18-03-2026 11-43 info: TEC2211_part3.xlsx created
+18-03-2026 11-43 info: TEC2411_part3.xlsx created
+18-03-2026 11-43 info: TEC2411_part4.xlsx created
+18-03-2026 11-43 info: TEC9988_part1.xlsx created
+18-03-2026 11-43 info: TEC2411_part5.xlsx created
+18-03-2026 11-43 info: TEC9988_part2.xlsx created
+18-03-2026 11-43 info: TEC2411_part6.xlsx created
+18-03-2026 11-43 info: TEC9988_part3.xlsx created
+18-03-2026 11-43 info: TEC2411_part7.xlsx created
+18-03-2026 11-43 info: TEC2211_part1.xlsx created
+18-03-2026 11-43 info: TEC2411_part8.xlsx created
+18-03-2026 11-43 info: TEC2211_part2.xlsx created
+18-03-2026 11-43 info: TEC2411_part9.xlsx created
+18-03-2026 11-43 info: TEC2211_part3.xlsx created
+18-03-2026 11-43 info: TEC2411_part10.xlsx created
+18-03-2026 11-43 info: TEC9988_part1.xlsx created
+18-03-2026 11-43 info: TEC2411_part11.xlsx created
+18-03-2026 11-43 info: TEC9988_part2.xlsx created
+18-03-2026 11-43 info: TEC2411_part12.xlsx created
+18-03-2026 11-43 info: TEC9988_part3.xlsx created
+18-03-2026 11-43 info: TEC2411_part13.xlsx created
+18-03-2026 11-43 info: TEC2411_part7.xlsx created
+18-03-2026 11-43 info: TEC2422_part1.xlsx created
+18-03-2026 11-43 info: TEC2411_part8.xlsx created
+18-03-2026 11-43 info: TEC2411_part1.xlsx created
+18-03-2026 11-44 info: TEC2411_part9.xlsx created
+18-03-2026 11-44 info: TEC2411_part2.xlsx created
+18-03-2026 11-44 info: TEC2411_part10.xlsx created
+18-03-2026 11-44 info: TEC2411_part3.xlsx created
+18-03-2026 11-44 info: TEC2411_part11.xlsx created
+18-03-2026 11-44 info: TEC2411_part4.xlsx created
+18-03-2026 11-44 info: TEC2411_part12.xlsx created
+18-03-2026 11-44 info: TEC2411_part5.xlsx created
+18-03-2026 11-44 info: TEC2411_part13.xlsx created
+18-03-2026 11-44 info: TEC2422_part1.xlsx created
+18-03-2026 11-44 info: TEC2411_part6.xlsx created
+18-03-2026 11-44 info: TEC2411_part14.xlsx created
+18-03-2026 11-44 info: TEC2422_part2.xlsx created
+18-03-2026 11-44 info: TEC2211_part4.xlsx created
+18-03-2026 11-44 info: TEC9988_part4.xlsx created
+18-03-2026 11-44 info: TEC2411_part7.xlsx created
+18-03-2026 11-44 info: TEC2411_part1.xlsx created
+18-03-2026 11-44 info: TEC2422_part1.xlsx created
+18-03-2026 11-44 info: [EXPORT 69ba41adbfea1631fd5601f5] Total matched docs: 610641
+18-03-2026 11-44 info: TEC2411_part2.xlsx created
+18-03-2026 11-44 info: TEC2411_part3.xlsx created
+18-03-2026 11-44 info: TEC2411_part4.xlsx created
+18-03-2026 11-44 info: TEC2411_part5.xlsx created
+18-03-2026 11-44 info: TEC2411_part6.xlsx created
+18-03-2026 11-44 info: TEC2411_part14.xlsx created
+18-03-2026 11-44 info: TEC2422_part2.xlsx created
+18-03-2026 11-44 info: TEC2211_part4.xlsx created
+18-03-2026 11-44 info: TEC9988_part4.xlsx created
+18-03-2026 11-44 info: TEC2411_part7.xlsx created
+18-03-2026 11-44 info: TEC2422_part1.xlsx created
+18-03-2026 11-44 info: [EXPORT 69ba423b36eb84e680fe47ce] Total matched docs: 610641
+18-03-2026 11-44 info: Export and zip completed for: 69ba41adbfea1631fd5601f5
+18-03-2026 11-44 info: Notification emails sent to: saran.st@viewzenlabs.com
+18-03-2026 11-44 info: [JOB 1] Worker completed event
+18-03-2026 11-44 info: Export and zip completed for: 69ba423b36eb84e680fe47ce
+18-03-2026 11-44 info: Notification emails sent to: saran.st@viewzenlabs.com
+18-03-2026 11-44 info: [JOB 2] Worker completed event
+18-03-2026 11-44 info: Export Worker Started...!!
+18-03-2026 11-44 info: Cleanup Worker Running...
+18-03-2026 11-44 info: server is running at 5000
+18-03-2026 11-44 info: Swagger docs is available at http://localhost:5000/api-docs
+18-03-2026 11-44 info: Redis connected
+18-03-2026 11-44 info: Mongo Connected
+18-03-2026 11-46 info: Export Worker Started...!!
+18-03-2026 11-46 info: Cleanup Worker Running...
+18-03-2026 11-46 info: server is running at 5000
+18-03-2026 11-46 info: Swagger docs is available at http://localhost:5000/api-docs
+18-03-2026 11-46 info: Redis connected
+18-03-2026 11-46 info: Mongo Connected
+18-03-2026 11-51 info: Redis connected
+18-03-2026 11-51 info: Export Worker Started...!!
+18-03-2026 11-51 info: Cleanup Worker Running...
+18-03-2026 11-51 info: server is running at 5000
+18-03-2026 11-51 info: Swagger docs is available at http://localhost:5000/api-docs
+18-03-2026 11-51 info: Redis connected
+18-03-2026 11-51 info: Mongo Connected
+18-03-2026 11-53 info: Export Worker Started...!!
+18-03-2026 11-53 info: Cleanup Worker Running...
+18-03-2026 11-53 info: server is running at 5000
+18-03-2026 11-53 info: Swagger docs is available at http://localhost:5000/api-docs
+18-03-2026 11-53 info: Redis connected
+18-03-2026 11-53 info: Mongo Connected
+18-03-2026 11-53 info: [JOB 1] Started export job for exportId=69ba4490008e96222b858084
+18-03-2026 11-53 info: TEC2411_part1.xlsx created
+18-03-2026 11-53 info: TEC2411_part2.xlsx created
+18-03-2026 11-53 info: TEC2411_part3.xlsx created
+18-03-2026 11-53 info: TEC2411_part4.xlsx created
+18-03-2026 11-53 info: TEC2411_part5.xlsx created
+18-03-2026 11-53 info: TEC2411_part6.xlsx created
+18-03-2026 11-53 info: TEC2411_part7.xlsx created
+18-03-2026 11-53 info: TEC2411_part8.xlsx created
+18-03-2026 11-53 info: TEC2411_part9.xlsx created
+18-03-2026 11-53 info: TEC2411_part10.xlsx created
+18-03-2026 11-53 info: TEC2411_part11.xlsx created
+18-03-2026 11-53 info: TEC2411_part12.xlsx created
+18-03-2026 11-53 info: TEC2411_part13.xlsx created
+18-03-2026 11-53 info: TEC2411_part1.xlsx created
+18-03-2026 11-53 info: TEC2411_part2.xlsx created
+18-03-2026 11-53 info: TEC2411_part3.xlsx created
+18-03-2026 11-53 info: TEC2411_part4.xlsx created
+18-03-2026 11-53 info: TEC2411_part5.xlsx created
+18-03-2026 11-53 info: TEC2411_part6.xlsx created
+18-03-2026 11-53 info: TEC2411_part14.xlsx created
+18-03-2026 11-53 info: TEC2411_part7.xlsx created
+18-03-2026 11-53 info: [EXPORT 69ba4490008e96222b858084] Total matched docs: 411525
+18-03-2026 11-53 info: Export and zip completed for: 69ba4490008e96222b858084
+18-03-2026 11-53 info: Notification emails sent to: saran.st@viewzenlabs.com
+18-03-2026 11-53 info: [JOB 1] Worker completed event
+18-03-2026 11-58 info: Deleted: /app/export.data/swami_69ba4490008e96222b858084
+18-03-2026 11-58 info: Cleanup completed for: 69ba4490008e96222b858084
+18-03-2026 12-10 info: Export Worker Started...!!
+18-03-2026 12-10 info: Cleanup Worker Running...
+18-03-2026 12-10 info: server is running at 5000
+18-03-2026 12-10 info: Swagger docs is available at http://localhost:5000/api-docs
+18-03-2026 12-10 info: Redis connected
+18-03-2026 12-10 info: Mongo Connected
+18-03-2026 12-10 info: Export Worker Started...!!
+18-03-2026 12-10 info: Cleanup Worker Running...
+18-03-2026 12-10 info: server is running at 5000
+18-03-2026 12-10 info: Swagger docs is available at http://localhost:5000/api-docs
+18-03-2026 12-10 info: Redis connected
+18-03-2026 12-10 info: Mongo Connected
+18-03-2026 12-11 info: Export Worker Started...!!
+18-03-2026 12-11 info: Cleanup Worker Running...
+18-03-2026 12-11 info: server is running at 5000
+18-03-2026 12-11 info: Swagger docs is available at http://localhost:5000/api-docs
+18-03-2026 12-11 info: Redis connected
+18-03-2026 12-11 info: Mongo Connected
+18-03-2026 12-11 info: Export Worker Started...!!
+18-03-2026 12-11 info: Cleanup Worker Running...
+18-03-2026 12-11 info: server is running at 5000
+18-03-2026 12-11 info: Swagger docs is available at http://localhost:5000/api-docs
+18-03-2026 12-11 info: Redis connected
+18-03-2026 12-11 info: Mongo Connected
+18-03-2026 12-18 info: Export Worker Started...!!
+18-03-2026 12-18 info: Cleanup Worker Running...
+18-03-2026 12-18 info: server is running at 5000
+18-03-2026 12-18 info: Swagger docs is available at http://localhost:5000/api-docs
+18-03-2026 12-18 info: Redis connected
+18-03-2026 12-18 info: Mongo Connected
+18-03-2026 12-19 info: [JOB 2] Started export job for exportId=69ba4abbcc9bf3d7dbb8f850
+18-03-2026 12-19 info: TEC2411_part1.xlsx created
+18-03-2026 12-19 info: TEC2411_part2.xlsx created
+18-03-2026 12-19 info: TEC2411_part3.xlsx created
+18-03-2026 12-19 info: TEC2411_part4.xlsx created
+18-03-2026 12-19 info: TEC2411_part5.xlsx created
+18-03-2026 12-19 info: TEC2411_part6.xlsx created
+18-03-2026 12-19 info: TEC2411_part7.xlsx created
+18-03-2026 12-19 info: TEC2411_part8.xlsx created
+18-03-2026 12-19 info: TEC2411_part9.xlsx created
+18-03-2026 12-19 info: TEC2411_part10.xlsx created
+18-03-2026 12-19 info: TEC2411_part11.xlsx created
+18-03-2026 12-19 info: TEC2411_part12.xlsx created
+18-03-2026 12-19 info: TEC2411_part13.xlsx created
+18-03-2026 12-19 info: TEC2411_part1.xlsx created
+18-03-2026 12-19 info: TEC2411_part2.xlsx created
+18-03-2026 12-19 info: TEC2411_part3.xlsx created
+18-03-2026 12-19 info: TEC2411_part4.xlsx created
+18-03-2026 12-19 info: TEC2411_part5.xlsx created
+18-03-2026 12-19 info: TEC2411_part6.xlsx created
+18-03-2026 12-19 info: TEC2411_part14.xlsx created
+18-03-2026 12-19 info: TEC2411_part7.xlsx created
+18-03-2026 12-19 info: [EXPORT 69ba4abbcc9bf3d7dbb8f850] Total matched docs: 411525
+18-03-2026 12-19 info: Export and zip completed for: 69ba4abbcc9bf3d7dbb8f850
+18-03-2026 12-19 info: Notification emails sent to: saran.st@viewzenlabs.com
+18-03-2026 12-19 info: [JOB 2] Worker completed event
+18-03-2026 12-24 info: Deleted: /app/export.data/swami_69ba4abbcc9bf3d7dbb8f850
+18-03-2026 12-24 info: Cleanup completed for: 69ba4abbcc9bf3d7dbb8f850
+18-03-2026 16-45 info: Export Worker Started...!!
+18-03-2026 16-45 info: Cleanup Worker Running...
+18-03-2026 16-45 info: server is running at 5000
+18-03-2026 16-45 info: Swagger docs is available at http://localhost:5000/api-docs
+18-03-2026 16-45 info: Redis connected
+18-03-2026 16-45 info: Mongo Connected
+18-03-2026 16-45 info: Export Worker Started...!!
+18-03-2026 16-45 info: Cleanup Worker Running...
+18-03-2026 16-45 info: server is running at 5000
+18-03-2026 16-45 info: Swagger docs is available at http://localhost:5000/api-docs
+18-03-2026 16-45 info: Redis connected
+18-03-2026 16-45 info: Mongo Connected
+18-03-2026 16-51 info: Export Worker Started...!!
+18-03-2026 16-51 info: Cleanup Worker Running...
+18-03-2026 16-51 info: server is running at 5000
+18-03-2026 16-51 info: Swagger docs is available at http://localhost:5000/api-docs
+18-03-2026 16-51 info: Redis connected
+18-03-2026 16-51 info: Mongo Connected
+18-03-2026 16-52 info: Export Worker Started...!!
+18-03-2026 16-52 info: Cleanup Worker Running...
+18-03-2026 16-52 info: server is running at 5000
+18-03-2026 16-52 info: Swagger docs is available at http://localhost:5000/api-docs
+18-03-2026 16-52 info: Redis connected
+18-03-2026 16-52 info: Mongo Connected
+18-03-2026 16-53 info: Export Worker Started...!!
+18-03-2026 16-53 info: Cleanup Worker Running...
+18-03-2026 16-53 info: server is running at 5000
+18-03-2026 16-53 info: Swagger docs is available at http://localhost:5000/api-docs
+18-03-2026 16-53 info: Redis connected
+18-03-2026 16-53 info: Mongo Connected
+18-03-2026 16-57 info: [JOB 3] Started export job for exportId=69ba8bd088d5364a58ea74a3
+18-03-2026 16-57 info: TEC2411_part1.xlsx created
+18-03-2026 16-57 info: TEC2411_part2.xlsx created
+18-03-2026 17-02 info: Export Worker Started...!!
+18-03-2026 17-02 info: Cleanup Worker Running...
+18-03-2026 17-02 info: server is running at 5000
+18-03-2026 17-02 info: Swagger docs is available at http://localhost:5000/api-docs
+18-03-2026 17-02 info: Redis connected
+18-03-2026 17-02 info: Mongo Connected
+18-03-2026 17-03 info: [JOB 3] Started export job for exportId=69ba8bd088d5364a58ea74a3
+18-03-2026 17-03 info: TEC2411_part1.xlsx created
+18-03-2026 17-03 info: TEC2411_part2.xlsx created
+18-03-2026 17-03 info: TEC2411_part3.xlsx created
+18-03-2026 17-03 info: TEC2411_part4.xlsx created
+18-03-2026 17-03 info: TEC2411_part5.xlsx created
+18-03-2026 17-03 info: TEC2411_part6.xlsx created
+18-03-2026 17-03 info: TEC2411_part7.xlsx created
+18-03-2026 17-03 info: TEC2411_part8.xlsx created
+18-03-2026 17-03 info: TEC2411_part9.xlsx created
+18-03-2026 17-03 info: TEC2411_part10.xlsx created
+18-03-2026 17-03 info: TEC2411_part11.xlsx created
+18-03-2026 17-03 info: TEC2411_part12.xlsx created
+18-03-2026 17-03 info: TEC2411_part13.xlsx created
+18-03-2026 17-03 info: TEC2411_part1.xlsx created
+18-03-2026 17-03 info: TEC2411_part2.xlsx created
+18-03-2026 17-03 info: TEC2411_part3.xlsx created
+18-03-2026 17-03 info: TEC2411_part4.xlsx created
+18-03-2026 17-03 info: TEC2411_part5.xlsx created
+18-03-2026 17-03 info: TEC2411_part6.xlsx created
+18-03-2026 17-03 info: TEC2411_part14.xlsx created
+18-03-2026 17-03 info: TEC2411_part7.xlsx created
+18-03-2026 17-03 info: [EXPORT 69ba8bd088d5364a58ea74a3] Total matched docs: 411525
+18-03-2026 17-04 info: Export and zip completed for: 69ba8bd088d5364a58ea74a3
+18-03-2026 17-04 info: Notification emails sent to: saran.st@viewzenlabs.com
+18-03-2026 17-04 info: [JOB 3] Worker completed event
+18-03-2026 17-09 info: Deleted: /app/export.data/saran_69ba8bd088d5364a58ea74a3
+18-03-2026 17-09 info: Cleanup completed for: 69ba8bd088d5364a58ea74a3
+18-03-2026 17-12 info: [JOB 4] Started export job for exportId=69ba8f92dea142d2ac4d9bb9
+18-03-2026 17-12 error: [JOB 4] Export failed for exportId=69ba8f92dea142d2ac4d9bb9: Error: No records found for the selected filters/collections
+    at runExport (/app/jobs/processor.js:59:11)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Worker.connection.connection [as processFn] (/app/jobs/worker.js:26:22)
+    at async /app/node_modules/bullmq/dist/cjs/classes/worker.js:571:32
+18-03-2026 17-12 error: [JOB 4] Worker failed event: No records found for the selected filters/collections
+18-03-2026 17-12 info: [JOB 4] Started export job for exportId=69ba8f92dea142d2ac4d9bb9
+18-03-2026 17-12 error: [JOB 4] Export failed for exportId=69ba8f92dea142d2ac4d9bb9: Error: No records found for the selected filters/collections
+    at runExport (/app/jobs/processor.js:59:11)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Worker.connection.connection [as processFn] (/app/jobs/worker.js:26:22)
+    at async /app/node_modules/bullmq/dist/cjs/classes/worker.js:571:32
+18-03-2026 17-12 error: [JOB 4] Worker failed event: No records found for the selected filters/collections
+18-03-2026 17-12 info: [JOB 4] Started export job for exportId=69ba8f92dea142d2ac4d9bb9
+18-03-2026 17-12 error: [JOB 4] Export failed for exportId=69ba8f92dea142d2ac4d9bb9: Error: No records found for the selected filters/collections
+    at runExport (/app/jobs/processor.js:59:11)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Worker.connection.connection [as processFn] (/app/jobs/worker.js:26:22)
+    at async /app/node_modules/bullmq/dist/cjs/classes/worker.js:571:32
+18-03-2026 17-12 error: [JOB 4] Worker failed event: No records found for the selected filters/collections
+18-03-2026 18-25 error:  Redis connection error: Error: connect ECONNREFUSED 172.20.0.2:6379
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16) {
+  errno: -111,
+  code: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '172.20.0.2',
+  port: 6379
+}
+18-03-2026 18-25 error:  Redis connection error: Error: getaddrinfo EAI_AGAIN my_redis
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26) {
+  errno: -3001,
+  code: 'EAI_AGAIN',
+  syscall: 'getaddrinfo',
+  hostname: 'my_redis'
+}
+18-03-2026 18-25 error:  Redis connection error: Error: getaddrinfo EAI_AGAIN my_redis
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26) {
+  errno: -3001,
+  code: 'EAI_AGAIN',
+  syscall: 'getaddrinfo',
+  hostname: 'my_redis'
+}

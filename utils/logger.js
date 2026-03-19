@@ -1,4 +1,5 @@
 const { createLogger, format, transports } = require("winston");
+const DailyRotateFile = require("winston-daily-rotate-file");
 const fs = require("fs");
 const path = require("path");
 
@@ -53,26 +54,35 @@ function formatMeta(meta) {
   return JSON.stringify(meta);
 }
 
+const logFormat = format.combine(
+  format((info) => {
+    info.timestamp = formatKolkataTimestamp();
+    return info;
+  })(),
+  format.errors({ stack: true }),
+  format.splat(),
+  format.printf(({ timestamp, level, message, stack, ...meta }) => {
+    const base = `${timestamp} ${level}: ${message}`;
+    const stackText = stack ? ` ${stack}` : "";
+    const metaText = formatMeta(meta);
+    const metaSuffix = metaText ? ` ${metaText}` : "";
+    return `${base}${stackText}${metaSuffix}`;
+  })
+);
+
 const logger = createLogger({
   level: process.env.LOG_LEVEL || "info",
-  format: format.combine(
-    format((info) => {
-      info.timestamp = formatKolkataTimestamp();
-      return info;
-    })(),
-    format.errors({ stack: true }),
-    format.splat(),
-    format.printf(({ timestamp, level, message, stack, ...meta }) => {
-      const base = `${timestamp} ${level}: ${message}`;
-      const stackText = stack ? ` ${stack}` : "";
-      const metaText = formatMeta(meta);
-      const metaSuffix = metaText ? ` ${metaText}` : "";
-      return `${base}${stackText}${metaSuffix}`;
-    })
-  ),
+  format: logFormat,
   transports: [
     new transports.Console(),
-    new transports.File({ filename: path.join(logsDir, "app.log") }),
+    new DailyRotateFile({
+      dirname: logsDir,
+      filename: "%DATE%.log",       // produces dd-mm-yyyy.log
+      datePattern: "DD-MM-YYYY",    
+      zippedArchive: false,
+      maxFiles: "30d",              
+      createSymlink: false,
+    }),
   ],
 });
 
