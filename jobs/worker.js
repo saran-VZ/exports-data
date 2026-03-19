@@ -3,6 +3,7 @@ const connection = require("./../config/redis");
 const exportStatus = require("./../schemas/export-status");
 const cleanupQueue = require("./cleanup.queue");
 const { runExport } = require("./processor");
+const { runExportV2 } = require("./processor.v2");
 const logger = require("./../utils/logger");
 
 const EXPIRY_TIME = 5 * 60 * 1000;                      // 5 minutes
@@ -23,7 +24,15 @@ const worker = new Worker(
       exportDoc.progress = 0;
       await exportDoc.save();
 
-      const result = await runExport(exportDoc);               //callback to processor 
+      // ── route to correct processor based on version ──────────────────────
+      let result;
+      if (exportDoc.version === "2.0") {
+        logger.info(`[JOB ${job.id}] Routing to V2 processor`);
+        result = await runExportV2(exportDoc);
+      } else {
+        logger.info(`[JOB ${job.id}] Routing to V1 processor`);
+        result = await runExport(exportDoc);
+      }
 
       exportDoc.status = "completed";
       exportDoc.completed_at = new Date();
@@ -36,7 +45,7 @@ const worker = new Worker(
       logger.info("Export and zip completed for: %s", exportDoc._id);
       logger.info("Notification emails sent to: %s", exportDoc.email);
 
-      await cleanupQueue.add(                                               //added to celanupqueue after the job is completed
+      await cleanupQueue.add(
         "deleteExportFiles",
         {
           userRoot: result.userRoot,
@@ -49,22 +58,16 @@ const worker = new Worker(
       );
 
     } catch (err) {
-      await exportStatus.findByIdAndUpdate(exportDoc._id, {
-        $set:  { status: "failed" },
-        $push: {
-          error_logs: {
-            attempt: exportDoc.attempts,
-            message: err.message,
-          }
-        }
-      });
+      exportDoc.status = "failed";
+      exportDoc.error_message = err.message;
+      await exportDoc.save();
       logger.error(`[JOB ${job.id}] Export failed for exportId=${exportId}: %s`, err);
       throw err;
     }
   },
   {
     connection,
-    concurrency: 2,                                                         //can process upto 2 jobs concurrently
+    concurrency: 2,
   }
 );
 

@@ -1,4 +1,6 @@
 const ExportService = require("./exports.class");
+const ExportServiceV2 = require("./exports.class.v2");
+
 const fs = require("fs");
 const logger = require("../utils/logger");
 
@@ -52,6 +54,40 @@ exports.createExport = async (req, res) => {
     return res.status(statusCode).json({
       success: false,
       message: "Failed to create export job",
+      error: error.message,
+    });
+  }
+};
+
+exports.createExportV2 = async (req, res) => {
+  try {
+    const exportServiceV2 = new ExportServiceV2();
+ 
+    const { exportDoc, job, delay } = await exportServiceV2.createExportV2({
+      app_id: req.params.id,          // app ObjectId from route param
+      user_name: req.body.user_name,
+      email: req.body.email,
+    });
+ 
+    return res.status(200).json({
+      success: true,
+      message:
+        delay > 0
+          ? "Export scheduled successfully"
+          : "Export queued successfully",
+      exportId: exportDoc._id,
+      jobId: job.id,
+      scheduledFor: exportDoc.scheduled_for
+        ? exportDoc.scheduled_for.toLocaleString("en-IN", {
+            hour12: false,
+          })
+        : null,
+    });
+  } catch (error) {
+    const statusCode = error.status || 500;
+    return res.status(statusCode).json({
+      success: false,
+      message: "Failed to create v2 export job",
       error: error.message,
     });
   }

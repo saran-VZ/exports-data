@@ -9,9 +9,11 @@ const ExportSchema = new mongoose.Schema(
 
     collections: {
       type: [String],
-      required: true,
     },
-
+    app_id: {
+      type: String,
+      default: null,
+    },
     email: {
       type: String,
       default: null,
@@ -91,7 +93,11 @@ const ExportSchema = new mongoose.Schema(
       type: Date,
       default: null,
     },
-
+    
+    version:{
+      type: String,
+      default: "1.0"
+    },
     expires_at: {
       type: Date,
       default: null,

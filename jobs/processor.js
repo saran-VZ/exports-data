@@ -3,13 +3,11 @@ const path = require("path");
 const fs = require("fs");
 const crypto = require("crypto");
 const archiver = require("archiver");
-const zipEncrypted = require("archiver-zip-encrypted");
+
 const logger = require("./../utils/logger");
 
 const { ExcelGroupService } = require("./excel");
 const { sendDownloadLinkMail, sendPasswordMail } = require("./../utils/mailer");
-
-archiver.registerFormat("zip-encrypted", zipEncrypted);
 
 
 async function runExport(exportDoc) {
