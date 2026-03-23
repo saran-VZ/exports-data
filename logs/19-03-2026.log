@@ -49,3 +49,26 @@
 19-03-2026 16-44 info: Redis connected
 19-03-2026 16-44 info: Deleted: /app/export.data/saran_69bbd95d74b4344f373b594c
 19-03-2026 16-44 info: Cleanup completed for: 69bbd95d74b4344f373b594c
+19-03-2026 18-10 error:  Redis connection error: Error: connect ECONNREFUSED 172.20.0.2:6379
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16) {
+  errno: -111,
+  code: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '172.20.0.2',
+  port: 6379
+}
+19-03-2026 18-10 error:  Redis connection error: Error: connect ECONNREFUSED 172.20.0.2:6379
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16) {
+  errno: -111,
+  code: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '172.20.0.2',
+  port: 6379
+}
+19-03-2026 18-10 error:  Redis connection error: Error: getaddrinfo EAI_AGAIN my_redis
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26) {
+  errno: -3001,
+  code: 'EAI_AGAIN',
+  syscall: 'getaddrinfo',
+  hostname: 'my_redis'
+}

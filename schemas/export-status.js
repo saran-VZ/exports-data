@@ -9,6 +9,7 @@ const ExportSchema = new mongoose.Schema(
 
     collections: {
       type: [String],
+      default: [],
     },
     app_id: {
       type: String,

@@ -5,8 +5,8 @@ const logger = require("./../utils/logger");
 
 class ExcelSimpleService {
   constructor(outputDir, exportDoc, collectionName) {
-    this.partCounter = 1;
-    this.rowLimit = 20000;
+    this.partCounter = 1;                                       // counts the no of excel files created for a collection 
+    this.rowLimit = parseInt(process.env.EXCEL_MAX_ROWS);
     this.currentRowCount = 0;
     this.workbook = null;
     this.worksheet = null;
@@ -26,7 +26,7 @@ class ExcelSimpleService {
 
       this.tempPath = path.join(this.finalDir, fileName);
 
-      this.workbook = new ExcelJS.stream.xlsx.WorkbookWriter({
+      this.workbook = new ExcelJS.stream.xlsx.WorkbookWriter({                   // streaming workbook to instantly commit each rows to reduce memory usage
         filename: this.tempPath,
         useSharedStrings: false,
         useStyles: false,
@@ -48,12 +48,12 @@ class ExcelSimpleService {
       }
 
       for (const doc of batch) {
-        this.worksheet.addRow(Object.values(doc)).commit();
+        this.worksheet.addRow(Object.values(doc)).commit();            // writes each document as a new row in excel and commits immediately
         this.currentRowCount++;
-
-        if (this.currentRowCount >= this.rowLimit) {
-          await this.workbook.commit();
-          logger.info(`[V2] ${path.basename(this.tempPath)} created`);
+ 
+        if (this.currentRowCount >= this.rowLimit) {                   
+          await this.workbook.commit();                               // if rowlimit is reached, commits the current file and creates a new file
+          logger.info(` ${path.basename(this.tempPath)} created`);
           await this.createNewFile();
         }
       }
@@ -62,11 +62,11 @@ class ExcelSimpleService {
     }
   }
 
-  async finalize() {
+  async finalize() {                                                    // commits the remaining rows in the last file and finalizes the workbook
     try {
       if (this.workbook) {
         await this.workbook.commit();
-        logger.info(`[V2] ${path.basename(this.tempPath)} created`);
+        logger.info(` ${path.basename(this.tempPath)} created`);
         this.workbook = null;
       }
     } catch (err) {

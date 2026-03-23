@@ -1,6 +1,6 @@
-const exportStatus = require("../schemas/export-status");
-const exportQueue = require("../jobs/queue");
-const { calculateDelay } = require("../utils/sheduler");
+const exportStatus = require("./../schemas/export-status");
+const exportQueue = require("./../jobs/queue");
+const { calculateDelay } = require("./../utils/sheduler");
 
 class ExportServiceV2 {
 
@@ -14,13 +14,11 @@ class ExportServiceV2 {
         throw err;
       }
 
-      // export doc created with app_id stored
-      // processor.v2.js will use this app_id to resolve actual collections
-      const exportDoc = await exportStatus.create({
+      const exportDoc = await exportStatus.create({                  //creates the export job record in the DB when the API is hit
         user_name,
         email,
-        app_id,                  // stored so processor can use it
-        collections: [],         // will be resolved in processor
+        app_id,                  
+        collections: [],         
         filters: {},
         file_format: "xlsx",
         status: "queued",
@@ -28,7 +26,7 @@ class ExportServiceV2 {
         version: "2.0",
       });
 
-      const delay = calculateDelay();
+      const delay = calculateDelay();                            // delay calculated for sheduling the incomming export job
 
       const job = await exportQueue.add(
         "exportJob",
@@ -46,7 +44,7 @@ class ExportServiceV2 {
         }
       );
 
-      if (delay > 0) {
+      if (delay > 0) {                                            // if not immediate mode then the sheduled time is added to the DB record
         exportDoc.scheduled_for = new Date(Date.now() + delay);
         await exportDoc.save();
       }

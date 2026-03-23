@@ -21,7 +21,7 @@ describe("calculateDelay", () => {
   test("should return 60000 when mode is sampleWait", () => {
     process.env.EXPORT_SCHEDULING_MODE = "sampleWait";
     const delay = calculateDelay();
-    expect(delay).toBe(60000);
+    expect(delay).toBe(20000);
   });
 
   test("should return delay until 22:00 when mode is night and time is before 22:00", () => {

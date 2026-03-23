@@ -48,7 +48,7 @@ class ExportService {
   }
   } 
 
-  async getExportStatus(id) {                           
+  async getExportStatus(id) {                                     // to view DB record of export job with id                       
     try{
       const exportDoc = await exportStatus.findById(id);
       if (!exportDoc) {
@@ -61,7 +61,7 @@ class ExportService {
     }  
   }
 
-  async downloadExport(id) {
+  async downloadExport(id) {                                     // to download the exported file using donwload link
     try{
     const exportDoc = await exportStatus.findById(id);
 

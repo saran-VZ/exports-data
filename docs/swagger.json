@@ -2,7 +2,7 @@
   "openapi": "3.0.0",
   "info": {
     "title": "Export Service API",
-    "version": "1.0.0",
+    "version": "2.0.0",
     "description": "API documentation for Export Job System"
   },
   "servers": [
@@ -12,23 +12,87 @@
   ],
   "tags": [
     {
-      "name": "Exports",
-      "description": "Export job related APIs"
+      "name": "Exports V2",
+      "description": "Export job APIs - new flow using app hierarchy, no filters needed"
+    },
+    {
+      "name": "Exports V1",
+      "description": "Export job APIs - original flow with filters and collection selection"
+    },
+    {
+      "name": "Common",
+      "description": "Shared endpoints for both V1 and V2"
     }
   ],
   "paths": {
-    "/export": {
+    "/export/{id}": {
       "post": {
-        "summary": "Create a new export job",
+        "summary": "Create a new export job (V2)",
+        "description": "Creates a new V2 export job using the app's hierarchy. Automatically resolves all formdata collections by traversing the app's subCategories tree and matching x-forms. No filters or collection names needed — only app_id in the URL and user details in the body.",
+        "tags": ["Exports V2"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "App ObjectId from the apps collection",
+            "schema": {
+              "type": "string"
+            },
+            "example": "aaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "description": "User details for the export job",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateExportV2Request"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Export job created successfully",
+            "content": {
+              "application/json": {
+                "example": {
+                  "success": true,
+                  "message": "Export queued successfully",
+                  "exportId": "687891234",
+                  "jobId": "12345",
+                  "scheduledFor": null
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "app_id is required"
+          },
+          "404": {
+            "description": "App not found or no collections resolved"
+          },
+          "500": {
+            "description": "Failed to create v2 export job"
+          }
+        }
+      }
+    },
+
+    "/exportV1": {
+      "post": {
+        "summary": "Create a new export job (V1)",
         "description": "Creates a new export job and creates a export record in the DB corresponding to the request. The export can be scheduled for a later time by providing the schedule mode in the env file. The export will be processed by the worker and the generated file can later be downloaded through the download endpoints.",
-        "tags": ["Exports"],
+        "tags": ["Exports V1"],
         "requestBody": {
           "required": true,
           "description": "Export job creation payload",
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/CreateExportRequest"
+                "$ref": "#/components/schemas/CreateExportV1Request"
               }
             }
           }
@@ -58,11 +122,11 @@
       }
     },
 
-    "/export/{id}": {
+    "/exportRecord/{id}": {
       "get": {
         "summary": "Get export job status",
-        "description": "Retrieves the processing status and progress of the export job.\n\nStatus values:\n- queued: Job is waiting in the queue\n- processing: Worker is currently generating the export\n- completed: Export finished successfully\n- failed: Export process failed\n- expired: Download link has expired",
-        "tags": ["Exports"],
+        "description": "Retrieves the processing status and progress of the export job. Works for both V1 and V2 exports.\n\nStatus values:\n- queued: Job is waiting in the queue\n- processing: Worker is currently generating the export\n- completed: Export finished successfully\n- failed: Export process failed\n- expired: Download link has expired",
+        "tags": ["Common"],
         "parameters": [
           {
             "in": "path",
@@ -98,8 +162,8 @@
     "/download-page/{id}": {
       "get": {
         "summary": "Get export download landing page",
-        "description": "Returns a landing page containing the download link for the generated export zip file.",
-        "tags": ["Exports"],
+        "description": "Returns a landing page containing the download link for the generated export zip file. Works for both V1 and V2 exports.",
+        "tags": ["Common"],
         "parameters": [
           {
             "in": "path",
@@ -137,8 +201,8 @@
     "/download/{id}": {
       "get": {
         "summary": "Download exported file",
-        "description": "Downloads the generated export file for the given export job. The download link remains valid only for a limited time (e.g., 1 hour) after the export job is completed.",
-        "tags": ["Exports"],
+        "description": "Downloads the generated export file for the given export job. The download link remains valid only for a limited time after the export job is completed. Works for both V1 and V2 exports.",
+        "tags": ["Common"],
         "parameters": [
           {
             "in": "path",
@@ -175,7 +239,22 @@
 
   "components": {
     "schemas": {
-      "CreateExportRequest": {
+      "CreateExportV2Request": {
+        "type": "object",
+        "required": ["user_name", "email"],
+        "properties": {
+          "user_name": {
+            "type": "string",
+            "example": "Saran"
+          },
+          "email": {
+            "type": "string",
+            "example": "saran@email.com"
+          }
+        }
+      },
+
+      "CreateExportV1Request": {
         "type": "object",
         "required": ["user_name", "email", "collections"],
         "properties": {

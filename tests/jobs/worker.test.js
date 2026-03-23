@@ -1,8 +1,8 @@
-const mockFindById = jest.fn();
-const mockFindByIdAndUpdate = jest.fn().mockResolvedValue(true); // ← ADDED
-const mockRunExport = jest.fn();
-const mockCleanupAdd = jest.fn();
-const mockProcessor = {};
+const mockFindById  = jest.fn();
+const mockRunExport   = jest.fn();
+const mockRunExportV2 = jest.fn();
+const mockCleanupAdd  = jest.fn();
+const mockProcessor   = {};
 
 jest.mock("bullmq", () => ({
   Worker: jest.fn().mockImplementation((queue, processor, options) => {
@@ -15,7 +15,6 @@ jest.mock("./../../config/redis", () => ({}));
 
 jest.mock("./../../schemas/export-status", () => ({
   findById: mockFindById,
-  findByIdAndUpdate: mockFindByIdAndUpdate, // ← ADDED
 }));
 
 jest.mock("./../../jobs/cleanup.queue", () => ({
@@ -24,6 +23,10 @@ jest.mock("./../../jobs/cleanup.queue", () => ({
 
 jest.mock("./../../jobs/processor", () => ({
   runExport: mockRunExport,
+}));
+
+jest.mock("./../../jobs/processor.v2", () => ({
+  runExportV2: mockRunExportV2,
 }));
 
 jest.mock("./../../utils/logger", () => ({
@@ -35,14 +38,19 @@ require("./../../jobs/worker");
 
 const exportStatus = require("./../../schemas/export-status");
 
+
+
 function makeFakeDoc(overrides = {}) {
   return {
-    _id:       "export123",
-    email:     "saran.st@viewzenlabs.com",
-    status:    "pending",
-    attempts:  0,
-    progress:  0,
-    save:      jest.fn().mockResolvedValue(true),
+    _id:           "export123",
+    email:         "saran.st@viewzenlabs.com",
+    status:        "pending",
+    attempts:      0,
+    progress:      0,
+    error_logs:   [],
+    version:       "1.0",
+    error_message: null,
+    save:          jest.fn().mockResolvedValue(true),
     ...overrides,
   };
 }
@@ -50,6 +58,8 @@ function makeFakeDoc(overrides = {}) {
 function makeFakeJob(exportId = "export123") {
   return { id: "job-001", data: { exportId } };
 }
+
+// ── Tests ─────────────────────────────────────────────────────────────────────
 
 describe("Export Worker", () => {
 
@@ -78,14 +88,26 @@ describe("Export Worker", () => {
     expect(doc.save).toHaveBeenCalled();
   });
 
-  test("should call runExport with the exportDoc", async () => {
-    const doc = makeFakeDoc();
+  test("should route to V1 processor when version is 1.0", async () => {
+    const doc = makeFakeDoc({ version: "1.0" });
     mockFindById.mockResolvedValue(doc);
     mockRunExport.mockResolvedValue({ zipPath: "/out.zip", password: "pass", userRoot: "/root" });
 
     await mockProcessor.processor(makeFakeJob());
 
     expect(mockRunExport).toHaveBeenCalledWith(doc);
+    expect(mockRunExportV2).not.toHaveBeenCalled();
+  });
+
+  test("should route to V2 processor when version is 2.0", async () => {
+    const doc = makeFakeDoc({ version: "2.0" });
+    mockFindById.mockResolvedValue(doc);
+    mockRunExportV2.mockResolvedValue({ zipPath: "/out.zip", password: "pass", userRoot: "/root", collections: [] });
+
+    await mockProcessor.processor(makeFakeJob());
+
+    expect(mockRunExportV2).toHaveBeenCalledWith(doc);
+    expect(mockRunExport).not.toHaveBeenCalled();
   });
 
   test("should set status completed and update all fields after success", async () => {
@@ -103,7 +125,7 @@ describe("Export Worker", () => {
     expect(doc.expires_at).toBeInstanceOf(Date);
   });
 
-  test("should queue cleanup job with correct payload and delay", async () => {
+  test("should queue cleanup job after success", async () => {
     const doc = makeFakeDoc();
     mockFindById.mockResolvedValue(doc);
     mockRunExport.mockResolvedValue({ zipPath: "/out.zip", password: "pass", userRoot: "/root" });
@@ -117,29 +139,21 @@ describe("Export Worker", () => {
     );
   });
 
-  test("should set status to failed and save error if runExport throws", async () => {
-    const doc = makeFakeDoc();
-    mockFindById.mockResolvedValue(doc);
-    mockRunExport.mockRejectedValue(new Error("MongoDB cursor timeout"));
+ test("should set status failed and save error if export throws", async () => {
+  const doc = makeFakeDoc();
+  mockFindById.mockResolvedValue(doc);
+  mockRunExport.mockRejectedValue(new Error("MongoDB cursor timeout"));
 
-    await expect(mockProcessor.processor(makeFakeJob()))
-      .rejects.toThrow("MongoDB cursor timeout");
+  await expect(mockProcessor.processor(makeFakeJob()))
+    .rejects.toThrow("MongoDB cursor timeout");
 
-    expect(mockFindByIdAndUpdate).toHaveBeenCalledWith(
-      "export123",
-      {
-        $set: { status: "failed" },
-        $push: {
-          error_logs: {
-            attempt: 1,
-            message: "MongoDB cursor timeout",
-          }
-        }
-      }
-    );
-  });
+  expect(doc.status).toBe("failed");
+  expect(doc.error_logs[0].message).toBe("MongoDB cursor timeout");
+  expect(doc.error_logs[0].attempt).toBe(1);
+  expect(doc.save).toHaveBeenCalled();
+});
 
-  test("should not queue cleanup job if runExport fails", async () => {
+  test("should not queue cleanup job if export fails", async () => {
     const doc = makeFakeDoc();
     mockFindById.mockResolvedValue(doc);
     mockRunExport.mockRejectedValue(new Error("Crash"));

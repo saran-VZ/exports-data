@@ -6,20 +6,23 @@ function calculateDelay() {
   }
 
   if (mode === "sampleWait"){
-    const sampleTime = 60*1000*1;
+    const sampleTime = 20*1000*1;
     return sampleTime;
   }
 
-  if (mode === "night") {
+if (mode === "night") {
   const now = new Date();
 
+  const scheduleHour   = parseInt(process.env.EXPORT_SCHEDULE_HOUR) ;
+  const scheduleMinute = parseInt(process.env.EXPORT_SCHEDULE_MINUTE);
+
   const start = new Date();
-  start.setHours(22, 0, 0, 0);
+  start.setHours(scheduleHour, scheduleMinute, 0, 0);
 
   const end = new Date();
   end.setHours(24, 0, 0, 0);
 
-  if (now >= start && now < end) {
+  if (now >= start && now < end) {   
     return 0;
   }
 
@@ -27,7 +30,6 @@ function calculateDelay() {
     return start - now;
   }
 }
-
   return 0;
 }
 

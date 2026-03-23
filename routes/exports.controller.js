@@ -3,6 +3,7 @@ const ExportServiceV2 = require("./exports.class.v2");
 
 const fs = require("fs");
 const logger = require("../utils/logger");
+const { Collection } = require("mongoose");
 
 function renderDownloadPage({ title, message, buttonHref, buttonLabel = "Download File" }) {
   const buttonHtml = buttonHref
@@ -64,7 +65,7 @@ exports.createExportV2 = async (req, res) => {
     const exportServiceV2 = new ExportServiceV2();
  
     const { exportDoc, job, delay } = await exportServiceV2.createExportV2({
-      app_id: req.params.id,          // app ObjectId from route param
+      app_id: req.params.id,               
       user_name: req.body.user_name,
       email: req.body.email,
     });
@@ -105,6 +106,7 @@ exports.getExportStatus = async (req, res) => {
       status: exportDoc.status,
       progress: exportDoc.progress,
       started_at: exportDoc.started_at,
+      Collections: exportDoc.collections,
       scheduled_for: exportDoc.scheduled_for
         ? exportDoc.scheduled_for.toLocaleString("en-IN", {
             hour12: false,

@@ -2,6 +2,7 @@ node_modules/
 export.data/
 mongo_data/
 redis-data/
+logs/
 
 .env 
 

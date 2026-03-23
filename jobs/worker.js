@@ -24,11 +24,12 @@ const worker = new Worker(
       exportDoc.progress = 0;
       await exportDoc.save();
 
-      // ── route to correct processor based on version ──────────────────────
       let result;
-      if (exportDoc.version === "2.0") {
+      if (exportDoc.version === "2.0") {                                 //specified for app based export 
         logger.info(`[JOB ${job.id}] Routing to V2 processor`);
         result = await runExportV2(exportDoc);
+        exportDoc.collections = result.collections;   
+        await exportDoc.save();     
       } else {
         logger.info(`[JOB ${job.id}] Routing to V1 processor`);
         result = await runExport(exportDoc);
@@ -45,7 +46,7 @@ const worker = new Worker(
       logger.info("Export and zip completed for: %s", exportDoc._id);
       logger.info("Notification emails sent to: %s", exportDoc.email);
 
-      await cleanupQueue.add(
+      await cleanupQueue.add(                               //after completion the job is added to the cleanup queue for expiration handling
         "deleteExportFiles",
         {
           userRoot: result.userRoot,
@@ -59,7 +60,10 @@ const worker = new Worker(
 
     } catch (err) {
       exportDoc.status = "failed";
-      exportDoc.error_message = err.message;
+      exportDoc.error_logs.push({                         // add error logs in DB record if any
+        attempt: exportDoc.attempts,
+        message: err.message,
+      });
       await exportDoc.save();
       logger.error(`[JOB ${job.id}] Export failed for exportId=${exportId}: %s`, err);
       throw err;
@@ -67,18 +71,18 @@ const worker = new Worker(
   },
   {
     connection,
-    concurrency: 2,
+    concurrency: 2,                                                    // no of jobs processed concurrently [2]
   }
 );
 
-worker.on("failed", (job, err) => {
+worker.on("failed", (job, err) => {                                   // event listener for failed jobs
   logger.error(
     `[JOB ${job?.id ?? "unknown"}] Worker failed event: %s`,
     err?.message || err
   );
 });
 
-worker.on("completed", (job) => {
+worker.on("completed", (job) => {                                    //event listner for completion of job
   logger.info(`[JOB ${job.id}] Worker completed event`);
 });
 
