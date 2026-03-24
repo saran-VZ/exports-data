@@ -5,9 +5,17 @@ const fs = require("fs");
 const logger = require("../utils/logger");
 const { Collection } = require("mongoose");
 
-function renderDownloadPage({ title, message, buttonHref, buttonLabel = "Download File" }) {
-  const buttonHtml = buttonHref
-    ? `<a href="${buttonHref}" style="display:inline-block;padding:12px 24px;background:#00c3ff;color:#0b1f3a;text-decoration:none;font-weight:bold;border-radius:8px;font-size:15px;">${buttonLabel}</a>`
+function renderDownloadPage({ title, message, downloadHref }) {
+  const autoDownloadMeta = downloadHref
+    ? `<meta http-equiv="refresh" content="0; url=${downloadHref}" />`
+    : "";
+
+  const autoDownloadScript = downloadHref
+    ? `<script>window.location.href = "${downloadHref}";</script>`
+    : "";
+
+  const fallbackHtml = downloadHref
+    ? `<p style="color:#FFD700;margin:18px 0 0;font-size:14px;">If the download does not start, <a href="${downloadHref}" style="color:#00c3ff;">click here</a>.</p>`
     : "";
 
   return `
@@ -16,6 +24,7 @@ function renderDownloadPage({ title, message, buttonHref, buttonLabel = "Downloa
     <head>
       <meta charset="UTF-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      ${autoDownloadMeta}
       <title>${title}</title>
     </head>
     <body style="margin:0;padding:0;background:#0b1f3a;font-family:Arial,sans-serif;">
@@ -23,42 +32,13 @@ function renderDownloadPage({ title, message, buttonHref, buttonLabel = "Downloa
         <div style="max-width:620px;width:100%;background:#102b52;padding:28px;border-radius:12px;text-align:center;box-shadow:0 8px 20px rgba(0,0,0,0.28);">
           <h1 style="color:#FFD700;margin:0 0 12px;font-size:24px;">${title}</h1>
           <p style="color:#FFD700;margin:0 0 22px;font-size:15px;line-height:1.5;">${message}</p>
-          ${buttonHtml}
+          ${fallbackHtml}
         </div>
       </div>
+      ${autoDownloadScript}
     </body>
   </html>`;
 }
-
-exports.createExport = async (req, res) => {
-  try {
-    const exportService = new ExportService();
-
-    const { exportDoc, job, delay } = await exportService.createExport(req.body);
-
-    return res.status(200).json({
-      success: true,
-      message:
-        delay > 0
-          ? "Export scheduled successfully"
-          : "Export queued successfully",
-      exportId: exportDoc._id,
-      jobId: job.id,
-      scheduledFor: exportDoc.scheduled_for
-        ? exportDoc.scheduled_for.toLocaleString("en-IN", {
-            hour12: false,
-          })
-        : null,
-    });
-  } catch (error) {
-    statusCode = error.status || 500;
-    return res.status(statusCode).json({
-      success: false,
-      message: "Failed to create export job",
-      error: error.message,
-    });
-  }
-};
 
 exports.createExportV2 = async (req, res) => {
   try {
@@ -146,8 +126,8 @@ exports.downloadLandingPage = async (req, res) => {
         renderDownloadPage({
           title: "Your Export Is Ready",
           message:
-            "Click the button below to start downloading your file... If your browser blocks the download, please press 'KEEP' or 'ALLOW' in the pop-up to proceed...",
-          buttonHref: directDownloadUrl,
+            "Your download should start automatically. If your browser blocks the download, please press 'KEEP' or 'ALLOW' in the pop-up to proceed...",
+          downloadHref: directDownloadUrl,
         })
       );
   } catch (err) {
@@ -156,7 +136,7 @@ exports.downloadLandingPage = async (req, res) => {
         renderDownloadPage({
           title: "Export Not Found",
           message: "This export does not exist or the file is missing.",
-          buttonHref: null,
+          downloadHref: null,
         })
       );
     }
@@ -166,7 +146,7 @@ exports.downloadLandingPage = async (req, res) => {
         renderDownloadPage({
           title: "Link Expired",
           message: "This download link has expired. Please create a new export request.",
-          buttonHref: null,
+          downloadHref: null,
         })
       );
     }
@@ -175,7 +155,7 @@ exports.downloadLandingPage = async (req, res) => {
       renderDownloadPage({
         title: "Download Unavailable",
         message: "Something went wrong while loading this page. Please try again.",
-        buttonHref: null,
+        downloadHref: null,
       })
     );
   }
@@ -220,30 +200,30 @@ exports.downloadExport = async (req, res) => {
   } catch (err) {
     if (err.message === "NOT_FOUND") {
       return res.status(404).type("html").send(
-        renderDownloadPage({
-          title: "Export Not Found",
-          message: "This export does not exist or the file is missing.",
-          buttonHref: null,
-        })
-      );
-    }
+      renderDownloadPage({
+        title: "Export Not Found",
+        message: "This export does not exist or the file is missing.",
+        downloadHref: null,
+      })
+    );
+  }
 
     if (err.message === "EXPIRED") {
       return res.status(410).type("html").send(
-        renderDownloadPage({
-          title: "Link Expired",
-          message: "This download link has expired. Please create a new export request.",
-          buttonHref: null,
-        })
-      );
-    }
-
-    return res.status(500).type("html").send(
       renderDownloadPage({
-        title: "Download Unavailable",
-        message: "Something went wrong while loading this page. Please try again.",
-        buttonHref: null,
+        title: "Link Expired",
+        message: "This download link has expired. Please create a new export request.",
+        downloadHref: null,
       })
     );
+  }
+
+    return res.status(500).type("html").send(
+    renderDownloadPage({
+      title: "Download Unavailable",
+      message: "Something went wrong while loading this page. Please try again.",
+      downloadHref: null,
+    })
+  );
   }
 };

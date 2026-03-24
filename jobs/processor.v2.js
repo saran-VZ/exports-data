@@ -66,7 +66,7 @@ async function runExportV2(exportDoc) {
   const resolvedItems = [];       
   const collections = [];         
 
-  const appFolderPath = path.join(USER_ROOT, `app_${exportDoc.app_id}`);
+  const appFolderPath = path.join(USER_ROOT, `${appDoc.name}`);
 
   await traverseAndResolve(appDoc, [], appFolderPath, xFormsCollection, resolvedItems, collections);      //recursive function called to extract collection names
 

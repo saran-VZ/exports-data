@@ -5,7 +5,7 @@ const logger = require("./../utils/logger");
 
 class ExcelSimpleService {
   constructor(outputDir, exportDoc, collectionName) {
-    this.partCounter = 1;                                       // counts the no of excel files created for a collection 
+    this.partCounter = 1;                                       // counts the no. of excel files created for a collection 
     this.rowLimit = parseInt(process.env.EXCEL_MAX_ROWS);
     this.currentRowCount = 0;
     this.workbook = null;
@@ -13,6 +13,9 @@ class ExcelSimpleService {
     this.exportId = exportDoc._id?.toString() || "unknown";
     this.finalDir = outputDir;
     this.collectionName = String(collectionName);
+    this.headerKeys = null;
+    this.headerKeySet = new Set();
+    this.headerWritten = false;
 
     if (!fs.existsSync(this.finalDir)) {
       fs.mkdirSync(this.finalDir, { recursive: true });
@@ -35,9 +38,46 @@ class ExcelSimpleService {
       this.worksheet = this.workbook.addWorksheet(sheetName);
 
       this.currentRowCount = 0;
+      this.headerWritten = false;
       this.partCounter++;
     } catch (err) {
       throw err;
+    }
+  }
+
+  async commitCurrentFile() {
+    if (this.workbook) {
+      await this.workbook.commit();
+      logger.info(` ${path.basename(this.tempPath)} created`);
+      this.workbook = null;
+    }
+  }
+
+  ensureHeaderKeys(doc) {
+    const keys = Object.keys(doc);
+    let changed = false;
+
+    if (!this.headerKeys) {
+      this.headerKeys = keys;
+      this.headerKeySet = new Set(keys);
+      return true;
+    }
+
+    for (const key of keys) {
+      if (!this.headerKeySet.has(key)) {
+        this.headerKeySet.add(key);
+        this.headerKeys.push(key);
+        changed = true;
+      }
+    }
+
+    return changed;
+  }
+
+  writeHeaderIfNeeded() {
+    if (!this.headerWritten && this.headerKeys.length > 0) {
+      this.worksheet.addRow(this.headerKeys).commit();
+      this.headerWritten = true;
     }
   }
 
@@ -48,13 +88,24 @@ class ExcelSimpleService {
       }
 
       for (const doc of batch) {
-        this.worksheet.addRow(Object.values(doc)).commit();            // writes each document as a new row in excel and commits immediately
+        if (!this.workbook) {
+          await this.createNewFile();
+        }
+
+        const headerChanged = this.ensureHeaderKeys(doc);
+
+        if (headerChanged && this.headerWritten) {
+          await this.commitCurrentFile();
+          await this.createNewFile();
+        }
+
+        this.writeHeaderIfNeeded();                                   //adds headers 
+        const row = this.headerKeys.map((key) => doc[key]);
+        this.worksheet.addRow(row).commit();                            // writes each document as a new row in excel and commits immediately
         this.currentRowCount++;
  
         if (this.currentRowCount >= this.rowLimit) {                   
-          await this.workbook.commit();                               // if rowlimit is reached, commits the current file and creates a new file
-          logger.info(` ${path.basename(this.tempPath)} created`);
-          await this.createNewFile();
+          await this.commitCurrentFile();                               // if rowlimit is reached, commits the current file; new file on next row
         }
       }
     } catch (err) {
@@ -62,12 +113,10 @@ class ExcelSimpleService {
     }
   }
 
-  async finalize() {                                                    // commits the remaining rows in the last file and finalizes the workbook
+  async finalize() {                                               // commits the remaining rows in the last file and finalizes the workbook
     try {
       if (this.workbook) {
-        await this.workbook.commit();
-        logger.info(` ${path.basename(this.tempPath)} created`);
-        this.workbook = null;
+        await this.commitCurrentFile();
       }
     } catch (err) {
       throw err;

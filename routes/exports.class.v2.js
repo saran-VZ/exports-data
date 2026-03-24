@@ -1,3 +1,4 @@
+const mongoose = require("mongoose");
 const exportStatus = require("./../schemas/export-status");
 const exportQueue = require("./../jobs/queue");
 const { calculateDelay } = require("./../utils/sheduler");
@@ -11,6 +12,18 @@ class ExportServiceV2 {
       if (!app_id) {
         const err = new Error("app_id is required");
         err.status = 400;
+        throw err;
+      }
+
+      // Validate that the app exists
+      const appsCollection = mongoose.connection.collection("apps");
+      const appDoc = await appsCollection.findOne({
+        _id: new mongoose.Types.ObjectId(app_id),
+      });
+
+      if (!appDoc) {
+        const err = new Error(`App not found for app_id: ${app_id}`);
+        err.status = 404;
         throw err;
       }
 

@@ -69,15 +69,16 @@ describe("ExcelSimpleService", () => {
       { a: 3, b: 4 },
     ]);
 
-    expect(mockAddRow).toHaveBeenCalledTimes(2);
+    expect(mockAddRow).toHaveBeenCalledTimes(3); // header + 2 data rows
   });
 
-  test("should use Object.values to write row — no keys", async () => {
+  test("should write header row and then values in header order", async () => {
     const service = new ExcelSimpleService("/out", makeFakeExportDoc(), "formdata_111");
 
     await service.writeBatch([{ field1: "val1", field2: "val2" }]);
 
-    expect(mockAddRow).toHaveBeenCalledWith(["val1", "val2"]);
+    expect(mockAddRow).toHaveBeenNthCalledWith(1, ["field1", "field2"]);
+    expect(mockAddRow).toHaveBeenNthCalledWith(2, ["val1", "val2"]);
   });
 
   test("should split into new part file when rowLimit is reached", async () => {
@@ -102,6 +103,17 @@ describe("ExcelSimpleService", () => {
     expect(calls[1][0].filename).toMatch(/formdata_111_part2\.xlsx$/);
   });
 
+  test("should start a new file when a new column appears later", async () => {
+    const service = new ExcelSimpleService("/out", makeFakeExportDoc(), "formdata_111");
+
+    await service.writeBatch([{ a: 1 }, { a: 2, b: 3 }]);
+
+    expect(ExcelJS.stream.xlsx.WorkbookWriter).toHaveBeenCalledTimes(2);
+    expect(mockAddRow).toHaveBeenNthCalledWith(1, ["a"]);
+    expect(mockAddRow).toHaveBeenNthCalledWith(2, [1]);
+    expect(mockAddRow).toHaveBeenNthCalledWith(3, ["a", "b"]);
+    expect(mockAddRow).toHaveBeenNthCalledWith(4, [2, 3]);
+  });
 
   test("should commit workbook on finalize", async () => {
     const service = new ExcelSimpleService("/out", makeFakeExportDoc(), "formdata_111");

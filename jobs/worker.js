@@ -2,7 +2,6 @@ const { Worker } = require("bullmq");
 const connection = require("./../config/redis");
 const exportStatus = require("./../schemas/export-status");
 const cleanupQueue = require("./cleanup.queue");
-const { runExport } = require("./processor");
 const { runExportV2 } = require("./processor.v2");
 const logger = require("./../utils/logger");
 
@@ -22,18 +21,15 @@ const worker = new Worker(
       exportDoc.started_at = new Date();
       exportDoc.attempts += 1;
       exportDoc.progress = 0;
+      exportDoc.bull_job_id = job.id;
       await exportDoc.save();
 
       let result;
-      if (exportDoc.version === "2.0") {                                 //specified for app based export 
-        logger.info(`[JOB ${job.id}] Routing to V2 processor`);
-        result = await runExportV2(exportDoc);
-        exportDoc.collections = result.collections;   
-        await exportDoc.save();     
-      } else {
-        logger.info(`[JOB ${job.id}] Routing to V1 processor`);
-        result = await runExport(exportDoc);
-      }
+      result = await runExportV2(exportDoc);           //calls the export processor function 
+
+      exportDoc.collections = result.collections;   
+      await exportDoc.save();     
+     
 
       exportDoc.status = "completed";
       exportDoc.completed_at = new Date();
