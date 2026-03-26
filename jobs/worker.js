@@ -2,7 +2,7 @@ const { Worker } = require("bullmq");
 const connection = require("./../config/redis");
 const exportStatus = require("./../schemas/export-status");
 const cleanupQueue = require("./cleanup.queue");
-const { runExportV2 } = require("./processor.v2");
+const { runExport } = require("./processor");
 const logger = require("./../utils/logger");
 
 const EXPIRY_TIME = 5 * 60 * 1000;                      // 5 minutes
@@ -25,7 +25,7 @@ const worker = new Worker(
       await exportDoc.save();
 
       let result;
-      result = await runExportV2(exportDoc);           //calls the export processor function 
+      result = await runExport(exportDoc);           //calls the export processor function 
 
       exportDoc.collections = result.collections;   
       await exportDoc.save();     

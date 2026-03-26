@@ -1,5 +1,4 @@
 const ExportService = require("./exports.class");
-const ExportServiceV2 = require("./exports.class.v2");
 
 const fs = require("fs");
 const logger = require("../utils/logger");
@@ -40,11 +39,11 @@ function renderDownloadPage({ title, message, downloadHref }) {
   </html>`;
 }
 
-exports.createExportV2 = async (req, res) => {
+exports.createExport = async (req, res) => {
   try {
-    const exportServiceV2 = new ExportServiceV2();
+    const exportService = new ExportService();
  
-    const { exportDoc, job, delay } = await exportServiceV2.createExportV2({
+    const { exportDoc, job, delay } = await exportService.createExport({
       app_id: req.params.id,               
       user_name: req.body.user_name,
       email: req.body.email,
@@ -68,7 +67,7 @@ exports.createExportV2 = async (req, res) => {
     const statusCode = error.status || 500;
     return res.status(statusCode).json({
       success: false,
-      message: "Failed to create v2 export job",
+      message: "Failed to create export job",
       error: error.message,
     });
   }
@@ -94,7 +93,7 @@ exports.getExportStatus = async (req, res) => {
         : null,
     });
   } catch (error) {
-    if (err.message === "Export job not found") {
+    if (error.message === "Export job not found") {
       return res.status(404).json({
         success: false,
         message: "Export job not found",

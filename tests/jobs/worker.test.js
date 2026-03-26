@@ -1,8 +1,7 @@
-const mockFindById  = jest.fn();
-const mockRunExport   = jest.fn();
-const mockRunExportV2 = jest.fn();
-const mockCleanupAdd  = jest.fn();
-const mockProcessor   = {};
+const mockFindById = jest.fn();
+const mockRunExport = jest.fn();
+const mockCleanupAdd = jest.fn();
+const mockProcessor = {};
 
 jest.mock("bullmq", () => ({
   Worker: jest.fn().mockImplementation((queue, processor, options) => {
@@ -21,12 +20,9 @@ jest.mock("./../../jobs/cleanup.queue", () => ({
   add: mockCleanupAdd,
 }));
 
+
 jest.mock("./../../jobs/processor", () => ({
   runExport: mockRunExport,
-}));
-
-jest.mock("./../../jobs/processor.v2", () => ({
-  runExportV2: mockRunExportV2,
 }));
 
 jest.mock("./../../utils/logger", () => ({
@@ -34,10 +30,8 @@ jest.mock("./../../utils/logger", () => ({
   error: jest.fn(),
 }));
 
-require("./../../jobs/worker");
-
 const exportStatus = require("./../../schemas/export-status");
-
+require("./../../jobs/worker");
 
 
 function makeFakeDoc(overrides = {}) {
@@ -59,7 +53,7 @@ function makeFakeJob(exportId = "export123") {
   return { id: "job-001", data: { exportId } };
 }
 
-// ── Tests ─────────────────────────────────────────────────────────────────────
+// tests
 
 describe("Export Worker", () => {
 
@@ -79,41 +73,47 @@ describe("Export Worker", () => {
   test("should set status to processing and increment attempts before export", async () => {
     const doc = makeFakeDoc();
     mockFindById.mockResolvedValue(doc);
-    mockRunExport.mockResolvedValue({ zipPath: "/out.zip", password: "pass", userRoot: "/root" });
+    mockRunExport.mockResolvedValue({
+      zipPath: "/out.zip",
+      password: "pass",
+      userRoot: "/root",
+      collections: [],
+    });
 
     await mockProcessor.processor(makeFakeJob());
 
     expect(doc.attempts).toBe(1);
     expect(doc.status).toBe("completed");
+    expect(doc.started_at).toBeInstanceOf(Date);
+    expect(doc.bull_job_id).toBe("job-001");
     expect(doc.save).toHaveBeenCalled();
   });
 
-  test("should route to V1 processor when version is 1.0", async () => {
-    const doc = makeFakeDoc({ version: "1.0" });
+
+  test("should route to processor when version is 2.0", async () => {
+    const doc = makeFakeDoc({ version: "2.0" });
     mockFindById.mockResolvedValue(doc);
-    mockRunExport.mockResolvedValue({ zipPath: "/out.zip", password: "pass", userRoot: "/root" });
+    mockRunExport.mockResolvedValue({
+      zipPath: "/out.zip",
+      password: "pass",
+      userRoot: "/root",
+      collections: [],
+    });
 
     await mockProcessor.processor(makeFakeJob());
 
     expect(mockRunExport).toHaveBeenCalledWith(doc);
-    expect(mockRunExportV2).not.toHaveBeenCalled();
-  });
-
-  test("should route to V2 processor when version is 2.0", async () => {
-    const doc = makeFakeDoc({ version: "2.0" });
-    mockFindById.mockResolvedValue(doc);
-    mockRunExportV2.mockResolvedValue({ zipPath: "/out.zip", password: "pass", userRoot: "/root", collections: [] });
-
-    await mockProcessor.processor(makeFakeJob());
-
-    expect(mockRunExportV2).toHaveBeenCalledWith(doc);
-    expect(mockRunExport).not.toHaveBeenCalled();
   });
 
   test("should set status completed and update all fields after success", async () => {
     const doc = makeFakeDoc();
     mockFindById.mockResolvedValue(doc);
-    mockRunExport.mockResolvedValue({ zipPath: "/out.zip", password: "secret", userRoot: "/root" });
+    mockRunExport.mockResolvedValue({
+      zipPath: "/out.zip",
+      password: "secret",
+      userRoot: "/root",
+      collections: ["users"],
+    });
 
     await mockProcessor.processor(makeFakeJob());
 
@@ -121,6 +121,7 @@ describe("Export Worker", () => {
     expect(doc.progress).toBe(100);
     expect(doc.file_path).toBe("/out.zip");
     expect(doc.password).toBe("secret");
+    expect(doc.collections).toEqual(["users"]);
     expect(doc.completed_at).toBeInstanceOf(Date);
     expect(doc.expires_at).toBeInstanceOf(Date);
   });
@@ -128,7 +129,12 @@ describe("Export Worker", () => {
   test("should queue cleanup job after success", async () => {
     const doc = makeFakeDoc();
     mockFindById.mockResolvedValue(doc);
-    mockRunExport.mockResolvedValue({ zipPath: "/out.zip", password: "pass", userRoot: "/root" });
+    mockRunExport.mockResolvedValue({
+      zipPath: "/out.zip",
+      password: "pass",
+      userRoot: "/root",
+      collections: [],
+    });
 
     await mockProcessor.processor(makeFakeJob());
 

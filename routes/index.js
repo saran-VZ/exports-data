@@ -5,11 +5,11 @@ const {
   getExportStatus,
   downloadExport,
   downloadLandingPage,
-  createExportV2,
+  createExport,
 } = require("./exports.controller");
 
 
-router.post("/export/:id", createExportV2);
+router.post("/export/:id", createExport);
 router.get("/exportRecord/:id", getExportStatus);
 router.get("/download-page/:id", downloadLandingPage);
 router.get("/download/:id", downloadExport);

@@ -2,8 +2,13 @@ const fs = require("fs");
 
 jest.mock("fs");
 
-const mockCommit      = jest.fn();
-const mockAddRow      = jest.fn(() => ({ commit: jest.fn() }));
+const mockCommit = jest.fn();
+let addRowSnapshots = [];
+const mockAddRow = jest.fn((row) => {
+  const snapshot = Array.isArray(row) ? [...row] : row;
+  addRowSnapshots.push(snapshot);
+  return { commit: jest.fn() };
+});
 const mockAddWorksheet = jest.fn(() => ({ addRow: mockAddRow }));
 
 jest.mock("exceljs", () => ({
@@ -20,7 +25,7 @@ jest.mock("exceljs", () => ({
 jest.mock("./../../utils/logger", () => ({ info: jest.fn(), error: jest.fn() }));
 
 const ExcelJS = require("exceljs");
-const { ExcelSimpleService } = require("./../../jobs/excel.v2");
+const { ExcelSimpleService } = require("./../../jobs/excel");
 
 function makeFakeExportDoc(overrides = {}) {
   return { _id: "export123", ...overrides };
@@ -30,6 +35,7 @@ describe("ExcelSimpleService", () => {
 
   beforeEach(() => {
     jest.clearAllMocks();
+    addRowSnapshots = [];
     fs.existsSync.mockReturnValue(true);
     fs.mkdirSync.mockReturnValue(undefined);
   });
@@ -69,7 +75,7 @@ describe("ExcelSimpleService", () => {
       { a: 3, b: 4 },
     ]);
 
-    expect(mockAddRow).toHaveBeenCalledTimes(3); // header + 2 data rows
+    expect(mockAddRow).toHaveBeenCalledTimes(3);              // header + 2 rows
   });
 
   test("should write header row and then values in header order", async () => {
@@ -77,8 +83,8 @@ describe("ExcelSimpleService", () => {
 
     await service.writeBatch([{ field1: "val1", field2: "val2" }]);
 
-    expect(mockAddRow).toHaveBeenNthCalledWith(1, ["field1", "field2"]);
-    expect(mockAddRow).toHaveBeenNthCalledWith(2, ["val1", "val2"]);
+    expect(addRowSnapshots[0]).toEqual(["field1", "field2"]);
+    expect(addRowSnapshots[1]).toEqual(["val1", "val2"]);
   });
 
   test("should split into new part file when rowLimit is reached", async () => {
@@ -99,7 +105,7 @@ describe("ExcelSimpleService", () => {
     await service.writeBatch([{ a: 1 }, { a: 2 }]);
 
     const calls = ExcelJS.stream.xlsx.WorkbookWriter.mock.calls;
-    expect(calls[0][0].filename).toMatch(/formdata_111_part1\.xlsx$/);
+    expect(calls[0][0].filename).toMatch(/formdata_111_part1\.xlsx$/);          //verifies excel file names
     expect(calls[1][0].filename).toMatch(/formdata_111_part2\.xlsx$/);
   });
 
@@ -109,10 +115,10 @@ describe("ExcelSimpleService", () => {
     await service.writeBatch([{ a: 1 }, { a: 2, b: 3 }]);
 
     expect(ExcelJS.stream.xlsx.WorkbookWriter).toHaveBeenCalledTimes(2);
-    expect(mockAddRow).toHaveBeenNthCalledWith(1, ["a"]);
-    expect(mockAddRow).toHaveBeenNthCalledWith(2, [1]);
-    expect(mockAddRow).toHaveBeenNthCalledWith(3, ["a", "b"]);
-    expect(mockAddRow).toHaveBeenNthCalledWith(4, [2, 3]);
+    expect(addRowSnapshots[0]).toEqual(["a"]);
+    expect(addRowSnapshots[1]).toEqual([1]);
+    expect(addRowSnapshots[2]).toEqual(["a", "b"]);
+    expect(addRowSnapshots[3]).toEqual([2, 3]);
   });
 
   test("should commit workbook on finalize", async () => {
@@ -121,7 +127,7 @@ describe("ExcelSimpleService", () => {
     await service.writeBatch([{ a: 1 }]);
     await service.finalize();
 
-    expect(mockCommit).toHaveBeenCalledTimes(1);
+    expect(mockCommit).toHaveBeenCalledTimes(1);           //to commit the excel workbook when finalize is called
   });
 
   test("should set workbook to null after finalize", async () => {

@@ -12,24 +12,16 @@
   ],
   "tags": [
     {
-      "name": "Exports V2",
-      "description": "Export job APIs - new flow using app hierarchy, no filters needed"
-    },
-    {
-      "name": "Exports V1",
-      "description": "Export job APIs - original flow with filters and collection selection"
-    },
-    {
-      "name": "Common",
-      "description": "Shared endpoints for both V1 and V2"
+      "name": "Export service",
+      "description": "Endpoints for the export app - microservice"
     }
   ],
   "paths": {
     "/export/{id}": {
       "post": {
-        "summary": "Create a new export job (V2)",
-        "description": "Creates a new V2 export job using the app's hierarchy. Automatically resolves all formdata collections by traversing the app's subCategories tree and matching x-forms. No filters or collection names needed — only app_id in the URL and user details in the body.",
-        "tags": ["Exports V2"],
+        "summary": "Create a new export job ",
+        "description": "Creates a new export job using the app's hierarchy. Automatically resolves all formdata collections by traversing the app's subCategories tree and matching x-forms. No filters or collection names needed — only app_id in the URL and user details in the body.",
+        "tags": ["Export service"],
         "parameters": [
           {
             "in": "path",
@@ -48,7 +40,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/CreateExportV2Request"
+                "$ref": "#/components/schemas/CreateExportRequest"
               }
             }
           }
@@ -75,7 +67,7 @@
             "description": "App not found or no collections resolved"
           },
           "500": {
-            "description": "Failed to create v2 export job"
+            "description": "Failed to create export job"
           }
         }
       }
@@ -85,8 +77,8 @@
     "/exportRecord/{id}": {
       "get": {
         "summary": "Get export job status",
-        "description": "Retrieves the processing status and progress of the export job. Works for both V1 and V2 exports.\n\nStatus values:\n- queued: Job is waiting in the queue\n- processing: Worker is currently generating the export\n- completed: Export finished successfully\n- failed: Export process failed\n- expired: Download link has expired",
-        "tags": ["Common"],
+        "description": "Retrieves the processing status and progress of the export job.\n\nStatus values:\n- queued: Job is waiting in the queue\n- processing: Worker is currently generating the export\n- completed: Export finished successfully\n- failed: Export process failed\n- expired: Download link has expired",
+        "tags": ["Export service"],
         "parameters": [
           {
             "in": "path",
@@ -122,8 +114,8 @@
     "/download-page/{id}": {
       "get": {
         "summary": "Get export download landing page",
-        "description": "Returns a landing page containing the download link for the generated export zip file. Works for both V1 and V2 exports.",
-        "tags": ["Common"],
+        "description": "Returns a landing page containing the download link for the generated export zip file.",
+        "tags": ["Export service"],
         "parameters": [
           {
             "in": "path",
@@ -161,8 +153,8 @@
     "/download/{id}": {
       "get": {
         "summary": "Download exported file",
-        "description": "Downloads the generated export file for the given export job. The download link remains valid only for a limited time after the export job is completed. Works for both V1 and V2 exports.",
-        "tags": ["Common"],
+        "description": "Downloads the generated export file for the given export job. The download link remains valid only for a limited time after the export job is completed.",
+        "tags": ["Export service"],
         "parameters": [
           {
             "in": "path",
@@ -199,7 +191,7 @@
 
   "components": {
     "schemas": {
-      "CreateExportV2Request": {
+      "CreateExportRequest": {
         "type": "object",
         "required": ["user_name", "email"],
         "properties": {
@@ -210,38 +202,6 @@
           "email": {
             "type": "string",
             "example": "saran@email.com"
-          }
-        }
-      },
-
-      "CreateExportV1Request": {
-        "type": "object",
-        "required": ["user_name", "email", "collections"],
-        "properties": {
-          "user_name": {
-            "type": "string",
-            "example": "Saran"
-          },
-          "email": {
-            "type": "string",
-            "example": "saran@email.com"
-          },
-          "collections": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "example": ["data"]
-          },
-          "filters": {
-            "type": "object",
-            "example": {
-              "Model_Name": "EWM-H5-DIN60L"
-            }
-          },
-          "fileFormat": {
-            "type": "string",
-            "example": "xlsx"
           }
         }
       },

@@ -6,7 +6,7 @@ const archiver = require("archiver");
 
 const logger = require("./../utils/logger");
 
-const { ExcelSimpleService } = require("./excel.v2");
+const { ExcelSimpleService } = require("./excel");
 const { sendDownloadLinkMail, sendPasswordMail } = require("./../utils/mailer");
 
 
@@ -36,13 +36,13 @@ async function traverseAndResolve(appDoc, hierarchyPath, currentFolderPath, xFor
   if (appDoc.subCategories && appDoc.subCategories.length > 0) {
     for (const child of appDoc.subCategories) {
       const childFolderPath = path.join(currentFolderPath, child.name);
-      await traverseAndResolve(child, currentHierarchy, childFolderPath, xFormsCollection, result, collections);        //recursive call is any subcategories available
+      await traverseAndResolve(child, currentHierarchy, childFolderPath, xFormsCollection, result, collections);        //recursive function call , if any subcategories available
     }
   }
 }
 
 
-async function runExportV2(exportDoc) {
+async function runExport(exportDoc) {
 
   const ROOT_DIR = path.join(process.cwd(), "export.data");                               // main folder for exports
   const userFolder = `${exportDoc.user_name}_${exportDoc._id.toString()}`;
@@ -185,4 +185,4 @@ function createPasswordProtectedZip(zipDir, userRoot) {                  // zipp
 }
 
 
-module.exports = { runExportV2 };
+module.exports = { runExport };

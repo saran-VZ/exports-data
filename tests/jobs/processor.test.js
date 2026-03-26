@@ -6,7 +6,7 @@ jest.mock("archiver");
 const mockWriteBatch = jest.fn();
 const mockFinalize   = jest.fn();
 
-jest.mock("./../../jobs/excel.v2", () => ({
+jest.mock("./../../jobs/excel", () => ({
   ExcelSimpleService: jest.fn().mockImplementation(() => ({
     writeBatch: mockWriteBatch,
     finalize:   mockFinalize,
@@ -41,7 +41,7 @@ jest.mock("mongoose", () => ({
 const archiver = require("archiver");
 archiver.registerFormat = jest.fn();
 
-const { runExportV2 } = require("./../../jobs/processor.v2");
+const { runExport } = require("./../../jobs/processor");
 
 function makeFakeExportDoc(overrides = {}) {
   return {
@@ -98,7 +98,7 @@ function setupArchiver() {
 }
 
 
-describe("processor.v2 - runExportV2", () => {
+describe("processor - runExport", () => {
 
   beforeEach(() => {
     jest.clearAllMocks();
@@ -128,33 +128,33 @@ describe("processor.v2 - runExportV2", () => {
   test("should throw if app not found", async () => {
     mockAppsFindOne.mockResolvedValue(null);
 
-    await expect(runExportV2(makeFakeExportDoc()))
+    await expect(runExport(makeFakeExportDoc()))
       .rejects.toThrow("App not found for app_id: aaaaaaaaaaaaaaaaaaaaaaaa");
   });
 
   test("should throw if no collections resolved", async () => {
     mockXFormsFind.mockReturnValue({ toArray: jest.fn().mockResolvedValue([]) });
 
-    await expect(runExportV2(makeFakeExportDoc()))
+    await expect(runExport(makeFakeExportDoc()))
       .rejects.toThrow("No collections resolved for the given app");
   });
 
   test("should throw if no records found in collections", async () => {
     mockFormdataFind.mockReturnValue(makeFakeCursor([]));
 
-    await expect(runExportV2(makeFakeExportDoc()))
+    await expect(runExport(makeFakeExportDoc()))
       .rejects.toThrow("No records found in the resolved collections");
   });
 
   test("should call writeBatch and finalize for each resolved collection", async () => {
-    await runExportV2(makeFakeExportDoc());
+    await runExport(makeFakeExportDoc());
 
     expect(mockWriteBatch).toHaveBeenCalled();
     expect(mockFinalize).toHaveBeenCalled();
   });
 
   test("should return zipPath, password, userRoot and collections", async () => {
-    const result = await runExportV2(makeFakeExportDoc());
+    const result = await runExport(makeFakeExportDoc());
 
     expect(result).toMatchObject({
       zipPath:     expect.stringMatching(/export-\d+\.zip$/),
@@ -167,7 +167,7 @@ describe("processor.v2 - runExportV2", () => {
   test("should throw if writeBatch fails", async () => {
     mockWriteBatch.mockRejectedValue(new Error("Disk write failed"));
 
-    await expect(runExportV2(makeFakeExportDoc()))
+    await expect(runExport(makeFakeExportDoc()))
       .rejects.toThrow("Disk write failed");
   });
 

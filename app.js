@@ -3,6 +3,7 @@ const express = require("express")
 const app = express()
 const mongoose = require("mongoose");
 const logger = require("./utils/logger");
+
 const archiver = require("archiver");
 const zipEncrypted = require("archiver-zip-encrypted");
 archiver.registerFormat("zip-encrypted", zipEncrypted);
@@ -10,8 +11,8 @@ archiver.registerFormat("zip-encrypted", zipEncrypted);
 const exportsRouter= require("./routes/index")
 const swaggerDocs = require("./docs/swagger");
 
-require("./jobs/worker");
-require("./jobs/cleanup.worker");
+require("./jobs/worker");                          //export worker starts
+require("./jobs/cleanup.worker");                 // export clean-up worker starts
 
 app.use(express.json())
 

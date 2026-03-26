@@ -18,7 +18,7 @@ describe("calculateDelay", () => {
     expect(delay).toBe(0);
   });
 
-  test("should return 60000 when mode is sampleWait", () => {
+  test("should return 20000 when mode is sampleWait", () => {
     process.env.EXPORT_SCHEDULING_MODE = "sampleWait";
     const delay = calculateDelay();
     expect(delay).toBe(20000);
@@ -26,16 +26,29 @@ describe("calculateDelay", () => {
 
   test("should return delay until 22:00 when mode is night and time is before 22:00", () => {
     process.env.EXPORT_SCHEDULING_MODE = "night";
+    process.env.EXPORT_SCHEDULE_HOUR = "22";
+    process.env.EXPORT_SCHEDULE_MINUTE = "0";
     jest.useFakeTimers().setSystemTime(new Date("2025-01-01T21:00:00"));
     const delay = calculateDelay();
     expect(delay).toBe(60 * 60 * 1000); 
   });
 
-   test("should return delay until 22:00 when mode is night and time is before 22:00", () => {
+  test("should return delay until 22:00 when mode is night and time is before 22:00 (early morning)", () => {
     process.env.EXPORT_SCHEDULING_MODE = "night";
+    process.env.EXPORT_SCHEDULE_HOUR = "22";
+    process.env.EXPORT_SCHEDULE_MINUTE = "0";
     jest.useFakeTimers().setSystemTime(new Date("2025-01-01T01:00:00"));
     const delay = calculateDelay();
     expect(delay).toBe(21 * 60 * 60 * 1000); 
+  });
+
+  test("should return 0 when mode is night and time is after schedule start", () => {
+    process.env.EXPORT_SCHEDULING_MODE = "night";
+    process.env.EXPORT_SCHEDULE_HOUR = "22";
+    process.env.EXPORT_SCHEDULE_MINUTE = "0";
+    jest.useFakeTimers().setSystemTime(new Date("2025-01-01T22:30:00"));
+    const delay = calculateDelay();
+    expect(delay).toBe(0);
   });
 
   test("should return 0 when invalid mode is provided", () => {

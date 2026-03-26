@@ -5,14 +5,12 @@ const mongoose = require("mongoose");
 const path     = require("path");
 const fs       = require("fs");
 
-// ── Register archiver format once ─────────────────────────────────────────────
 const archiver     = require("archiver");
 const zipEncrypted = require("archiver-zip-encrypted");
 if (!archiver.isRegisteredFormat("zip-encrypted")) {
   archiver.registerFormat("zip-encrypted", zipEncrypted);
 }
 
-// ── Build express app without calling app.listen ──────────────────────────────
 const express       = require("express");
 const exportsRouter = require("../../routes/index");
 
@@ -20,19 +18,18 @@ const app = express();
 app.use(express.json());
 app.use("/", exportsRouter);
 
-// ── Config ────────────────────────────────────────────────────────────────────
 
 const APP_ID        = process.env.SUPERTEST_APP_ID;
 const TEST_EMAIL    = process.env.SUPERTEST_EMAIL;
 const USERNAME      = process.env.SUPERTEST_USERNAME;
 const POLL_INTERVAL = 3000;
 const POLL_TIMEOUT  = 5 * 60 * 1000;
+const LOG_FILE      = path.join(process.cwd(), "test-output.log");
 
-// ── Helpers ───────────────────────────────────────────────────────────────────
 
 async function pollUntilCompleted(exportId) {
   const deadline = Date.now() + POLL_TIMEOUT;
-
+  
   while (Date.now() < deadline) {
     const res = await request(app).get(`/exportRecord/${exportId}`);
     const { status } = res.body;
@@ -62,9 +59,30 @@ function findExcelFiles(dir) {
   return found;
 }
 
-// ── Suite ─────────────────────────────────────────────────────────────────────
+function logTestResult(name, status, err) {
+  const message = err && err.message ? ` - ${err.message}` : "";
+  const line = `[${new Date().toISOString()}] ${status} ${name}${message}\n`;
+  fs.appendFileSync(LOG_FILE, line);
+}
 
-describe("E2E — V2 export full flow", () => {
+function loggedTest(name, fn, timeout) {
+  test(
+    name,
+    async () => {
+      try {
+        await fn();
+        logTestResult(name, "PASS");
+      } catch (err) {
+        logTestResult(name, "FAIL", err);
+        throw err;
+      }
+    },
+    timeout
+  );
+}
+
+
+describe("E2E — export full flow", () => {
 
   let exportId;
 
@@ -73,10 +91,10 @@ describe("E2E — V2 export full flow", () => {
     if (!TEST_EMAIL) throw new Error("SUPERTEST_EMAIL is required in .env");
     if (!USERNAME)   throw new Error("SUPERTEST_USERNAME is required in .env");
 
-    // connect mongoose before starting worker so worker has db connection
+    fs.writeFileSync(LOG_FILE, "");
+
     await mongoose.connect(process.env.mongodb_url);
 
-    // start worker AFTER mongoose is connected
     require("../../jobs/worker");
     require("../../jobs/cleanup.worker");
   }, 30000);
@@ -85,9 +103,8 @@ describe("E2E — V2 export full flow", () => {
     await mongoose.disconnect();
   });
 
-  // ── 1. API call ────────────────────────────────────────────────────────────
 
-  test("POST /export/:id returns 200 with exportId and jobId", async () => {
+  loggedTest("POST /export/:id returns 200 with exportId and jobId", async () => {          //API hit
     const res = await request(app)
       .post(`/export/${APP_ID}`)
       .send({ user_name: USERNAME, email: TEST_EMAIL });
@@ -104,9 +121,8 @@ describe("E2E — V2 export full flow", () => {
     exportId = res.body.exportId;
   }, 15000);
 
-  // ── 2. MongoDB doc created ─────────────────────────────────────────────────
 
-  test("export document created in MongoDB with correct initial state", async () => {
+  loggedTest("export document created in MongoDB with correct initial state", async () => {   //record creation in DB
     const doc = await mongoose.connection
       .collection("exportstatuses")
       .findOne({ _id: new mongoose.Types.ObjectId(exportId) });
@@ -123,18 +139,16 @@ describe("E2E — V2 export full flow", () => {
     expect(doc.error_logs).toEqual([]);
   }, 15000);
 
-  // ── 3. Job completes ───────────────────────────────────────────────────────
 
-  test("export job completes successfully within 5 minutes", async () => {
+  loggedTest("export job completes successfully within 5 minutes", async () => {   //job completion
     const result = await pollUntilCompleted(exportId);
 
     expect(result.status).toBe("completed");
     expect(result.progress).toBe(100);
   }, POLL_TIMEOUT + 30000);
 
-  // ── 4. MongoDB doc fully updated ───────────────────────────────────────────
 
-  test("export document fully updated in MongoDB after completion", async () => {
+  loggedTest("export document fully updated in MongoDB after completion", async () => {  //updated record in DB
     const doc = await mongoose.connection
       .collection("exportstatuses")
       .findOne({ _id: new mongoose.Types.ObjectId(exportId) });
@@ -153,9 +167,8 @@ describe("E2E — V2 export full flow", () => {
     expect(doc.error_logs).toEqual([]);
   }, 15000);
 
-  // ── 5. Zip file exists on disk ─────────────────────────────────────────────
 
-  test("password-protected zip file exists on disk", async () => {
+  loggedTest("password-protected zip file exists on disk", async () => {         //zip file verification
     const doc = await mongoose.connection
       .collection("exportstatuses")
       .findOne({ _id: new mongoose.Types.ObjectId(exportId) });
@@ -165,9 +178,7 @@ describe("E2E — V2 export full flow", () => {
     expect(doc.file_path).toMatch(/\.zip$/);
   }, 15000);
 
-  // ── 6. Folder structure mirrors app hierarchy ──────────────────────────────
-
-  test("export folder structure mirrors app hierarchy on disk", async () => {
+  loggedTest("export folder structure mirrors app hierarchy on disk", async () => {   //folder structure verification
     const doc = await mongoose.connection
       .collection("exportstatuses")
       .findOne({ _id: new mongoose.Types.ObjectId(exportId) });
@@ -177,7 +188,6 @@ describe("E2E — V2 export full flow", () => {
     const userRoot  = path.dirname(path.dirname(doc.file_path));
     expect(fs.existsSync(userRoot)).toBe(true);
 
-    // Find the app folder (it contains the exported data, not the zips folder)
     const items = fs.readdirSync(userRoot, { withFileTypes: true });
     const appFolders = items.filter(item => item.isDirectory() && item.name !== "zips");
     
@@ -189,16 +199,14 @@ describe("E2E — V2 export full flow", () => {
     expect(contents.length).toBeGreaterThan(0);
   }, 15000);
 
-  // ── 7. Excel files exist ───────────────────────────────────────────────────
 
-  test("excel files exist inside the correct hierarchy folders", async () => {
+  loggedTest("excel files exist inside the correct hierarchy folders", async () => {    //excel file verification
     const doc = await mongoose.connection
       .collection("exportstatuses")
       .findOne({ _id: new mongoose.Types.ObjectId(exportId) });
 
     const userRoot  = path.dirname(path.dirname(doc.file_path));
     
-    // Find the app folder (it contains the exported data, not the zips folder)
     const items = fs.readdirSync(userRoot, { withFileTypes: true });
     const appFolders = items.filter(item => item.isDirectory() && item.name !== "zips");
     
@@ -213,9 +221,8 @@ describe("E2E — V2 export full flow", () => {
     expect(excelFiles.length).toBeGreaterThan(0);
   }, 15000);
 
-  // ── 8. Status endpoint ─────────────────────────────────────────────────────
 
-  test("GET /exportRecord/:id returns completed status with all fields", async () => {
+  loggedTest("GET /exportRecord/:id returns completed status with all fields", async () => {
     const res = await request(app).get(`/exportRecord/${exportId}`);
 
     expect(res.status).toBe(200);
@@ -226,9 +233,8 @@ describe("E2E — V2 export full flow", () => {
     expect(res.body.started_at).toBeDefined();
   }, 15000);
 
-  // ── 9. Download landing page ───────────────────────────────────────────────
 
-  test("GET /download-page/:id returns HTML with download button", async () => {
+  loggedTest("GET /download-page/:id returns HTML with download button", async () => {    //landing page for donwload
     const res = await request(app).get(`/download-page/${exportId}`);
 
     expect(res.status).toBe(200);
@@ -237,9 +243,8 @@ describe("E2E — V2 export full flow", () => {
     expect(res.text).toContain(`/download/${exportId}`);
   }, 15000);
 
-  // ── 10. Direct file download ───────────────────────────────────────────────
 
-  test("GET /download/:id streams zip file as binary", async () => {
+  loggedTest("GET /download/:id streams zip file as binary", async () => {         //file donwload verification
     const res = await request(app)
       .get(`/download/${exportId}`)
       .buffer(true)
@@ -257,9 +262,8 @@ describe("E2E — V2 export full flow", () => {
     expect(res.body[1]).toBe(0x4B); // K
   }, 30000);
 
-  // ── 11. Invalid app id ─────────────────────────────────────────────────────
 
-  test("POST /export/:id with non-existent app id returns error", async () => {
+  loggedTest("POST /export/:id with non-existent app id returns error", async () => {  //verification for ivalid app id
     const res = await request(app)
       .post(`/export/000000000000000000000000`)
       .send({ user_name: USERNAME, email: TEST_EMAIL });
@@ -268,9 +272,8 @@ describe("E2E — V2 export full flow", () => {
     expect(res.body.success).toBe(false);
   }, 15000);
 
-  // ── 12. Missing email ──────────────────────────────────────────────────────
 
-  test("POST /export/:id with missing email returns error", async () => {
+  loggedTest("POST /export/:id with missing email returns error", async () => {        //email mission constrain
     const res = await request(app)
       .post(`/export/${APP_ID}`)
       .send({ user_name: USERNAME });
@@ -279,9 +282,8 @@ describe("E2E — V2 export full flow", () => {
     expect(res.body.success).toBe(false);
   }, 15000);
 
-  // ── 13. Invalid export id ──────────────────────────────────────────────────
 
-  test("POST /export/:id with non-existent app id returns 404", async () => {
+  loggedTest("POST /export/:id with non-existent app id returns 404", async () => {    //invalid export id in viewexport API
     const res = await request(app)
       .post(`/export/000000000000000000000000`)
       .send({ user_name: USERNAME, email: TEST_EMAIL });
